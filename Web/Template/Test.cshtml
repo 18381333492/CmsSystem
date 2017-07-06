@@ -1,0 +1,15 @@
+﻿@using Web.Models;
+@using RazorBase;
+@{
+    List<student> obj = (List<student>)Model.list;
+    //student obj = Model.stu as student;
+}
+@Include("Head", Model)
+<body>
+  @foreach(var m in obj)
+  {
+        <p>@m.name  @m.age @m.school @m.score</p>
+        <p>@MyCommon.Helper.Upper()</p>
+  }
+</body>
+</html>
