@@ -48,7 +48,7 @@ namespace RazorBase
             service = RazorEngineService.Create();//创建默认的
 
             //初始化文件的嵌套，及公共文件的模板的编译
-            var sTemplateList = C_Config.ReadAppSetting("CommonTemplate");
+            var sTemplateList = C_Config.ReadAppSetting("sCommonTemplatePath");
             if (!string.IsNullOrEmpty(sTemplateList))
             {
                 var list = sTemplateList.Split(',').ToList();
