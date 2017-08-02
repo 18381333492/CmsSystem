@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "模板列表";
+}
+<table id="Templet"></table>
+<div id="Templet_toolbar" style="padding:5px;">
+    <form id="searchForm">
+        <div style="margin-bottom:5px">
+            <span>添加时间</span>
+            <input type="text" name="Sta" class="easyui-datebox" data-options="width:120,editable:false">
+            --
+            <input name="End" type="text" class="easyui-datebox" data-options="width:120,editable:false">
+            <span>模糊查询</span>
+            <input class="easyui-textbox" name="searchText" data-options="width:180,height:22,required:false,prompt:'商品编号/商品名称'">
+            <a data-name="goods_search" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查 询</a>
+        </div>
+    </form>
+    <a class="easyui-linkbutton add" data-options="iconCls:'icon-add',plain:true">新增</a>
+    <a class="easyui-linkbutton edit" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+    <a class="easyui-linkbutton cancel" data-options="iconCls:'icon-cancel',plain:true">删除</a>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var admin = new adminPackage();
+        //注册路由
+        admin.routeRegister("Templet");
+
+        //新增操作
+        $('.add').on("click", function () {
+            admin.dialog(admin.route('Add'), "新增模板", function (r) {
+
+            },800,650);
+        });
+
+
+        /*!
+        * method:数据列表(datagrid)的绑定
+        */
+        admin.grid.datagrid({
+            url: admin.route('List'),
+            toolbar: admin.toolbar,
+            columns: [[
+                { field: '', checkbox: true, },
+                { field: 'sGoodsName', title: '商品名字', align: 'center', width: 300 },
+                { field: 'sGoodNo', title: '商品编号', align: 'center', width: 100 },
+                {
+                    field: 'sGoodsPicture', title: '商品图片', align: 'center', width: 120, formatter: function (value) {
+                        return '<img style="width:60px;height:60px;vertical-align:middle;margin:3px" src=' + value + '>';
+                    }
+                },
+                { field: 'dInsertTime', title: '添加时间', align: 'center', width: 200 },
+                {
+                    field: 'bShelves', title: '上/下架', align: 'center', width: 80, formatter: function (value) {
+                        if (value) return '<span style="color:green">上架<span>';
+                        else return '<span style="color:red">下架<span>';
+                    }
+                }
+            ]],
+            onLoadSuccess: function () {
+                admin.grid.datagrid('resize');
+            }
+        });
+
+    });
+
+
+
+ 
+</script>
+
+
