@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "站点设置";
+}
+@using Web.Models;
+@model TG_WebSite
+<style>
+    .gridtable{
+        font-size:14px;
+    }
+</style>
+<div class="container">
+    <form id="dataForm">
+        <input type="hidden" name="ID"  value="@Model.ID" />
+        <table class="gridtable">
+            <tr>
+                <td>站点名称:</td>
+                <td>
+                    <input name="sSiteName" class="easyui-textbox" data-options="required:true" style="width:300px" value="@Model.sSiteName">
+                </td>
+            </tr>
+            <tr>
+                <td>站点域名:</td>
+                <td>
+                    <input name="sSiteDNS" class="easyui-textbox easyui-validatebox"  style="width:300px" value="@Model.sSiteDNS">
+                </td>
+            </tr>
+            <tr>
+                <td>联系邮箱:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" style="width: 300px;" name="sEmail" maxlength="30" value="@Model.sEmail" />
+                </td>
+            </tr>
+            <tr>
+                <td>联系电话:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" style="width: 300px;" name="sPhone" maxlength="30" value="@Model.sPhone"/>
+                </td>
+            </tr>
+            <tr>
+                <td>联系地址:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" style="width: 300px;" name="sAddress" maxlength="30" value="@Model.sAddress" />
+                </td>
+            </tr>
+            <tr>
+                <td>网站关键字:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" style="width: 300px;" name="sKeyWord" maxlength="20" value="@Model.sKeyWord" />
+                    多个关键字请用英文逗号隔开.
+                </td>
+            </tr>
+            <tr>
+                <td>网站描述:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="sDescription">@Model.sDescription</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>版权信息:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="sCopyRight">@Model.sCopyRight</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>备案信息:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="sFiling">@Model.sFiling</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div id="action-buttons-webconfig">
+                        <a href="javascript:void(0)" id="btnWebConfigSave" class="easyui-linkbutton" iconcls="icon-ok">保 存</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var admin = new adminPackage();
+        //注册路由
+        admin.routeRegister("WebSite");
+
+        //编辑操作
+        $('#btnWebConfigSave').on("click", function () {
+            if ($(admin.form).form("validate")) {
+                admin.button.disable();
+                var params = $(admin.form).serialize();
+                admin.Ajax(admin.route("Set"), params, function (r) {
+                    admin.alert("操作成功");
+                });
+            }
+        });
+    });
+</script>

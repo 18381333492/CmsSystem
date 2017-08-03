@@ -13,20 +13,20 @@
     <div data-options="region:'north',border:false" style="height:70px;"></div>
 
     <!--Menu-->
-    <div data-options="region:'west',title:'菜单栏目',split:true" style="width:230px;">
-        <ul id="tree" class="easyui-tree" data-options="animate:true,lines:true" 
+    <div data-options="region:'west',title:'菜单栏目',split:true" style="width:200px;">
+        <ul id="tree" class="easyui-tree" data-options="animate:true,lines:false" 
             style="width:180px;margin:0 auto;margin-top:10px">
             <li>
-                <span>菜单栏目</span>
+                <span>信息管理</span>
                 <ul>
                     <li>
-                        <span><a data-url="">网站设置</a></span>
+                        <span><a data-url="/Category/Index">栏目管理</a></span>
+                    </li>
+                    <li>
+                        <span><a data-url="">文章管理</a></span>
                     </li>
                     <li>
                         <span><a data-url="/Templet/Index">模板管理</a></span>
-                    </li>
-                    <li>
-                        <span><a data-url="">栏目管理</a></span>
                     </li>
                     <li>
                         <span><a data-url="">生成页面</a></span>
@@ -34,7 +34,15 @@
                 </ul>
             </li>
             <li>
-                <span>File21</span>
+                <span>系统设置</span>
+                <ul>
+                    <li>
+                        <span><a data-url="/User/Index">用户管理</a></span>
+                    </li>
+                    <li>
+                        <span><a data-url="/WebSite/Index">站点设置</a></span>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

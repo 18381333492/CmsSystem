@@ -1,0 +1,67 @@
+﻿
+<!--添加栏目-->
+
+<form id="dataForm">
+    <div style="padding-left:15px;">
+        <p>
+            <label>所属栏目：</label>
+            <input class="easyui-combotree" name="sUserName" data-options="url:'@Url.Content("~/category/TreeJsonList")',required:true">
+            <label>栏目名称：</label>
+            <input class="easyui-textbox" name="s_Name" data-options="required:true">
+            <label>是否为跳转的栏目：</label>
+            <input type="checkbox" name="b_IsRedirect" value="true" class="b_IsRedirect" />
+            <input class="easyui-textbox" type="text" name="s_RedirectUrl"  />
+        </p>
+        <p>
+            <label>栏目标识：</label>
+            <input class="easyui-textbox" name="s_EnName" data-options="required:true">
+            <label>排序编号：</label>
+            <input class="easyui-numberspinner" name="i_Order" required="required"
+                   missingmessage="请输入排序编号." data-options="min:0,max:100,editable:true">
+            <label>是否显示在导航栏：</label>
+            <input type="checkbox" name="b_IsShowNav" class="b_IsShowNav" value="true" />
+        </p>
+        <p>
+            <label>栏目模板：</label>
+            <input name="i_TemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/GetTeamplate")',valueField:'ID',
+                        textField:'s_TemplateName',editable:false">
+        </p>
+        <p>
+            <label>是否为内容栏目：</label>
+            <input type="checkbox" id="b_IsContentItem" /><label for="b_IsContentItem">是</label>
+            <input type="hidden" name="b_IsContentItem" value="false" />
+        </p>
+        <p>
+            <label>栏目下文章模板：</label>
+            <input name="i_ContentTemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/GetTeamplate")',valueField:'ID',
+                         textField:'s_TemplateName',editable:false" style="width:305px;">
+        </p>
+        <p>
+            <label>栏目描述：</label>
+            <input class="easyui-textbox easyui-validatebox" type="text" name="s_Description" />
+        </p>
+        <p>
+            <label>栏目关键字：</label>
+            <input class="easyui-textbox easyui-validatebox" type="text" name="s_KeyWord" maxlength="100" />
+            多个关键字请用英文逗号隔开.
+        </p>
+        <p>
+            <label>栏目导图：</label>
+            <img src="" style="height:120px; width:120px" />
+        </p>
+        <p>
+            <label>栏目内容：</label>
+            <textarea id="s_Content" name="s_Content" style="width:600px;height:400px"></textarea>
+            <input type="hidden" id="replaceContent" name="s_Content" />@*替代的内容*@
+        </p>
+    </div>
+</form>
+<script type="text/javascript">
+    $('.b_IsShowNav,.b_IsRedirect').iCheck({
+        labelHover: false,
+        cursor: true,
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%'
+    });
+</script>

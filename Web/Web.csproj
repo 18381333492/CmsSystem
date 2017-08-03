@@ -77,9 +77,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -140,9 +146,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -196,14 +199,45 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TempletController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WebSiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PagingRet.cs" />
+    <Compile Include="Models\PageInfo.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\student.cs" />
+    <Compile Include="Models\TG_Templet.cs">
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TG_User.cs">
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TG_WebSite.cs">
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\EFHelper.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -662,8 +696,150 @@
     <Content Include="Content\easyui\themes\metro\validatebox.css" />
     <Content Include="Content\easyui\themes\metro\window.css" />
     <Content Include="Content\easyui\themes\mobile.css" />
+    <Content Include="Content\icheck\css\banner.jpg" />
+    <Content Include="Content\icheck\css\custom.css" />
+    <Content Include="Content\icheck\css\icheck.png" />
+    <Content Include="Content\icheck\css\ie\arrow-bottom.png" />
+    <Content Include="Content\icheck\css\ie\arrow-top.png" />
+    <Content Include="Content\icheck\css\ie\header-line.png" />
+    <Content Include="Content\icheck\css\ie\icon-fork.png" />
+    <Content Include="Content\icheck\css\ie\icon-github.png" />
+    <Content Include="Content\icheck\css\ie\icon-lab.png" />
+    <Content Include="Content\icheck\css\ie\icon-options.png" />
+    <Content Include="Content\icheck\css\ie\icon-star.png" />
+    <Content Include="Content\icheck\css\montserrat-bold.svg" />
+    <Content Include="Content\icheck\css\montserrat-regular.svg" />
+    <Content Include="Content\icheck\css\normalize.css" />
+    <Content Include="Content\icheck\icheck.min.js" />
+    <Content Include="Content\icheck\js\custom.js" />
+    <Content Include="Content\icheck\js\custom.min.js" />
+    <Content Include="Content\icheck\js\jquery.js" />
+    <Content Include="Content\icheck\js\zepto.js" />
+    <Content Include="Content\icheck\skins\all.css" />
+    <Content Include="Content\icheck\skins\flat\aero%402x.png" />
+    <Content Include="Content\icheck\skins\flat\aero.css" />
+    <Content Include="Content\icheck\skins\flat\aero.png" />
+    <Content Include="Content\icheck\skins\flat\blue%402x.png" />
+    <Content Include="Content\icheck\skins\flat\blue.css" />
+    <Content Include="Content\icheck\skins\flat\blue.png" />
+    <Content Include="Content\icheck\skins\flat\flat%402x.png" />
+    <Content Include="Content\icheck\skins\flat\flat.css" />
+    <Content Include="Content\icheck\skins\flat\flat.png" />
+    <Content Include="Content\icheck\skins\flat\green%402x.png" />
+    <Content Include="Content\icheck\skins\flat\green.css" />
+    <Content Include="Content\icheck\skins\flat\green.png" />
+    <Content Include="Content\icheck\skins\flat\grey%402x.png" />
+    <Content Include="Content\icheck\skins\flat\grey.css" />
+    <Content Include="Content\icheck\skins\flat\grey.png" />
+    <Content Include="Content\icheck\skins\flat\orange%402x.png" />
+    <Content Include="Content\icheck\skins\flat\orange.css" />
+    <Content Include="Content\icheck\skins\flat\orange.png" />
+    <Content Include="Content\icheck\skins\flat\pink%402x.png" />
+    <Content Include="Content\icheck\skins\flat\pink.css" />
+    <Content Include="Content\icheck\skins\flat\pink.png" />
+    <Content Include="Content\icheck\skins\flat\purple%402x.png" />
+    <Content Include="Content\icheck\skins\flat\purple.css" />
+    <Content Include="Content\icheck\skins\flat\purple.png" />
+    <Content Include="Content\icheck\skins\flat\red%402x.png" />
+    <Content Include="Content\icheck\skins\flat\red.css" />
+    <Content Include="Content\icheck\skins\flat\red.png" />
+    <Content Include="Content\icheck\skins\flat\yellow%402x.png" />
+    <Content Include="Content\icheck\skins\flat\yellow.css" />
+    <Content Include="Content\icheck\skins\flat\yellow.png" />
+    <Content Include="Content\icheck\skins\flat\_all.css" />
+    <Content Include="Content\icheck\skins\futurico\futurico%402x.png" />
+    <Content Include="Content\icheck\skins\futurico\futurico.css" />
+    <Content Include="Content\icheck\skins\futurico\futurico.png" />
+    <Content Include="Content\icheck\skins\line\aero.css" />
+    <Content Include="Content\icheck\skins\line\blue.css" />
+    <Content Include="Content\icheck\skins\line\green.css" />
+    <Content Include="Content\icheck\skins\line\grey.css" />
+    <Content Include="Content\icheck\skins\line\line%402x.png" />
+    <Content Include="Content\icheck\skins\line\line.css" />
+    <Content Include="Content\icheck\skins\line\line.png" />
+    <Content Include="Content\icheck\skins\line\orange.css" />
+    <Content Include="Content\icheck\skins\line\pink.css" />
+    <Content Include="Content\icheck\skins\line\purple.css" />
+    <Content Include="Content\icheck\skins\line\red.css" />
+    <Content Include="Content\icheck\skins\line\yellow.css" />
+    <Content Include="Content\icheck\skins\line\_all.css" />
+    <Content Include="Content\icheck\skins\minimal\aero%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\aero.css" />
+    <Content Include="Content\icheck\skins\minimal\aero.png" />
+    <Content Include="Content\icheck\skins\minimal\blue%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\blue.css" />
+    <Content Include="Content\icheck\skins\minimal\blue.png" />
+    <Content Include="Content\icheck\skins\minimal\green%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\green.css" />
+    <Content Include="Content\icheck\skins\minimal\green.png" />
+    <Content Include="Content\icheck\skins\minimal\grey%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\grey.css" />
+    <Content Include="Content\icheck\skins\minimal\grey.png" />
+    <Content Include="Content\icheck\skins\minimal\minimal%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\minimal.css" />
+    <Content Include="Content\icheck\skins\minimal\minimal.png" />
+    <Content Include="Content\icheck\skins\minimal\orange%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\orange.css" />
+    <Content Include="Content\icheck\skins\minimal\orange.png" />
+    <Content Include="Content\icheck\skins\minimal\pink%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\pink.css" />
+    <Content Include="Content\icheck\skins\minimal\pink.png" />
+    <Content Include="Content\icheck\skins\minimal\purple%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\purple.css" />
+    <Content Include="Content\icheck\skins\minimal\purple.png" />
+    <Content Include="Content\icheck\skins\minimal\red%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\red.css" />
+    <Content Include="Content\icheck\skins\minimal\red.png" />
+    <Content Include="Content\icheck\skins\minimal\yellow%402x.png" />
+    <Content Include="Content\icheck\skins\minimal\yellow.css" />
+    <Content Include="Content\icheck\skins\minimal\yellow.png" />
+    <Content Include="Content\icheck\skins\minimal\_all.css" />
+    <Content Include="Content\icheck\skins\polaris\polaris%402x.png" />
+    <Content Include="Content\icheck\skins\polaris\polaris.css" />
+    <Content Include="Content\icheck\skins\polaris\polaris.png" />
+    <Content Include="Content\icheck\skins\square\aero%402x.png" />
+    <Content Include="Content\icheck\skins\square\aero.css" />
+    <Content Include="Content\icheck\skins\square\aero.png" />
+    <Content Include="Content\icheck\skins\square\blue%402x.png" />
+    <Content Include="Content\icheck\skins\square\blue.css" />
+    <Content Include="Content\icheck\skins\square\blue.png" />
+    <Content Include="Content\icheck\skins\square\green%402x.png" />
+    <Content Include="Content\icheck\skins\square\green.css" />
+    <Content Include="Content\icheck\skins\square\green.png" />
+    <Content Include="Content\icheck\skins\square\grey%402x.png" />
+    <Content Include="Content\icheck\skins\square\grey.css" />
+    <Content Include="Content\icheck\skins\square\grey.png" />
+    <Content Include="Content\icheck\skins\square\orange%402x.png" />
+    <Content Include="Content\icheck\skins\square\orange.css" />
+    <Content Include="Content\icheck\skins\square\orange.png" />
+    <Content Include="Content\icheck\skins\square\pink%402x.png" />
+    <Content Include="Content\icheck\skins\square\pink.css" />
+    <Content Include="Content\icheck\skins\square\pink.png" />
+    <Content Include="Content\icheck\skins\square\purple%402x.png" />
+    <Content Include="Content\icheck\skins\square\purple.css" />
+    <Content Include="Content\icheck\skins\square\purple.png" />
+    <Content Include="Content\icheck\skins\square\red%402x.png" />
+    <Content Include="Content\icheck\skins\square\red.css" />
+    <Content Include="Content\icheck\skins\square\red.png" />
+    <Content Include="Content\icheck\skins\square\square%402x.png" />
+    <Content Include="Content\icheck\skins\square\square.css" />
+    <Content Include="Content\icheck\skins\square\square.png" />
+    <Content Include="Content\icheck\skins\square\yellow%402x.png" />
+    <Content Include="Content\icheck\skins\square\yellow.css" />
+    <Content Include="Content\icheck\skins\square\yellow.png" />
+    <Content Include="Content\icheck\skins\square\_all.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Models\WebModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebModel.edmx</DependentUpon>
+      <LastGenOutput>WebModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WebModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebModel.edmx</DependentUpon>
+      <LastGenOutput>WebModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -672,6 +848,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\easyui\themes\material\images\Thumbs.db" />
+    <EntityDeploy Include="Models\WebModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WebModel.edmx.diagram">
+      <DependentUpon>WebModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\icheck\css\custom.styl" />
+    <Content Include="Content\icheck\css\montserrat-bold.eot" />
+    <Content Include="Content\icheck\css\montserrat-bold.ttf" />
+    <Content Include="Content\icheck\css\montserrat-bold.woff" />
+    <Content Include="Content\icheck\css\montserrat-regular.eot" />
+    <Content Include="Content\icheck\css\montserrat-regular.ttf" />
+    <Content Include="Content\icheck\css\montserrat-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -702,6 +892,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Templet\Index.cshtml" />
     <Content Include="Views\Templet\Add.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\WebSite\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Category\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -716,10 +912,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f32a4bb7-c074-4773-a927-86152259bcb1}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RazorBase\RazorBase.csproj">
       <Project>{4c0a784d-b8f1-4d3e-9000-976bd6d4c9eb}</Project>
       <Name>RazorBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

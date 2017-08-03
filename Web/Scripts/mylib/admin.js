@@ -8,6 +8,10 @@
 function adminPackage() {
 
     var basePath ='';
+    var button= {
+            enable: function () { $('#ok').eq(0).linkbutton('enable'); },
+            disable: function () { $('#ok').eq(0).linkbutton('disable'); }
+    }
 
     /*注册路由 
     @params area:域名
@@ -20,13 +24,15 @@ function adminPackage() {
             basePath = "/" + control + "/";
         var grid = $('#' + control);
         var toolbar = $('#' + control + "_toolbar");
-        var form = $('#dataForm');
-        var searchform = $('#searchForm');
+        var form ='#dataForm';
+        var searchform ='#searchForm';
         //****动态改变api接口*****//
+        res.searchform = searchform;
         res.form = form;
         res.grid = grid;
         res.toolbar = toolbar;
     }
+
 
     //获取url
     function route(action, value) {
@@ -166,8 +172,18 @@ function adminPackage() {
         alert: alert,
         confirm: confirm,
         dialog: dialog,
-        Ajax: Ajax
+        Ajax: Ajax,
+        button: button
     }
     return res;
 }
 
+Array.prototype.toObject = function () {
+    var obj = {};
+    for (var i = 0; i < this.length; i++) {
+        var key = this[i]["name"];
+        var value = this[i]["value"];
+        obj[key] = value;
+    }
+    return obj;
+}

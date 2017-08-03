@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CmsSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TG_Templet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sTempletName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sTempletEnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sTempletContent" Type="nvarchar(max)" />
+          <Property Name="sTempletUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="dInsertTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TG_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sUserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sPassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="sRealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="iUserType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TG_WebSite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sSiteDNS" Type="nvarchar" MaxLength="255" />
+          <Property Name="sEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="sPhone" Type="nvarchar" MaxLength="100" />
+          <Property Name="sAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="sKeyWord" Type="nvarchar" MaxLength="255" />
+          <Property Name="sDescription" Type="nvarchar(max)" />
+          <Property Name="sCopyRight" Type="nvarchar(max)" />
+          <Property Name="sFiling" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="CmsSystemModelStoreContainer">
+          <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TG_User" EntityType="Self.TG_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TG_WebSite" EntityType="Self.TG_WebSite" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CmsSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TG_Templet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sTempletName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sTempletEnName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sTempletContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sTempletUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" />
+          <EntitySet Name="TG_WebSite" EntityType="CmsSystemModel.TG_WebSite" />
+          <EntitySet Name="TG_User" EntityType="CmsSystemModel.TG_User" />
+        </EntityContainer>
+        <EntityType Name="TG_WebSite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sSiteDNS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="sKeyWord" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sCopyRight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sFiling" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TG_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sPassword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sRealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iUserType" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CmsSystemModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="TG_Templet">
+            <EntityTypeMapping TypeName="CmsSystemModel.TG_Templet">
+              <MappingFragment StoreEntitySet="TG_Templet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="sTempletName" ColumnName="sTempletName" />
+                <ScalarProperty Name="sTempletEnName" ColumnName="sTempletEnName" />
+                <ScalarProperty Name="sTempletContent" ColumnName="sTempletContent" />
+                <ScalarProperty Name="sTempletUrl" ColumnName="sTempletUrl" />
+                <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TG_WebSite">
+            <EntityTypeMapping TypeName="CmsSystemModel.TG_WebSite">
+              <MappingFragment StoreEntitySet="TG_WebSite">
+                <ScalarProperty Name="sFiling" ColumnName="sFiling" />
+                <ScalarProperty Name="sCopyRight" ColumnName="sCopyRight" />
+                <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+                <ScalarProperty Name="sKeyWord" ColumnName="sKeyWord" />
+                <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+                <ScalarProperty Name="sPhone" ColumnName="sPhone" />
+                <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+                <ScalarProperty Name="sSiteDNS" ColumnName="sSiteDNS" />
+                <ScalarProperty Name="sSiteName" ColumnName="sSiteName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TG_User">
+            <EntityTypeMapping TypeName="CmsSystemModel.TG_User">
+              <MappingFragment StoreEntitySet="TG_User">
+                <ScalarProperty Name="iUserType" ColumnName="iUserType" />
+                <ScalarProperty Name="sRealName" ColumnName="sRealName" />
+                <ScalarProperty Name="sPhone" ColumnName="sPhone" />
+                <ScalarProperty Name="sPassword" ColumnName="sPassword" />
+                <ScalarProperty Name="sUserName" ColumnName="sUserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

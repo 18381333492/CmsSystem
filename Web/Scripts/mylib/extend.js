@@ -8,12 +8,12 @@
 
 void function () {
 
-    //$.extend($.fn.textbox.defaults, {
-    //    height: 30,
-    //    width: 200,
-    //    required: true,
-    //    missingMessage:'亲,该项为必填项哦'
-    //});
+    $.extend($.fn.textbox.defaults, {
+       // height: 30,
+       // width: 200,
+       // required: true,
+        missingMessage:'亲,该项为必填项哦'
+    });
 
     //$.extend($.fn.numberbox.defaults, {
     //    height: 30,
@@ -111,7 +111,14 @@ void function () {
                 return regex.exec(value);
             },
             message: '亲,手机号码格式错误!'
+        },
+        equals: {
+            validator: function (value, param) {
+                return value == $(param[0]).val();
+            },
+            message: '两次密码输入不一致'
         }
+        
     });
 
 
