@@ -5,63 +5,69 @@
     <div style="padding-left:15px;">
         <p>
             <label>所属栏目：</label>
-            <input class="easyui-combotree" name="sUserName" data-options="url:'@Url.Content("~/category/TreeJsonList")',required:true">
-            <label>栏目名称：</label>
-            <input class="easyui-textbox" name="s_Name" data-options="required:true">
+            <input class="easyui-combotree" name="CategoryId" data-options="url:'/Category/CategoryComtreeData',required:true,panelHeight:'auto'">
             <label>是否为跳转的栏目：</label>
-            <input type="checkbox" name="b_IsRedirect" value="true" class="b_IsRedirect" />
-            <input class="easyui-textbox" type="text" name="s_RedirectUrl"  />
+            <input type="checkbox" name="bIsRedirect" value="true" class="bIsRedirect" />
+            <label>跳转链接：</label>
+            <input class="easyui-textbox" type="text" name="sRedirectUrl"  />
+        </p>
+        <p>
+            <label>栏目名称：</label>
+            <input class="easyui-textbox" name="sName" data-options="required:true">
+            <label>是否显示在导航栏：</label>
+            <input type="checkbox" name="bIsShowNav" class="bIsShowNav" value="true" />
         </p>
         <p>
             <label>栏目标识：</label>
-            <input class="easyui-textbox" name="s_EnName" data-options="required:true">
+            <input class="easyui-textbox" name="sEnName" data-options="required:true">
+            <label>是否为内容的栏目：</label>
+            <input type="checkbox"  class="bIsContentCategory" name="bIsContentCategory" value="true" />
+        </p>
+        <p>
             <label>排序编号：</label>
-            <input class="easyui-numberspinner" name="i_Order" required="required"
+            <input class="easyui-numberspinner" name="iOrder" required="required"
                    missingmessage="请输入排序编号." data-options="min:0,max:100,editable:true">
-            <label>是否显示在导航栏：</label>
-            <input type="checkbox" name="b_IsShowNav" class="b_IsShowNav" value="true" />
+            <label>栏目英文：</label>
+            <input class="easyui-textbox" name="sEnNick" >
         </p>
         <p>
             <label>栏目模板：</label>
-            <input name="i_TemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/GetTeamplate")',valueField:'ID',
-                        textField:'s_TemplateName',editable:false">
-        </p>
-        <p>
-            <label>是否为内容栏目：</label>
-            <input type="checkbox" id="b_IsContentItem" /><label for="b_IsContentItem">是</label>
-            <input type="hidden" name="b_IsContentItem" value="false" />
-        </p>
-        <p>
+            <input name="iTemplateId" class="easyui-combobox" data-options="url:'/Templet/comboxData',valueField:'ID',
+                        textField:'sTempletName',editable:false,height:25,width:173">
             <label>栏目下文章模板：</label>
-            <input name="i_ContentTemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/GetTeamplate")',valueField:'ID',
-                         textField:'s_TemplateName',editable:false" style="width:305px;">
+            <input name="iArticleTemplateId" class="easyui-combobox" data-options="url:'/Templet/comboxData',valueField:'ID',
+                         textField:'sTempletName',editable:false,height:25,width:173">
         </p>
         <p>
             <label>栏目描述：</label>
-            <input class="easyui-textbox easyui-validatebox" type="text" name="s_Description" />
-        </p>
-        <p>
+            <input class="easyui-textbox easyui-validatebox" type="text" name="sDescription" data-options="multiline:true,height:120,width:300"/>
             <label>栏目关键字：</label>
-            <input class="easyui-textbox easyui-validatebox" type="text" name="s_KeyWord" maxlength="100" />
-            多个关键字请用英文逗号隔开.
+            <input class="easyui-textbox easyui-validatebox" type="text" name="sKeyWord"  data-options="multiline:true,height:120,width:300" />
         </p>
         <p>
-            <label>栏目导图：</label>
-            <img src="" style="height:120px; width:120px" />
+            <label>导图尺寸：</label>
+            <input class="easyui-textbox" type="text" name="sPictureSize" />(建议尺寸)
         </p>
         <p>
-            <label>栏目内容：</label>
-            <textarea id="s_Content" name="s_Content" style="width:600px;height:400px"></textarea>
-            <input type="hidden" id="replaceContent" name="s_Content" />@*替代的内容*@
+            <label style="vertical-align:top;display:block;float:left">栏目导图：</label>
+            <div id="sPictureUrl"></div>
+            <input type="hidden" name="sPictureUrl"  value=""/>
+           </p>
+        <p>
+            <label style="vertical-align:top;display:block;float:left">栏目内容：</label>
+            <textarea id="sContent" name="sContent" style="width:750px;height:400px;"></textarea>
         </p>
     </div>
 </form>
 <script type="text/javascript">
-    $('.b_IsShowNav,.b_IsRedirect').iCheck({
+    $('.bIsShowNav,.bIsRedirect,.bIsContentCategory').iCheck({
         labelHover: false,
         cursor: true,
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%'
     });
+
+    var pciture = new dpictures();
+    pciture.create("sPictureUrl");
 </script>

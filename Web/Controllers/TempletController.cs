@@ -163,5 +163,21 @@ namespace Web.Controllers
             }
         }
 
+
+        /// <summary>
+        /// 获取combox下拉模板列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult comboxData()
+        {
+            var query =from m in mangae.db.TG_Templet 
+                       orderby m.ID descending
+                       select new
+                       {
+                           m.ID,
+                           m.sTempletName
+                       };
+            return Content(C_Json.toJson(query));
+        }
     }
 }

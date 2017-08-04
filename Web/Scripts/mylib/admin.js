@@ -103,11 +103,11 @@ function adminPackage() {
                 onClose: function () { name.dialog("destroy"); },
                 onLoad: function () {
                     //加载之后的动作   
-                    document.onkeydown = function (event) {
-                        if (event.keyCode == "13") {
-                            $('#ok').click();
-                        }
-                    }
+                    //document.onkeydown = function (event) {
+                    //    if (event.keyCode == "13") {
+                    //        $('#ok').click();
+                    //    }
+                    // }
                     //回调页面(加载成功的函数
                     if (loadCall) loadCall();
                 },

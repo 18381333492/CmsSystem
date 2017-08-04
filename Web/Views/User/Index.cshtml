@@ -76,6 +76,7 @@
                     admin.Ajax(admin.route("Cancel"), { Ids: Ids.join() }, function (r) {
                         admin.alert("删除成功");
                         admin.grid.datagrid("reload");
+                        admin.grid.datagrid("clearSelections");
                     });
                 });
             }

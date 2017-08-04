@@ -5,6 +5,28 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CmsSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TG_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="sName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sEnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sEnNick" Type="nvarchar" MaxLength="255" />
+          <Property Name="iOrder" Type="int" Nullable="false" />
+          <Property Name="iTemplateId" Type="int" />
+          <Property Name="iArticleTemplateId" Type="int" />
+          <Property Name="bIsRedirect" Type="bit" />
+          <Property Name="sRedirectUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="bIsShowNav" Type="bit" Nullable="false" />
+          <Property Name="bIsContentCategory" Type="bit" />
+          <Property Name="sPictureSize" Type="nvarchar" MaxLength="255" />
+          <Property Name="sPictureUrl" Type="nvarchar(max)" />
+          <Property Name="sDescription" Type="nvarchar(max)" />
+          <Property Name="sKeyWord" Type="nvarchar(max)" />
+          <Property Name="sContent" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="TG_Templet">
           <Key>
             <PropertyRef Name="ID" />
@@ -43,6 +65,7 @@
           <Property Name="sFiling" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="CmsSystemModelStoreContainer">
+          <EntitySet Name="TG_Category" EntityType="Self.TG_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_User" EntityType="Self.TG_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_WebSite" EntityType="Self.TG_WebSite" Schema="dbo" store:Type="Tables" />
@@ -66,6 +89,7 @@
           <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" />
           <EntitySet Name="TG_WebSite" EntityType="CmsSystemModel.TG_WebSite" />
           <EntitySet Name="TG_User" EntityType="CmsSystemModel.TG_User" />
+          <EntitySet Name="TG_Category" EntityType="CmsSystemModel.TG_Category" />
         </EntityContainer>
         <EntityType Name="TG_WebSite">
           <Key>
@@ -92,6 +116,28 @@
           <Property Name="sPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sRealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="iUserType" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TG_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="sName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sEnName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sEnNick" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="iOrder" Type="Int32" Nullable="false" />
+          <Property Name="iTemplateId" Type="Int32" />
+          <Property Name="iArticleTemplateId" Type="Int32" />
+          <Property Name="bIsRedirect" Type="Boolean" />
+          <Property Name="sRedirectUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="bIsShowNav" Type="Boolean" Nullable="false" />
+          <Property Name="bIsContentCategory" Type="Boolean" />
+          <Property Name="sPictureSize" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sPictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sKeyWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -135,6 +181,29 @@
                 <ScalarProperty Name="sPhone" ColumnName="sPhone" />
                 <ScalarProperty Name="sPassword" ColumnName="sPassword" />
                 <ScalarProperty Name="sUserName" ColumnName="sUserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TG_Category">
+            <EntityTypeMapping TypeName="CmsSystemModel.TG_Category">
+              <MappingFragment StoreEntitySet="TG_Category">
+                <ScalarProperty Name="sContent" ColumnName="sContent" />
+                <ScalarProperty Name="sKeyWord" ColumnName="sKeyWord" />
+                <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+                <ScalarProperty Name="sPictureUrl" ColumnName="sPictureUrl" />
+                <ScalarProperty Name="sPictureSize" ColumnName="sPictureSize" />
+                <ScalarProperty Name="bIsContentCategory" ColumnName="bIsContentCategory" />
+                <ScalarProperty Name="bIsShowNav" ColumnName="bIsShowNav" />
+                <ScalarProperty Name="sRedirectUrl" ColumnName="sRedirectUrl" />
+                <ScalarProperty Name="bIsRedirect" ColumnName="bIsRedirect" />
+                <ScalarProperty Name="iArticleTemplateId" ColumnName="iArticleTemplateId" />
+                <ScalarProperty Name="iTemplateId" ColumnName="iTemplateId" />
+                <ScalarProperty Name="iOrder" ColumnName="iOrder" />
+                <ScalarProperty Name="sEnNick" ColumnName="sEnNick" />
+                <ScalarProperty Name="sEnName" ColumnName="sEnName" />
+                <ScalarProperty Name="sName" ColumnName="sName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
