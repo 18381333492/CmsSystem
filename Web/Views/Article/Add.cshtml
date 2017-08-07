@@ -1,0 +1,177 @@
+﻿
+
+<!--添加文章视图-->
+<form id="dataForm">
+    <div style="padding-left:15px;">
+        <p>
+            <label>所属栏目：</label>
+            <input class="easyui-combotree" name="CategoryId" data-options="url:'/Category/CategoryComtreeData',required:true,panelHeight:'auto'">
+        </p>   
+        <p>
+            <label>文章标题：</label>
+            <input class="easyui-textbox" name="sEnName" data-options="required:true">
+        </p>   
+        <p>
+            <label>作者/提供商:：</label>
+            <input class="easyui-textbox" name="sEnName" data-options="required:true">
+        </p>       
+        <p>
+            <label>作者/提供商:：</label>
+            <input class="easyui-textbox" name="sEnName" data-options="required:true">
+        </p>           
+    </div>
+
+
+        <table class="gridtable">
+            <tr>
+                <td>所属栏目:</td>
+                <td>
+                    <input id="i_CategoryID" name="i_CategoryID" class="easyui-combotree" style="width: 305px;"
+                           data-options="url:'@Url.Content("~/category/TreeJsonList")?bShowTop=false',required:true" missingmessage="请选择文章所属栏目.">
+                </td>
+            </tr>
+            <tr>
+                <td>标题:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" type="text" name="s_Title" style="width: 300px;" data-options="required:true" maxlength="30"
+                           missingmessage="请输入文章标题." />
+                </td>
+            </tr>
+            <tr>
+                <td class="tempauthor">作者/提供商:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" style="width: 300px;" type="text" name="s_Author" maxlength="20" />
+                </td>
+            </tr>
+            <tr>
+                <td class="tempsize">信息大小:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" style="width: 300px;" type="text" name="s_Size" maxlength="20" /><span class="tempsizeadd">MB</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="templang">信息语言:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" style="width: 300px;" type="text" name="s_Lang" maxlength="20" />
+                </td>
+            </tr>
+            <tr>
+                <td class="temversion">信息版本:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" style="width: 300px;" type="text" name="s_Version" maxlength="20" />
+                </td>
+            </tr>
+            <tr>
+                <td>发布时间:</td>
+                <td>
+                    <input class="easyui-textbox easyui-datebox" type="text" style="width: 300px;" name="s_PublishTime" data-options="required:true" maxlength="20" />
+                </td>
+            </tr>
+            <tr>
+                <td>摘要/运行环境:</td>
+                <td>
+                    <textarea class="easyui-textbox easyui-validatebox" style="width: 300px; height: 50px;" name="s_Summary"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>属性:</td>
+                <td>
+                    <input type="checkbox" id="b_IsTop" /><label for="b_IsTop">置顶</label>
+                    <input type="hidden" name="b_IsTop" value="false" />
+                    <input type="checkbox" id="b_IsSlide" /><label for="b_IsSlide">幻灯片</label>
+                    <input type="hidden" name="b_IsSlide" value="false" />
+                    <input type="checkbox" id="b_IsHot" /><label for="b_IsHot">热点</label>
+                    <input type="hidden" name="b_IsHot" value="false" />
+                </td>
+            </tr>
+            <tr>
+                <td>导图:</td>
+                <td>
+                    <span id="daotu">
+                        <img src="" />
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>附件:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" style="width: 300px;" type="text" name="s_Attach" id="s_Attach" maxlength="255" />
+                    <input type="button" value="上传" onclick="browserAttach()" />
+                    <span id="uploadAttachTip" class="red"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>独立模板:</td>
+                <td>
+                    <input name="i_TemplateID" class="easyui-combobox" data-options="url:'@Url.Content("~/template/GetTeamplate")',valueField:'ID',
+                        textField:'s_TemplateName',editable:false" style="width:305px;">
+                    <span class="red">仅当需要单独设置该文章格式时需要填写</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tempenname">英文标题:</td>
+                <td>
+                    <input class="easyui-textbox easyui-validatebox" type="text" name="s_EnName" data-options="validType:'english'" maxlength="25"
+                           invalidmessage="只能输入英文与数字的组合." style="width: 300px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>文章关键字:</td>
+                <td>
+                    <input class="easyui-validatebox" style="width: 300px;" type="text" name="s_KeyWord" maxlength="20" />
+                    多个关键字请用英文逗号隔开.
+                </td>
+            </tr>
+            <tr>
+                <td>文章描述:</td>
+                <td>
+                    <textarea class="easyui-validatebox" style="width: 300px; height: 50px;" name="s_Description" id="articleDescription"></textarea>
+                    <span>你还可以输入<span id="desNum" style="color: red; font-weight: 700">50</span>个汉字</span>
+                </td>
+            </tr>
+            <tr>
+                <td>内容描述:</td>
+                <td>
+                    <textarea id="s_Content" style="height:300px;"></textarea>
+                    @*<input type="hidden" id="replaceContent" name="s_Content" />替代的内容*@
+                </td>
+            </tr>
+        </table>
+</form>
+
+@*<div id="uploadAttachFormPanel" class="easyui-dialog" title="附件上传" style="width: 400px; height: 80px; padding: 10px;" closed="true"
+        data-options="resizable:false,modal:true">
+        <form id="uploadAttachForm" action="@Url.Content("~/Upload/Upload")?dir=file" enctype="multipart/form-data" method="post">
+            <input type="file" name="imgFile" id="attachFile" />
+            <input type="submit" value="确定" id="btnAttachSubmit" />
+        </form>
+    </div>*@
+<script type="text/javascript">
+    window.editor = KindEditor.create('#s_Content');
+    $(function () {
+        $('#daotu').ImgUpload({ url: '/Upload.ashx' });
+    });
+    function AddArticle() {
+        debugger
+        var param = $('#articleForm').serialize();
+        var s_ImgPath = $('#daotu img').attr("src");
+        $('#s_Content').val(window.editor.html());
+        var s_Content = $('#s_Content').val();
+        $.ajax({
+            url: '/Article/Add',
+            type: 'POST',
+            dataType: 'json',
+            data: param + '&s_ImgPath=' + s_ImgPath + '&s_Content=' + s_Content,
+            success: function (data) {
+                if (data.success) {
+                    $.messager.alert('警告', data.message);
+                    $('#AddArticle').dialog('close');
+                    $('#articleList').datagrid('reload');
+                }
+                else {
+                    $.messager.alert('警告', data.message);
+                }
+            }
+        });
+    }
+</script>

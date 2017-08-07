@@ -147,12 +147,11 @@ function dpictures() {
                         //单图片返回结果处理
                         $(element).find('li').eq(orderIndex).find(".s_picture_btn").attr("src", defaults.VirtualDirectory + data.url);
                         sUrlArray[orderIndex] = data.url;
-                        //更新值
-                        $(element).next().val(sUrlArray.join());
                     }
                     else
                         appendHtml(data.url);
-                    $(element).next().val(data.url);
+                    //更新值
+                    $(element).next().val(sUrlArray.join());
                 } else {
                     alert(data.message);
                 }

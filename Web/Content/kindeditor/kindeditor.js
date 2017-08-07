@@ -227,10 +227,11 @@ function _getBasePath() {
     //return "http://img1.chuguicdn.com:58433/res/p/js/kindeditor/";//±à¼­Æ÷´æ·ÅÂ·¾¶
 }
 K.basePath = _getBasePath();
+ 
 K.options = {
 	designMode : true,
 	fullscreenMode : false,
-	filterMode : true,
+	filterMode : false,
 	wellFormatMode : true,
 	shadowMode : true,
 	loadStyleMode : true,

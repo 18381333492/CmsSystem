@@ -73,10 +73,10 @@ function kindeditor() {
                 items: defaults.items,
                 uploadJson: defaults.uploadJson,
                 bodyClass: 'ke-content',
+                filterMode:false,//true时过滤HTML代码，false时允许输入任何代码。
                 /*创建编辑器之后的回调函数*/
                 afterCreate: defaults.afterCreate  /*创建编辑器之后的回调函数*/
             });
-
     }
 
     /*
@@ -125,7 +125,6 @@ function kindeditor() {
 
 
     return {
-        editor:editor,
         items:items,//工具栏配置项
         create: create,
         sethtml: sethtml, //html获取/设置
