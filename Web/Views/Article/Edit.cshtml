@@ -1,44 +1,42 @@
-﻿
-
-<!--添加文章视图-->
+﻿<!--编辑文章视图-->
 <form id="dataForm">
     <div style="padding-left:15px;">
         <p>
             <label>所属栏目:</label>
             <input class="easyui-combotree" name="iCategoryId" data-options="url:'/Category/CategoryComtreeData?IsGen=0',required:true,panelHeight:'auto'">
             <label>文章属性:</label>
-            <input type="checkbox" name="bIsSlide" value="true" class="bIsSlide" />发布 &nbsp;&nbsp;
             <input type="checkbox" name="bIsTop" value="true" class="bIsTop" />置顶 &nbsp;&nbsp;
+            <input type="checkbox" name="bIsSlide" value="true" class="bIsSlide" />幻灯片 &nbsp;
             <input type="checkbox" name="bIsHot" value="true" class="bIsHot" />热点
-        </p>   
+            <label>独立模板:</label>
+            <input name="iTemplateId" class="easyui-combobox" data-options="url:'/Templet/comboxData',valueField:'ID',
+                        textField:'sTempletName',editable:false,height:25,width:173">
+        </p>
         <p>
             <label>文章标题:</label>
-            <input class="easyui-textbox" name="sTitle" style="width:405px">
-        </p>   
+            <input class="easyui-textbox" name="sTitle">
+            <label>信息语言:</label>
+            <input class="easyui-textbox" name="sLang">
+            <label>作者/提供商:</label>
+            <input class="easyui-textbox" name="sAuthor">
+        </p>
         <p>
             <label>英文标题:</label>
             <input class="easyui-textbox" name="sEnTitle">
             <label>信息版本:</label>
             <input class="easyui-textbox" name="sVersion">
-            <label>独立模板:</label>
-            <input name="iTemplateId" class="easyui-combobox" data-options="url:'/Templet/comboxData',valueField:'ID',
-                        textField:'sTempletName',editable:false,height:25,width:173">   
-        </p>   
+            <label>摘要/运行环境:</label>
+            <input class="easyui-textbox" name="sSummary">
+        </p>
         <p>
             <label>发布时间:</label>
             <input type="text" class="easyui-datebox" name="dPublishTime" />
-            <label>信息语言:</label>
-            <input class="easyui-textbox" name="sLang"> 
-            <label>作者/提供商:</label>
-            <input class="easyui-textbox" name="sAuthor">   
-        </p>
-        <p>
             <label>导图尺寸:</label>
             <input class="easyui-textbox" type="text" name="sPictureSize" />
-            <label>信息大小:</label>
-            <input class="easyui-textbox" name="sSize">
-            <label>摘要/运行环境:</label>
-            <input class="easyui-textbox" name="sSummary">
+            <label>文章属性:</label>
+            <input type="checkbox" name="bIsTop" value="true" class="bIsTop" />置顶 &nbsp;&nbsp;
+            <input type="checkbox" name="bIsSlide" value="true" class="bIsSlide" />幻灯片 &nbsp;
+            <input type="checkbox" name="bIsHot" value="true" class="bIsHot" />热点
         </p>
         <p>
             <label style="vertical-align:top;display:block;float:left">文章的导图:</label>
@@ -48,15 +46,15 @@
         <p style="clear:both">
             <label>文章关键字:</label>
             <input class="easyui-textbox easyui-validatebox" type="text" name="sKeyword" data-options="multiline:true,height:120,width:680" />
-        </p>    
+        </p>
         <p>
             <label>文章的描述:</label>
             <input class="easyui-textbox easyui-validatebox" type="text" name="sDescription" data-options="multiline:true,height:120,width:680" />
-        </p>    
+        </p>
         <p>
             <label style="vertical-align:top;display:block;float:left">文章的内容 :</label>
             <textarea id="sContent" name="sContent" style="width:680px;height:400px;"></textarea>
-        </p>   
+        </p>
     </div>
 </form>
 <script type="text/javascript">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.App_Start;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -23,13 +24,69 @@ namespace Web.Controllers
             return View();
         }
 
-
-        public ActionResult List()
+        public ActionResult Edit(int ID)
         {
-            result.pageResult.total = 0;
-            result.pageResult.rows = new List<object>();
-            return Content(result.toJson());
+            return View(mangae.db.TG_Article.Find(ID));
         }
 
+
+        /// <summary>
+        /// 分页获取文章数据列表
+        /// </summary>
+        /// <param name="pageInfo"></param>
+        /// <param name="iCategoryId"></param>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        public ActionResult List(PageInfo pageInfo,int iCategoryId=0)
+        {
+            var query = from m in mangae.db.TG_Article
+                        join n in mangae.db.TG_Category
+                        on m.iCategoryId equals n.ID
+                        where m.bIsDeleted == false
+                        orderby m.ID descending
+                        select new
+                        {
+                            m.ID,
+                            m.iCategoryId,
+                            n.sName,//栏目名称
+                            m.sTitle,
+                            m.sAuthor,
+                            m.bIsHot,
+                            m.bIsTop,
+                            m.bIsSlide
+                        };
+            if (iCategoryId > 0)
+                query = query.Where(m => m.iCategoryId == iCategoryId);
+            if (!string.IsNullOrEmpty(pageInfo.sKeyWord))
+                query = query.Where(m => m.sTitle.Contains(pageInfo.sKeyWord));
+            result.pageResult.total = query.Count();
+            query = query.Skip((pageInfo.page - 1) * pageInfo.rows).Take(pageInfo.rows);
+            result.pageResult.rows = query;
+            return Content(result.pageResult.toJson());
+        }
+
+        /// <summary>
+        /// 添加文章
+        /// </summary>
+        /// <param name="article"></param>
+        [ValidateInput(false)]
+        public void Insert(TG_Article article)
+        {
+            article.bIsDeleted = false;
+            mangae.Add<TG_Article>(article);
+            result.success = mangae.SaveChange();
+        }
+
+
+        /// <summary>
+        /// 编辑文章
+        /// </summary>
+        /// <param name="article"></param>
+        [ValidateInput(false)]
+        public void Update(TG_Article article)
+        {
+            mangae.Edit<TG_Article>(article);
+            result.success = mangae.SaveChange();
+        }
     }
 }

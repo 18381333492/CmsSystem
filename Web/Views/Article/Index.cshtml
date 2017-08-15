@@ -2,10 +2,18 @@
 @{
     ViewBag.Title = "文章数据列表";
 }
+<link href="~/Content/icheck/skins/square/blue.css" rel="stylesheet" />
+<script src="~/Content/icheck/icheck.min.js"></script>
+<script src="~/Content/kindeditor/kindeditor.js"></script>
+<script src="~/Scripts/plug-in/kindeditor.js"></script>
+<link href="~/Scripts/plug-in/dpictures/dpictures.css" rel="stylesheet" />
+<script src="~/Scripts/plug-in/dpictures/dpictures.js"></script>
 <table id="Article"></table>
 <div id="Article_toolbar" style="padding:5px;">
     <form id="searchForm">
         <div style="margin-bottom:5px">
+            <span>栏目选择</span>
+            <input class="easyui-combotree" name="iCategoryId" data-options="url:'/Category/CategoryComtreeData?IsGen=0',panelHeight:'auto',editable:true">
             <span>模糊查询</span>
             <input class="easyui-textbox" name="sKeyWord" data-options="width:180,height:22,required:false,prompt:'标题'">
             <a class="easyui-linkbutton search" data-options="iconCls:'icon-search'">查 询</a>
@@ -21,6 +29,8 @@
         //注册路由
         admin.routeRegister("Article");
 
+        var editor=new kindeditor();
+
         //查询操作
         $('#searchForm .search').on("click", function () {
             var params = $(admin.searchform).serializeArray().toObject();
@@ -31,24 +41,27 @@
 
         //新增操作
         $('.add').on("click", function () {
-            var dialog = admin.dialog(admin.route('Add'), "新增模板", function (r) {
+            var dialog = admin.dialog(admin.route('Add'), "新增文章", function (r) {
                 if ($(admin.form).form('validate')) {
                     admin.button.disable();
-                    var data = $(admin.form).serialize();
+                    var data = $(admin.form).serializeArray().toObject();
+                    data.sContent = editor.gethtml();
                     admin.Ajax(admin.route('Insert'), data, function (r) {
                         admin.alert("添加成功");
                         dialog.dialog('close');
                         admin.grid.datagrid("reload");
                     });
                 }
-            },800,650);
+            }, 800, 600, function () {
+                editor.create("#sContent", { items: editor.items.defaults });
+            });
         });
 
         //编辑操作
         $('.edit').on("click", function () {
             var selected = admin.grid.datagrid('getSelections');
             if (selected.length == 1) {
-                var dialog = admin.dialog(admin.route('Add') + "?ID="+selected[0].ID, "编辑模板", function (r) {
+                var dialog = admin.dialog(admin.route('Edit') + "?ID=" + selected[0].ID, "编辑文章", function (r) {
                     if ($(admin.form).form('validate')) {
                         admin.button.disable();
                         var data = $(admin.form).serialize();
@@ -58,7 +71,7 @@
                             admin.grid.datagrid("reload");
                         });
                     }
-                }, 800, 650);
+                }, 800, 600);
             }
             else {
                 admin.alert("请选择一条数据进行操作!");
@@ -93,14 +106,13 @@
             url: admin.route('List'),
             toolbar: admin.toolbar,
             columns: [[
-                { field: 's_Title', title: '标题', align: 'center', width: 250, rowspan: 2 },
-                { field: 's_CategoryName', title: '所属栏目', align: 'center', width: 100, rowspan: 2 },
-                { field: 's_Author', title: '作者', align: 'center', width: 100, rowspan: 2 },
-                { field: 'i_Status', title: '是否发布', align: 'center', width: 60, rowspan: 2 },
+                { field: 'sTitle', title: '标题', align: 'center', width: 250, rowspan: 2 },
+                { field: 'sName', title: '所属栏目', align: 'center', width: 100, rowspan: 2 },
+                { field: 'sAuthor', title: '作者', align: 'center', width: 100, rowspan: 2 },
                 { title: '文章属性', width: 200, colspan: 3 }],
                     [
                         {
-                            field: 'b_IsTop', title: '置顶', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsTop', title: '置顶', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
                                 if (value) {
                                     return "是";
                                 } else {
@@ -109,7 +121,7 @@
                             }
                         },
                         {
-                            field: 'b_IsSlide', title: '幻灯片', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsSlide', title: '幻灯片', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
                                 if (value) {
                                     return "是";
                                 } else {
@@ -118,7 +130,7 @@
                             }
                         },
                         {
-                            field: 'b_IsHot', title: '热点', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsHot', title: '热点', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
                                 if (value) {
                                     return "是";
                                 } else {
@@ -132,12 +144,7 @@
                 admin.grid.datagrid('resize');
             }
         });
-
     });
-
-
-
-
 </script>
 
 

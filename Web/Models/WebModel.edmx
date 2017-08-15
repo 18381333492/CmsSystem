@@ -5,6 +5,31 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CmsSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TG_Article">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iCategoryId" Type="int" Nullable="false" />
+          <Property Name="iTemplateId" Type="int" Nullable="false" />
+          <Property Name="sTitle" Type="varchar" MaxLength="255" />
+          <Property Name="sEnTitle" Type="varchar" MaxLength="255" />
+          <Property Name="sAuthor" Type="varchar" MaxLength="255" />
+          <Property Name="sSize" Type="varchar" MaxLength="255" />
+          <Property Name="sLang" Type="varchar" MaxLength="255" />
+          <Property Name="sVersion" Type="varchar" MaxLength="255" />
+          <Property Name="sSummary" Type="varchar" MaxLength="255" />
+          <Property Name="sPictureSize" Type="varchar" MaxLength="255" />
+          <Property Name="sPictureUrl" Type="varchar(max)" />
+          <Property Name="bIsTop" Type="bit" />
+          <Property Name="bIsSlide" Type="bit" />
+          <Property Name="bIsHot" Type="bit" />
+          <Property Name="dPublishTime" Type="datetime" />
+          <Property Name="sDescription" Type="varchar(max)" />
+          <Property Name="sKeyword" Type="varchar(max)" />
+          <Property Name="sContent" Type="varchar(max)" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="TG_Category">
           <Key>
             <PropertyRef Name="ID" />
@@ -65,6 +90,7 @@
           <Property Name="sFiling" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="CmsSystemModelStoreContainer">
+          <EntitySet Name="TG_Article" EntityType="Self.TG_Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_Category" EntityType="Self.TG_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_User" EntityType="Self.TG_User" Schema="dbo" store:Type="Tables" />
@@ -90,6 +116,7 @@
           <EntitySet Name="TG_WebSite" EntityType="CmsSystemModel.TG_WebSite" />
           <EntitySet Name="TG_User" EntityType="CmsSystemModel.TG_User" />
           <EntitySet Name="TG_Category" EntityType="CmsSystemModel.TG_Category" />
+          <EntitySet Name="TG_Article" EntityType="CmsSystemModel.TG_Article" />
         </EntityContainer>
         <EntityType Name="TG_WebSite">
           <Key>
@@ -138,6 +165,31 @@
           <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sKeyWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TG_Article">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="iTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="sTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sEnTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sAuthor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sSize" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sLang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sVersion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sPictureSize" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sPictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bIsTop" Type="Boolean" />
+          <Property Name="bIsSlide" Type="Boolean" />
+          <Property Name="bIsHot" Type="Boolean" />
+          <Property Name="dPublishTime" Type="DateTime" Precision="3" />
+          <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sKeyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -204,6 +256,32 @@
                 <ScalarProperty Name="sEnName" ColumnName="sEnName" />
                 <ScalarProperty Name="sName" ColumnName="sName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TG_Article">
+            <EntityTypeMapping TypeName="CmsSystemModel.TG_Article">
+              <MappingFragment StoreEntitySet="TG_Article">
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+                <ScalarProperty Name="sContent" ColumnName="sContent" />
+                <ScalarProperty Name="sKeyword" ColumnName="sKeyword" />
+                <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+                <ScalarProperty Name="dPublishTime" ColumnName="dPublishTime" />
+                <ScalarProperty Name="bIsHot" ColumnName="bIsHot" />
+                <ScalarProperty Name="bIsSlide" ColumnName="bIsSlide" />
+                <ScalarProperty Name="bIsTop" ColumnName="bIsTop" />
+                <ScalarProperty Name="sPictureUrl" ColumnName="sPictureUrl" />
+                <ScalarProperty Name="sPictureSize" ColumnName="sPictureSize" />
+                <ScalarProperty Name="sSummary" ColumnName="sSummary" />
+                <ScalarProperty Name="sVersion" ColumnName="sVersion" />
+                <ScalarProperty Name="sLang" ColumnName="sLang" />
+                <ScalarProperty Name="sSize" ColumnName="sSize" />
+                <ScalarProperty Name="sAuthor" ColumnName="sAuthor" />
+                <ScalarProperty Name="sEnTitle" ColumnName="sEnTitle" />
+                <ScalarProperty Name="sTitle" ColumnName="sTitle" />
+                <ScalarProperty Name="iTemplateId" ColumnName="iTemplateId" />
+                <ScalarProperty Name="iCategoryId" ColumnName="iCategoryId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

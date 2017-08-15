@@ -213,6 +213,9 @@
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\student.cs" />
+    <Compile Include="Models\TG_Article.cs">
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TG_Category.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
@@ -1153,7 +1156,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1179,6 +1184,7 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\Add.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

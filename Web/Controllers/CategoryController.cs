@@ -56,17 +56,21 @@ namespace Web.Controllers
         /// 获取栏目ComtreeData
         /// </summary>
         /// <returns></returns>
-        public ActionResult CategoryComtreeData()
+        public ActionResult CategoryComtreeData(int? IsGen)
         {
+           
             var query = mangae.db.TG_Category.OrderBy(m => m.iOrder).AsQueryable();
             var main = query.Where(m => m.CategoryId == 0).ToList();
             var child = query.Where(m => m.CategoryId > 0).ToList();
 
-            JArray comtreeData = new JArray();       
-            var data = new JObject();
-            data.Add(new JProperty("id", 0));
-            data.Add(new JProperty("text", "根栏目"));
-            comtreeData.Add(data);
+            JArray comtreeData = new JArray();
+            if (IsGen == null)
+            {
+                var data = new JObject();
+                data.Add(new JProperty("id", 0));
+                data.Add(new JProperty("text", "根栏目"));
+                comtreeData.Add(data);
+            }
           
                
             foreach (var m in main)
