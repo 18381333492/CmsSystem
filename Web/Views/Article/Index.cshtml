@@ -64,14 +64,17 @@
                 var dialog = admin.dialog(admin.route('Edit') + "?ID=" + selected[0].ID, "编辑文章", function (r) {
                     if ($(admin.form).form('validate')) {
                         admin.button.disable();
-                        var data = $(admin.form).serialize();
+                        var data = $(admin.form).serializeArray().toObject();
+                        data.sContent = editor.gethtml();
                         admin.Ajax(admin.route('Update'), data, function (r) {
                             admin.alert("编辑成功");
                             dialog.dialog('close');
                             admin.grid.datagrid("reload");
                         });
                     }
-                }, 800, 600);
+                }, 800, 600, function () {
+                    editor.create("#sContent", { items: editor.items.defaults });
+                });
             }
             else {
                 admin.alert("请选择一条数据进行操作!");
@@ -106,13 +109,13 @@
             url: admin.route('List'),
             toolbar: admin.toolbar,
             columns: [[
-                { field: 'sTitle', title: '标题', align: 'center', width: 250, rowspan: 2 },
-                { field: 'sName', title: '所属栏目', align: 'center', width: 100, rowspan: 2 },
+                { field: 'sTitle', title: '标题', align: 'center', width: 350, rowspan: 2 },
+                { field: 'sName', title: '所属栏目', align: 'center', width: 150, rowspan: 2 },
                 { field: 'sAuthor', title: '作者', align: 'center', width: 100, rowspan: 2 },
                 { title: '文章属性', width: 200, colspan: 3 }],
                     [
                         {
-                            field: 'bIsTop', title: '置顶', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsSlide', title: '发布', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
                                 if (value) {
                                     return "是";
                                 } else {
@@ -121,7 +124,7 @@
                             }
                         },
                         {
-                            field: 'bIsSlide', title: '幻灯片', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsTop', title: '置顶', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
                                 if (value) {
                                     return "是";
                                 } else {

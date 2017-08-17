@@ -20,11 +20,17 @@ namespace RazorBase
         private readonly string sTemplateBasePath;
         private readonly string sHtmlBasePath;
 
+        private static RazorHelper instance = null;
+
         public static RazorHelper Instance
         {
             get
             {
-                return new RazorHelper();
+                if (instance == null)
+                {
+                    instance = new RazorHelper();
+                }        
+                return instance;
             }
         }
 
@@ -54,7 +60,7 @@ namespace RazorBase
                 var list = sTemplateList.Split(',').ToList();
                 foreach(var m in list)
                 {
-                    string sPath = sTemplateBasePath + m + ".cshtml";
+                    string sPath =sTemplateBasePath+"\\"+m+".cshtml";
                     string fileStr = File.ReadAllText(sPath);
                     service.Compile(fileStr, m);
                 }
@@ -69,7 +75,8 @@ namespace RazorBase
         /// <returns></returns>
         public string ParseFile(string filePath, object Model = null)
         {
-            string fileStr = File.ReadAllText(sTemplateBasePath + filePath);
+            filePath =sTemplateBasePath+"\\"+filePath;
+            string fileStr = File.ReadAllText(filePath);
             string str = ParseString(fileStr, Model);
             return str;
         }
@@ -94,13 +101,21 @@ namespace RazorBase
         /// <returns></returns>
         public bool MakeHtml(string sfilePath,string sContent)
         {
-            System.IO.File.WriteAllText(sHtmlBasePath+sfilePath, sContent);
-            return true;
+            try
+            {
+                if (!Directory.Exists(sfilePath))
+                {
+                    Directory.CreateDirectory(sHtmlBasePath+sfilePath);
+                }
+                sfilePath = sHtmlBasePath+sfilePath+".html";
+                System.IO.File.WriteAllText(sfilePath, sContent);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
-
-
-
-
     
     }
 }

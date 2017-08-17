@@ -88,5 +88,17 @@ namespace Web.Controllers
             mangae.Edit<TG_Article>(article);
             result.success = mangae.SaveChange();
         }
+
+
+        /// <summary>
+        /// 删除文章
+        /// </summary>
+        /// <param name="Ids"></param>
+        public void Cancel(string Ids)
+        {
+           var res=mangae.Cancel<TG_Article>(Ids);
+            if (res > 0)
+                result.success = true;
+        }
     }
 }

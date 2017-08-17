@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MakeHtmlController.cs" />
     <Compile Include="Controllers\TempletController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebSiteController.cs" />
@@ -1185,6 +1186,7 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\Add.cshtml" />
     <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\MakeHtml\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

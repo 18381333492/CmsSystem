@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "生成页面";
+}
+
+<div id="layout" class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'west',border:false" style="width:250px;padding-top:15px;padding-left:15px;">
+        <ul id="MakeHtml"></ul>
+    </div>
+    <!--Center-->
+    <div data-options="region:'center',border:false" style="padding-top:15px;padding-left:15px;border-left:1px solid #95B8E7">
+        <a id="MakeCategoryPage" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">生成栏目页</a>&nbsp;
+        <a id="MakeArticlePage" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">生成栏目下的文章页</a>
+    </div>
+   
+</div>
+<script type="text/javascript">
+    $(function () {
+        var admin = new adminPackage();
+        //注册路由
+        admin.routeRegister("MakeHtml");
+
+        //生成栏目页
+        $('#MakeCategoryPage').on("click", function () {
+            //获取选中的节点
+            var selected = $(admin.grid).tree("getChecked");
+            var tip = selected.length > 0 ? "确定要生成选中的栏目页？" : "确定要生成所有的栏目页？";
+            admin.confirm(tip, function () {
+                var Ids = [];
+                $(selected).each(function () {
+                    Ids.push(this.id);
+                });
+                admin.Ajax(admin.route("MakeCategoryPage"), { Ids: Ids.join() }, function (r) {
+
+                })
+            });
+        });
+
+
+        //生成栏目页
+        $('#MakeArticlePage').on("click", function () {
+        });
+
+
+
+
+        //树形数据的绑定
+        $(admin.grid).tree({
+            url: '/Category/CategoryComtreeData?IsGen=0',
+            animate: true,
+            checkbox: true,
+            cascadeCheck:false
+        });
+    });
+</script>

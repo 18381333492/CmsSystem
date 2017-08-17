@@ -42,7 +42,7 @@ namespace Web.Upload
                             Directory.CreateDirectory(sPath);
                         }
 
-                        string format = System.IO.Path.GetExtension(image.FileName);//获取文件后缀名
+                        string format = System.IO.Path.GetExtension(image.FileName).ToLower();//获取文件后缀名
                         /*组装文件名*/
                         string sFileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + format;
 

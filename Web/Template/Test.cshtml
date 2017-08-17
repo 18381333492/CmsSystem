@@ -3,13 +3,25 @@
 @{
     List<student> obj = (List<student>)Model.list;
     //student obj = Model.stu as student;
+    TG_Category item = Model as TG_Category;
 }
 @Include("Head", Model)
 <body>
-  @foreach(var m in obj)
+  @foreach (var m in obj)
   {
         <p>@m.name  @m.age @m.school @m.score</p>
         <p>@MyCommon.Helper.Upper()</p>
   }
 </body>
 </html>
+
+
+@item.ID
+@item.bIsContentCategory
+@item.bIsShowNav
+@item.iArticleTemplateId
+@item.iOrder
+@item.sDescription
+@item.sEnName
+@item.sEnNick
+@item.sKeyWord

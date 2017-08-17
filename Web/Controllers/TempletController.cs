@@ -121,7 +121,15 @@ namespace Web.Controllers
         /// <param name="Ids"></param>
         public void Cancel(string Ids)
         {
-            result.success = mangae.Delete<TG_Templet>(Ids);
+            List<int> IdList = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
+            if (mangae.db.TG_Category.Any(m => IdList.Contains(m.iTemplateId.Value) || IdList.Contains(m.iArticleTemplateId.Value)))
+            {
+                result.info = "该模板绑定有栏目,不能进行删除操作？";
+            }
+            else
+            {
+                result.success = mangae.Delete<TG_Templet>(Ids);
+            }
         }
 
 
