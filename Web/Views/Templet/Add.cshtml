@@ -11,7 +11,10 @@
             <label>模板标识：</label><input class="easyui-textbox" name="sTempletEnName" data-options="required:true" value="@Model.sTempletEnName">
         </p>
         <p> <label>生成路径：</label><input class="easyui-textbox" name="sTempletUrl" style="width:200px" data-options="required:true" readonly="readonly" value="@Model.sTempletUrl"></p>
-        <p> <label>模板内容：</label><input class="easyui-textbox" name="sTempletContent" data-options="multiline:true,height:480,width:650" value="@Model.sTempletContent"></p>
+        <p> <label>模板内容：</label>
+            <textarea style="height:480px;width:650px">@Html.Raw(Model.sTempletContent)</textarea>
+            @*<input class="easyui-textbox" name="sTempletContent" data-options="multiline:true,height:480,width:650" value="@Html.Raw(Model.sTempletContent)">*@
+        </p>
     </div>
 </form>
 

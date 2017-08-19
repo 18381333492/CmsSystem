@@ -36,7 +36,7 @@ namespace Web.Controllers
             {
                 templet = mangae.db.TG_Templet.Find(ID);
                 //读取模板文件内容
-                var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath");
+                var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+"\\";
                 string sFileName = templet.sTempletEnName + ".cshtml";
                 try
                 {
@@ -138,7 +138,7 @@ namespace Web.Controllers
         /// </summary>
         private void MakeTempletHtml(TG_Templet templet)
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath");
+            var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+"\\";
             if (!Directory.Exists(path))
             {//不存在该目录
                 Directory.CreateDirectory(path);
@@ -156,7 +156,7 @@ namespace Web.Controllers
         public void MakeAllTempletHtml()
         {
             var list = mangae.db.TG_Templet.ToList();
-            var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath");
+            var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+ "\\";
             if (!Directory.Exists(path))
             {//不存在该目录
                 Directory.CreateDirectory(path);
