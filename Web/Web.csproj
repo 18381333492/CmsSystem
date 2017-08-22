@@ -1104,6 +1104,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\easyui\themes\material\images\Thumbs.db" />
+    <Content Include="Content\auto-line-number.js" />
     <EntityDeploy Include="Models\WebModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WebModel.Designer.cs</LastGenOutput>

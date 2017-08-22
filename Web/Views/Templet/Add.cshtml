@@ -2,6 +2,21 @@
 @using Web.Models;
 @model TG_Templet
 <!--添加/编辑模板-->
+<style>
+textarea {
+        width: 750px;
+        background-color: #373737;
+        height: 480px;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        overflow: auto;
+        color: white;
+        font-size: 16px;
+    }
+</style>
+<script src="~/Content/auto-line-number.js"></script>
 <form id="dataForm">
     <input type="hidden" name="ID" value="@Model.ID" />
     <input type="hidden" name="dInsertTime" value="@Model.dInsertTime" />
@@ -11,10 +26,17 @@
             <label>模板标识：</label><input class="easyui-textbox" name="sTempletEnName" data-options="required:true" value="@Model.sTempletEnName">
         </p>
         <p> <label>生成路径：</label><input class="easyui-textbox" name="sTempletUrl" style="width:200px" data-options="required:true" readonly="readonly" value="@Model.sTempletUrl"></p>
-        <p> <label>模板内容：</label>
-            <textarea style="height:480px;width:650px">@Html.Raw(Model.sTempletContent)</textarea>
-            @*<input class="easyui-textbox" name="sTempletContent" data-options="multiline:true,height:480,width:650" value="@Html.Raw(Model.sTempletContent)">*@
+        <p>
+            <textarea id="text" name="sTempletContent">@Html.Raw(Model.sTempletContent)</textarea>
         </p>
     </div>
 </form>
+<script type="text/javascript">
+    $("#text").setTextareaCount({
+        width: "30px",
+        bgColor: "#000",
+        color: "#FFF",
+        display: "inline-block"
+    });
+</script>
 
