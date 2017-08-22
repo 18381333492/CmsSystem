@@ -24,7 +24,7 @@ namespace Web.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<TG_Templet> TG_Templet { get; set; }
         public virtual DbSet<TG_WebSite> TG_WebSite { get; set; }
         public virtual DbSet<TG_User> TG_User { get; set; }

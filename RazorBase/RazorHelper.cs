@@ -99,16 +99,17 @@ namespace RazorBase
         /// <param name="sfilePath"></param>
         /// <param name="sContent"></param>
         /// <returns></returns>
-        public bool MakeHtml(string sfilePath,string sContent)
+        public bool MakeHtml(string sfilePath,string sFileName,string sContent)
         {
+            string DirectoryPath = sHtmlBasePath + "\\" + sfilePath;
             try
             {
-                if (!Directory.Exists(sfilePath))
+                if (!Directory.Exists(DirectoryPath))
                 {
-                    Directory.CreateDirectory(sHtmlBasePath+sfilePath);
+                    Directory.CreateDirectory(DirectoryPath);
                 }
-                sfilePath = sHtmlBasePath+sfilePath+".html";
-                System.IO.File.WriteAllText(sfilePath, sContent);
+                string sPath = DirectoryPath+ "\\"+sFileName+ ".html";
+                System.IO.File.WriteAllText(sPath, sContent);
                 return true;
             }
             catch (Exception e)

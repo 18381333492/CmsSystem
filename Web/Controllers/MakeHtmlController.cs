@@ -29,34 +29,106 @@ namespace Web.Controllers
         /// <param name="Ids"></param>
         public void MakeCategoryPage(string Ids)
         {
-            var CategoryList = mangae.db.TG_Category.OrderBy(m=>m.ID).AsQueryable();//栏目数据
-            var TempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable();//模板数据
+            int iSuccessCount = 0;//成功条数
+            int iFalseCount = 0;//失败条数
+            var CategoryList = mangae.db.TG_Category.OrderBy(m=>m.ID).AsQueryable().ToList();//栏目数据
+            var TempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();//模板数据
+            //所有的栏目数据
+            var allCategoryList = CategoryList;
             if (!string.IsNullOrEmpty(Ids))
             {
                 var listIds = Ids.Split(',').Select(m=>Convert.ToInt32(m)).ToList();
-                CategoryList = CategoryList.Where(m => listIds.Contains(m.ID));
+                CategoryList = CategoryList.Where(m => listIds.Contains(m.ID)).ToList();
                 //获取栏目下的所有模板ID
                 var listIds_Templet = CategoryList.Select(m => m.iTemplateId.Value).ToList();
-                TempletList = TempletList.Where(m => listIds_Templet.Contains(m.ID));
+                TempletList = TempletList.Where(m => listIds_Templet.Contains(m.ID)).ToList();
             }
-            foreach(var category in CategoryList)
+            //循环生成栏目页
+            foreach (var category in CategoryList)
             {
+
                 var templet = TempletList.Where(m => m.ID == category.iTemplateId).SingleOrDefault();
                 if (templet != null)
-                {
-                   string templetHtmlString=RazorHelper.Instance.ParseFile(templet.sTempletEnName+".cshtml", category);
-                   string sHtmlPath = GetHtmlPath(category);
-                   var res=RazorHelper.Instance.MakeHtml(sHtmlPath, templetHtmlString);
+                {//模板存在
+                    string templetHtmlString = RazorHelper.Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
+                    string sHtmlPath = GetHtmlPath(category, allCategoryList);
+                    if (RazorHelper.Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
+                    {
+                        iSuccessCount++;
+                    }
+                    else
+                    {
+                        iFalseCount++;
+                    }
                 }
             }
+            result.success = true;
+            result.data = new { iSuccessCount=iSuccessCount,
+                                iFalseCount = iFalseCount,
+                                iTatolCount=iSuccessCount+ iFalseCount};
+        }
 
+
+        /// <summary>
+        /// 生成文章页
+        /// </summary>
+        /// <param name="Ids"></param>
+        public void MakeArticlePage(string Ids)
+        {
+            int iSuccessCount = 0;//成功条数
+            int iFalseCount = 0;//失败条数
+            var CategoryList = mangae.db.TG_Category.OrderBy(m => m.ID).AsQueryable().ToList();//栏目数据
+            var TempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();
+            //所有的栏目数据
+            var allCategoryList = CategoryList;
+            if (!string.IsNullOrEmpty(Ids))
+            {
+                var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
+                //获取栏目数据
+                CategoryList = CategoryList.Where(m => listIds.Contains(m.ID)).ToList();
+            }
+            //获取栏目的ID集合
+            var CategoryIds = CategoryList.Select(m => m.ID);
+            //获取栏目下的所有文章
+            List<TG_Article> ArticleList = mangae.db.TG_Article.Where(m => CategoryIds.Contains(m.iCategoryId)&&m.bIsDeleted==false).ToList();
+            //循环生成文章页
+            foreach (var category in CategoryList)
+            {
+                //获取栏目下的文章模板
+                TG_Templet templetArticle = TempletList.Where(m => m.ID == category.iArticleTemplateId).SingleOrDefault();
+                //获取当前栏目下的文章数据列表
+                var CurrentArticleList = ArticleList.Where(m => m.iCategoryId == category.ID).ToList();
+                //遍历当前栏目下的文章
+                foreach (var article in CurrentArticleList)
+                {
+                    if (article.iTemplateId != 0)
+                    {//获取文章是否有独立模板
+                     //有则使用独立模板
+                        templetArticle = TempletList.FirstOrDefault(m => m.ID == article.iTemplateId);
+                    }
+                    if (templetArticle != null)
+                    {//模板存在
+                        //解析模板
+                        string templetHtmlString = RazorHelper.Instance.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
+                        string ArticlePath = GetHtmlPath(category, allCategoryList);
+                        if (RazorHelper.Instance.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
+                        {//生成成功
+                            iSuccessCount++;
+                        }
+                        else
+                        {//生成失败
+                            iFalseCount++;
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
         /// 根据栏目获取栏目生成文件的路径
         /// </summary>
         /// <returns></returns>
-        public string GetHtmlPath(TG_Category category)
+        public string GetHtmlPath(TG_Category category, List<TG_Category> categoryList)
         {
             string sPath = string.Empty;
             if (category.CategoryId == 0)
@@ -65,16 +137,15 @@ namespace Web.Controllers
             }
             else
             {//子级栏目
-                var categoryList = mangae.db.TG_Category.ToList();
                 TG_Category parentCategory = null;
                 do
                 {
-                    parentCategory = categoryList.FirstOrDefault(m=>m.ID== category.CategoryId);
-                    sPath =sPath+"\\"+parentCategory.sEnName.ToLower();
+                    parentCategory = categoryList.FirstOrDefault(m => m.ID == category.CategoryId);
+                    sPath = sPath + "\\" + parentCategory.sEnName.ToLower();
                 }
-                while (parentCategory!=null&&parentCategory.CategoryId!=0);
+                while (parentCategory != null && parentCategory.CategoryId != 0);
+                sPath = sPath.TrimStart('\\');
             }
-
             return sPath;
         }
 

@@ -11,8 +11,11 @@
     <div data-options="region:'center',border:false" style="padding-top:15px;padding-left:15px;border-left:1px solid #95B8E7">
         <a id="MakeCategoryPage" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">生成栏目页</a>&nbsp;
         <a id="MakeArticlePage" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">生成栏目下的文章页</a>
+        <div style="margin-top:20px;">
+            <p id="TipCategory"></p>
+            <p id="TipArticle"></p>
+        </div>
     </div>
-   
 </div>
 <script type="text/javascript">
     $(function () {
@@ -26,19 +29,34 @@
             var selected = $(admin.grid).tree("getChecked");
             var tip = selected.length > 0 ? "确定要生成选中的栏目页？" : "确定要生成所有的栏目页？";
             admin.confirm(tip, function () {
+                $('#TipCategory').html("栏目页生成中.....");
                 var Ids = [];
                 $(selected).each(function () {
                     Ids.push(this.id);
                 });
                 admin.Ajax(admin.route("MakeCategoryPage"), { Ids: Ids.join() }, function (r) {
-
-                })
+                    $('#TipCategory').html('生成栏目页:【成功<span style="color:green">' + r.data.iSuccessCount + '</span>次，失败<span style="color:red">' + r.data.iFalseCount + '</span>次】');
+                });
             });
         });
 
 
-        //生成栏目页
+        //生成文章页
         $('#MakeArticlePage').on("click", function () {
+            //获取选中的节点
+            var selected = $(admin.grid).tree("getChecked");
+            var tip = selected.length > 0 ? "确定要生成选中的栏目下的文章页？" : "确定要生成所有的栏目下的文章页？";
+            admin.confirm(tip, function () {
+                $('#TipArticle').html("文章页生成中.....");
+                var Ids = [];
+                $(selected).each(function () {
+                    Ids.push(this.id);
+                });
+                admin.Ajax(admin.route("MakeArticlePage"), { Ids: Ids.join() }, function (r) {
+                    $('#TipArticle').html('生成文章页:【成功<span style="color:green">' + r.data.iSuccessCount + '</span>次，失败<span style="color:red">' + r.data.iFalseCount + '</span>次】');
+                });
+            });
+
         });
 
 

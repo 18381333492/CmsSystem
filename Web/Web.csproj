@@ -246,6 +246,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\EFHelper.cs" />
+    <Compile Include="Server\FuncHelper.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Upload\Upload.ashx.cs">
       <DependentUpon>Upload.ashx</DependentUpon>
