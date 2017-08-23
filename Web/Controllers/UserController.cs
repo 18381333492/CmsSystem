@@ -14,6 +14,7 @@ namespace Web.Controllers
     /// </summary>
     public class UserController : BaseController
     {
+
         // GET: User
         public ActionResult Index()
         {
@@ -96,5 +97,10 @@ namespace Web.Controllers
             result.success = mangae.Delete<TG_User>(Ids);
         }
 
+
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }

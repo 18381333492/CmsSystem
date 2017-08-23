@@ -1,16 +1,17 @@
 ﻿@using Web.Models;
 @using RazorBase;
 @{
-    List<student> obj = Model.list as List<student>;
-    //student obj = Model.stu as student;
+    var item = Model as TG_Category;
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@Model.sTitle</title>
-</head>
-
-
-
+<title>@item.sName</title>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1">
+<link href="/ContentHtml/css/all-examples.css" rel="stylesheet" />
+<link rel="stylesheet" href="/ContentHtml/css/styel.css">
+<link rel="stylesheet" href="/ContentHtml/css/bootstrap.min.css">
+<link rel="stylesheet" href="/ContentHtml/css/templatemo_misc.css">
+<link rel="stylesheet" href="/ContentHtml/css/templatemo_style.css">
+<link rel="stylesheet" href="/ContentHtml/css/swiper.css">
+<script src="/ContentHtml/js/swiper.js"></script>
+<script src="/ContentHtml/js/jquery.min.js"></script>
 

@@ -42,25 +42,31 @@
         $('.edit').on("click", function () {
             var selected = admin.grid.treegrid('getSelections');
             if (selected.length == 1) {
-                var dialog = admin.dialog(admin.route('Edit') + "?ID=" + selected[0].ID, "编辑栏目", function (r) {
-                    if ($(admin.form).form('validate')) {
-                        admin.button.disable();
-                        var data = $(admin.form).serializeArray().toObject();
-                        data.sContent = editor.gethtml();
-                        admin.Ajax(admin.route('Update'), data, function (r) {
-                            admin.alert("编辑成功");
-                            dialog.dialog('close');
-                            admin.grid.treegrid("reload");
-                        });
-                    }
-                }, 850, 650, function () {
-                    editor.create("#sContent", { items: editor.items.defaults });
-                });
+                UpdateCategory(selected[0].ID);
             }
             else {
                 admin.alert("请选择一条数据进行操作!");
             }
         });
+
+        //编辑栏目
+        function UpdateCategory(ID) {
+            var dialog = admin.dialog(admin.route('Edit') + "?ID=" +ID, "编辑栏目", function (r) {
+                if ($(admin.form).form('validate')) {
+                    admin.button.disable();
+                    var data = $(admin.form).serializeArray().toObject();
+                    data.sContent = editor.gethtml();
+                    admin.Ajax(admin.route('Update'), data, function (r) {
+                        admin.alert("编辑成功");
+                        dialog.dialog('close');
+                        admin.grid.treegrid("reload");
+                    });
+                }
+            }, 850, 650, function () {
+                editor.create("#sContent", { items: editor.items.defaults });
+            });
+        }
+
 
         //删除操作
         $('.cancel').on("click", function () {
@@ -99,7 +105,10 @@
                 { field: 'sName', title: '栏目名称', width: 150, align: 'left' },
                 { field: 'sEnName', title: '栏目标识', width: 120, align: 'center' },
                 { field: 'iOrder', title: '栏目排序', width: 80, align: 'center' },
-            ]]
+            ]],
+            onDblClickRow: function (row) {
+                UpdateCategory(row.ID);
+            }
         });
 
 

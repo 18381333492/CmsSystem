@@ -1,0 +1,426 @@
+﻿@using Web.Server;
+@using Web.Models;
+@{
+    var item = Model as TG_Category;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@item.sName</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    @Include("quote", item)
+    <style>
+        .snow {
+            position: absolute;
+            top: 0;
+            color: #fff;
+            z-index: 999999999999999999999;
+        }
+    </style>
+</head>
+<body class="snowbg">
+    <!-- menu start -->
+    <div class="menu">
+        <div class="templatemo_menubg shadow">
+            <div class="col-sm-4 right">
+                <div class="templatemo_logo">Xiang</div>
+            </div>
+            <div class="col-sm-8">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Xiang</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div id="top-menu">
+                            <div class="collapse navbar-collapse main_menu" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    @foreach (var m in FuncHelper.Instance.GetShowCategory())
+                                    {
+                                    if (m.ID == item.ID)
+                                    {
+                                    <li class="current"><a href="index.html">@m.sName</a></li>
+                                    }
+                                    else
+                                    {
+                                    <li><a href="ITabout.html">@m.sName</a></li>
+                                    }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- menu end -->
+    <!-- home start -->
+    <div class="templatemo_topbg topmargin">
+        <div class="templatemo_grey">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="swiper-container slide_img">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="images/portfolio/1.jpg">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/portfolio/2.jpg">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/portfolio/3.jpg">
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 margin40 title_right_box">
+                        <div class="title_box"><span style="color: #ef252f;font-weight: bold;font-size: 17px">推荐文章 </span>  NEW Blog</div>
+                        <ul class="topblog">
+                            <li>
+                                <img src="images/1.png">
+                                <a title="腾讯云和阿里云对比哪个好？云计算优势测评" target="_blank">
+                                    腾讯云和阿里云对比哪个好？云计<span>在对比每一款产品时，本文先通过一系列的文先标准化测...</span>
+                                </a>
+                            </li>
+                            <li>
+                                <img src="images/2.png">
+                                <a title="dux主题1.8下载-大前端主题" target="_blank">dux主题1.8下载-大前端主题<span>最近看到很多找大前端主题dux主题1.8下载的，我也...</span></a>
+                            </li>
+                            <li>
+                                <img src="images/3.png">
+                                <a title="网络刷单骗子伎俩揭晓" target="_blank">网络刷单骗子伎俩揭晓<span>很多大学生总想赚钱，看到网上各类刷单广告心痒的...</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row templatemo_homemid">
+            <div class="col-md-3 margin30">
+                <div class="templatemo_gradient1 shadow ">
+                    <div class="templatemo_gradient2 ">
+                        <div class="overflow">
+                            <div class="title">关于博主</div>
+                            <p>个人资料：女，九零后，IT女，金牛座，IT界最不着调的程序员</p>
+                            <div class="more"><a href="#">summer</a></div>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="templatemo_gradient1 shadow margin30">
+                    <div class="templatemo_gradient2">
+                        <div class="overflow">
+                            <div class="title">关于友情链接</div>
+                            <p>申请友情链接童鞋们：</p>
+                            <p>首先在贵站做好叶</p>
+                            <div class="more"><a href="#">summer</a></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 margin30">
+                <div class="new_act">
+                    <span>旅途分享</span>最新文章
+                    <div class="back_box"></div>
+                </div>
+
+                <div class="templatemo_homemid_right shadow">
+                    <div class="box">
+                        <div class="icon"><img src="images/portfolio/1.jpg" alt="templatemo home icon 1"></div>
+                        <div class="text">
+                            <div class="title">vagrant环境问题的记录</div>
+                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
+                            <p class="autor">
+                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
+                                <span class="dtime f_l">2017-07-21</span>
+                                <input class="zan_cookie" type="hidden" value="2">
+                                <input class="zan_newsid" type="hidden" value="432">
+                                <span class="label_bottom f_r" style="padding-left: 0;">
+                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
+                                </span>
+                                <span class="viewnum f_r">浏览（204）</span>
+                                <span class="pingl f_r">
+                                    <a href="/index/titleinfo/id/432#SOHUCS">
+                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="templatemo_homemid_right shadow">
+                    <div class="box">
+                        <div class="icon"><img src="images/portfolio/4.jpg" alt="templatemo home icon 1"></div>
+                        <div class="text">
+                            <div class="title">vagrant环境问题的记录</div>
+                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
+                            <p class="autor">
+                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
+                                <span class="dtime f_l">2017-07-21</span>
+                                <input class="zan_cookie" type="hidden" value="2">
+                                <input class="zan_newsid" type="hidden" value="432">
+                                <span class="label_bottom f_r" style="padding-left: 0;">
+                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
+                                </span>
+                                <span class="viewnum f_r">浏览（204）</span>
+                                <span class="pingl f_r">
+                                    <a href="/index/titleinfo/id/432#SOHUCS">
+                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="templatemo_homemid_right shadow">
+                    <div class="box">
+                        <div class="icon"><img src="images/portfolio/3.jpg"></div>
+                        <div class="text">
+                            <div class="title">vagrant环境问题的记录</div>
+                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
+                            <p class="autor">
+                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
+                                <span class="dtime f_l">2017-07-21</span>
+                                <input class="zan_cookie" type="hidden" value="2">
+                                <input class="zan_newsid" type="hidden" value="432">
+                                <span class="label_bottom f_r" style="padding-left: 0;">
+                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
+                                </span>
+                                <span class="viewnum f_r">浏览（204）</span>
+                                <span class="pingl f_r">
+                                    <a href="/index/titleinfo/id/432#SOHUCS">
+                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="templatemo_homemid_right shadow">
+                    <div class="box">
+                        <div class="icon"><img src="images/portfolio/1.jpg" alt="templatemo home icon 1"></div>
+                        <div class="text">
+                            <div class="title">vagrant环境问题的记录</div>
+                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
+                            <p class="autor">
+                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
+                                <span class="dtime f_l">2017-07-21</span>
+                                <input class="zan_cookie" type="hidden" value="2">
+                                <input class="zan_newsid" type="hidden" value="432">
+                                <span class="label_bottom f_r" style="padding-left: 0;">
+                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
+                                </span>
+                                <span class="viewnum f_r">浏览（204）</span>
+                                <span class="pingl f_r">
+                                    <a href="/index/titleinfo/id/432#SOHUCS">
+                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="templatemo_homemid_right shadow">
+                    <div class="box">
+                        <div class="icon"><img src="images/portfolio/4.jpg" alt="templatemo home icon 1"></div>
+                        <div class="text">
+                            <div class="title">vagrant环境问题的记录</div>
+                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
+                            <p class="autor">
+                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
+                                <span class="dtime f_l">2017-07-21</span>
+                                <input class="zan_cookie" type="hidden" value="2">
+                                <input class="zan_newsid" type="hidden" value="432">
+                                <span class="label_bottom f_r" style="padding-left: 0;">
+                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
+                                </span>
+                                <span class="viewnum f_r">浏览（204）</span>
+                                <span class="pingl f_r">
+                                    <a href="/index/titleinfo/id/432#SOHUCS">
+                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="templatemo_homemid_right shadow">
+                    <div class="box">
+                        <div class="icon"><img src="images/portfolio/3.jpg"></div>
+                        <div class="text">
+                            <div class="title">vagrant环境问题的记录</div>
+                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
+                            <p class="autor">
+                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
+                                <span class="dtime f_l">2017-07-21</span>
+                                <input class="zan_cookie" type="hidden" value="2">
+                                <input class="zan_newsid" type="hidden" value="432">
+                                <span class="label_bottom f_r" style="padding-left: 0;">
+                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
+                                </span>
+                                <span class="viewnum f_r">浏览（204）</span>
+                                <span class="pingl f_r">
+                                    <a href="/index/titleinfo/id/432#SOHUCS">
+                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="fat">
+            <section class="partner">
+                <ul>
+                    <li>
+                        <h2>关于佳丽</h2>
+                        <p><a href="http://520.itbyc.com">佳丽的告白</a></p>
+                        <p><a href="#">个人档案</a></p>
+                        <p><a href="#" rel="nofollow">给我留言</a></p><a href="#" rel="nofollow">
+                            <h2>网站赞助</h2>
+                        </a><p><a href="#" rel="nofollow"></a><a rel="nofollow" href="http://itbyc.com/tags/" target="_blank">热点标签</a></p>
+                        <p><a href="http://itbyc.com/sitemap.xml" title="sitemap" target="_blank">sitemap</a></p>
+                    </li>
+
+                </ul>
+            </section>
+            <section class="links">
+                <h2>友情链接</h2>
+                <ul>
+                    <li><a href="http://itbyc.com/sitemap.xml" title="sitemap" target="_blank">sitemap</a></li>
+                    <li><a href="http://www.monkeyblog.cn/" target="_blank">Monkey前端博客</a> </li>
+                    <li><a href="http://www.aiihu.cn/" target="_blank">爱虎网</a> </li>
+                    <li><a href="http://v5dyw.com" target="_blank">v5订阅网</a> </li>
+                    <li><a href="http://www.phpernote.com" target="_blank">php程序员的笔记</a> </li>
+                    <li><a href="https://www.phpsong.com" target="_blank">小松博客</a> </li>
+                    <li><a href="http://www.sucaihuo.com/" target="_blank">html5网站模板</a> </li>
+                    <li><a href="http://www.weixianmanbu.com" target="_blank">黑客技术博客</a> </li>
+                    <li><a href="http://www.5imb.com" target="_blank">网站模板</a> </li>
+                    <li><a href="http://www.liudehua.video/" target="_blank">刘德华视频</a> </li>
+                    <li><a href="http://itbyc.com/cms/" target="_blank">cms使用教程</a> </li>
+                    <li><a href="http://www.runmeiti.com/" target="_blank">ASO优化</a> </li>
+                    <li><a href="http://bbs.zzjidi.com" target="_blank">站长论坛</a> </li>
+                    <li><a href="http://itbyc.com" target="_blank">个人博客</a> </li>
+                    <li><a href="http://www.php230.com/" target="_blank">IT程序员</a> </li>
+                    <li><a href="http://www.itjie.com/" target="_blank">IT业界</a> </li>
+
+                    <!---<li class="more"><a href="" target="_blank" rel="nofollow">更多链接>></a></li>--->
+                </ul>
+            </section>
+        </div>
+        <div id="copright">
+            <span>本站采用创作共用版权 CC BY-NC-ND/2.5/CN 许可协议 </span><span>滇ICP备14002061号-1</span>
+            <script type="text/javascript">
+                var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fca9c9aeca6d24b987c40c4c8ad091e42' type='text/javascript'%3E%3C/script%3E"));
+            </script>
+            <script src=" http//hm.baidu.com/h.js?ca9c9aeca6d24b987c40c4c8ad091e42" type="text/javascript"></script>
+        </div>
+    </footer>
+
+<!-- Visual Studio Browser Link -->
+<script type="application/json" id="__browserLink_initializationData">
+    {"appName":"Chrome","requestId":"386b186815244779a1cdcf05ae3d8777"}
+</script>
+<script type="text/javascript" src="http://localhost:20707/2bcfdbc436f34808898fb60fd998a868/browserLink" async="async"></script>
+<!-- End Browser Link -->
+
+</body>
+<!-- footer end-->
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        grabCursor: true,
+        effect : 'cube',
+        autoplay : 2000,
+        speed:1000,
+        loop : true,
+        cube: {
+            slideShadows: true,
+            shadow: true,
+            shadowOffset: 100,
+            shadowScale: 0.6
+        }
+
+    });
+    $(function(){
+
+        var d="<div class='snow'>❅<div>"
+
+        setInterval(function(){
+
+            var f=$(document).width();
+
+            var e=Math.random()*f-100;
+
+            var o=0.3+Math.random();
+
+            var fon=10+Math.random()*30;
+
+            var l = e - 100 + 200 * Math.random();
+
+            var k=2000 + 5000 * Math.random();
+
+            $(d).clone().appendTo(".snowbg").css({
+
+                left:e+"px",
+
+                opacity:o,
+
+                "font-size":fon,
+
+            }).animate({
+
+                top:"1900px",
+
+                left:l+"px",
+
+                opacity:0.1
+
+            },k,"linear",function(){$(this).remove()})
+
+        },500)
+
+    })
+</script>
+</html>

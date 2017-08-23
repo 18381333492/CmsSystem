@@ -8,6 +8,8 @@ using Web.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Common;
+using Web.Server;
+using RazorBase;
 
 namespace Web.Controllers
 {
@@ -156,6 +158,15 @@ namespace Web.Controllers
             }
             mangae.Edit<TG_Category>(category);
             result.success = mangae.SaveChange();
+
+            /**编辑栏目重新生成栏目页***/
+            var templet = mangae.db.TG_Templet.Where(m => m.ID == category.iTemplateId).SingleOrDefault();
+            if (templet != null)
+            {//模板存在
+                string templetHtmlString = RazorHelper.Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
+                string sHtmlPath = FuncHelper.Instance.GetHtmlPath(category, mangae.db.TG_Category.ToList());
+                RazorHelper.Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString);
+            }
         }
 
         /// <summary>

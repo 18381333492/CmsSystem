@@ -14,7 +14,7 @@ namespace RazorBase
     public class RazorHelper
     {
          /*
-         tip:注意使用RazorEngine.Razor引擎的时候 在页面编写Razor语法的时候不要用as 用强制的
+         tip:注意使用RazorEngine.Razor引擎的时候
          */
 
         private readonly string sTemplateBasePath;

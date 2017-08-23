@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web.App_Start;
 using Web.Models;
+using Web.Server;
 
 namespace Web.Controllers
 {
@@ -51,7 +52,7 @@ namespace Web.Controllers
                 if (templet != null)
                 {//模板存在
                     string templetHtmlString = RazorHelper.Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
-                    string sHtmlPath = GetHtmlPath(category, allCategoryList);
+                    string sHtmlPath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
                     if (RazorHelper.Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
                     {
                         iSuccessCount++;
@@ -110,7 +111,7 @@ namespace Web.Controllers
                     {//模板存在
                         //解析模板
                         string templetHtmlString = RazorHelper.Instance.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
-                        string ArticlePath = GetHtmlPath(category, allCategoryList);
+                        string ArticlePath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
                         if (RazorHelper.Instance.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
                         {//生成成功
                             iSuccessCount++;
@@ -122,35 +123,13 @@ namespace Web.Controllers
                     }
                 }
             }
+            result.success = true;
+            result.data = new
+            {
+                iSuccessCount = iSuccessCount,
+                iFalseCount = iFalseCount,
+                iTatolCount = iSuccessCount + iFalseCount
+            };
         }
-
-        /// <summary>
-        /// 根据栏目获取栏目生成文件的路径
-        /// </summary>
-        /// <returns></returns>
-        public string GetHtmlPath(TG_Category category, List<TG_Category> categoryList)
-        {
-            string sPath = string.Empty;
-            if (category.CategoryId == 0)
-            {//一级栏目
-                sPath = category.sEnName.ToLower();
-            }
-            else
-            {//子级栏目
-                TG_Category parentCategory = null;
-                do
-                {
-                    parentCategory = categoryList.FirstOrDefault(m => m.ID == category.CategoryId);
-                    sPath = sPath + "\\" + parentCategory.sEnName.ToLower();
-                }
-                while (parentCategory != null && parentCategory.CategoryId != 0);
-                sPath = sPath.TrimStart('\\');
-            }
-            return sPath;
-        }
-
-
-
-
     }
 }
