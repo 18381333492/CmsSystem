@@ -25,6 +25,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
+
         var admin = new adminPackage();
         //注册路由
         admin.routeRegister("Article");
@@ -57,24 +58,29 @@
             });
         });
 
+        //编辑文章
+        function UpdateArticle(ID) {
+            var dialog = admin.dialog(admin.route('Edit') + "?ID=" +ID, "编辑文章", function (r) {
+                if ($(admin.form).form('validate')) {
+                    admin.button.disable();
+                    var data = $(admin.form).serializeArray().toObject();
+                    data.sContent = editor.gethtml();
+                    admin.Ajax(admin.route('Update'), data, function (r) {
+                        admin.alert("编辑成功");
+                        dialog.dialog('close');
+                        admin.grid.datagrid("reload");
+                    });
+                }
+            }, 800, 600, function () {
+                editor.create("#sContent", { items: editor.items.defaults });
+            });
+        }
+
         //编辑操作
         $('.edit').on("click", function () {
             var selected = admin.grid.datagrid('getSelections');
             if (selected.length == 1) {
-                var dialog = admin.dialog(admin.route('Edit') + "?ID=" + selected[0].ID, "编辑文章", function (r) {
-                    if ($(admin.form).form('validate')) {
-                        admin.button.disable();
-                        var data = $(admin.form).serializeArray().toObject();
-                        data.sContent = editor.gethtml();
-                        admin.Ajax(admin.route('Update'), data, function (r) {
-                            admin.alert("编辑成功");
-                            dialog.dialog('close');
-                            admin.grid.datagrid("reload");
-                        });
-                    }
-                }, 800, 600, function () {
-                    editor.create("#sContent", { items: editor.items.defaults });
-                });
+                UpdateArticle(selected[0].ID);
             }
             else {
                 admin.alert("请选择一条数据进行操作!");
@@ -112,39 +118,53 @@
                 { field: 'sTitle', title: '标题', align: 'center', width: 350, rowspan: 2 },
                 { field: 'sName', title: '所属栏目', align: 'center', width: 150, rowspan: 2 },
                 { field: 'sAuthor', title: '作者', align: 'center', width: 100, rowspan: 2 },
-                { title: '文章属性', width: 200, colspan: 3 }],
+                {
+                    field: 'bIsRelease', title: '发布', align: 'center', width: 100, rowspan: 2, formatter: function (value) {
+                        if (value) {
+                            return "<span style='color:red'>是</span>";
+                        } else {
+                            return "否";
+                        }
+                    }
+                },
+                { title: '文章属性', width: 200, colspan: 3 },
+                { field: 'dInsertTime', title: '添加时间', align: 'center', width: 150, rowspan: 2 },
+                ],
                     [
                         {
-                            field: 'bIsSlide', title: '发布', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsSlide', title: '最新', align: 'center', width: 60, formatter: function (value, row, index) {
                                 if (value) {
-                                    return "是";
+                                    return "<span style='color:red'>是</span>";
                                 } else {
                                     return "否";
                                 }
                             }
                         },
                         {
-                            field: 'bIsTop', title: '置顶', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsTop', title: '置顶', align: 'center', width: 60, formatter: function (value, row, index) {
                                 if (value) {
-                                    return "是";
+                                    return "<span style='color:red'>是</span>";
                                 } else {
                                     return "否";
                                 }
                             }
                         },
                         {
-                            field: 'bIsHot', title: '热点', align: 'center', width: 60, sortable: true, formatter: function (value, row, index) {
+                            field: 'bIsHot', title: '热点', align: 'center', width: 60,formatter: function (value, row, index) {
                                 if (value) {
-                                    return "是";
+                                    return "<span style='color:red'>是</span>";
                                 } else {
                                     return "否";
                                 }
                             }
                         }
-                ]    
+                    ]
             ],
             onLoadSuccess: function () {
                 admin.grid.datagrid('resize');
+            },
+            onDblClickRow: function (index, row) {
+                UpdateArticle(row.ID);
             }
         });
     });

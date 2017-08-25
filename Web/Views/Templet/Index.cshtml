@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "模板列表";
 }
+<link href="~/Content/icheck/skins/square/blue.css" rel="stylesheet" />
+<script src="~/Content/icheck/icheck.min.js"></script>
 <table id="Templet"></table>
 <div id="Templet_toolbar" style="padding:5px;">
     <form id="searchForm">
@@ -42,30 +44,35 @@
                         admin.grid.datagrid("reload");
                     });
                 }
-            },800,680);
+            }, 800, 650);
         });
+
+        //编辑模板操作
+        function UpdateTemplet(ID) {
+            var dialog = admin.dialog(admin.route('Add') + "?ID=" +ID, "编辑模板", function (r) {
+                if ($(admin.form).form('validate')) {
+                    admin.button.disable();
+                    var data = $(admin.form).serialize();
+                    admin.Ajax(admin.route('Update'), data, function (r) {
+                        admin.alert("编辑成功");
+                        dialog.dialog('close');
+                        admin.grid.datagrid("reload");
+                    });
+                }
+            }, 800, 650);
+        }
 
         //编辑操作
         $('.edit').on("click", function () {
             var selected = admin.grid.datagrid('getSelections');
             if (selected.length == 1) {
-                var dialog = admin.dialog(admin.route('Add') + "?ID="+selected[0].ID, "编辑模板", function (r) {
-                    if ($(admin.form).form('validate')) {
-                        admin.button.disable();
-                        var data = $(admin.form).serialize();
-                        admin.Ajax(admin.route('Update'), data, function (r) {
-                            admin.alert("编辑成功");
-                            dialog.dialog('close');
-                            admin.grid.datagrid("reload");
-                        });
-                    }
-                }, 800, 680);
+                UpdateTemplet(selected[0].ID);
             }
             else {
                 admin.alert("请选择一条数据进行操作!");
             }
         });
-        
+
         //删除操作
         $('.cancel').on("click", function () {
             var selected = admin.grid.datagrid('getSelections');
@@ -102,23 +109,31 @@
         admin.grid.datagrid({
             url: admin.route('List'),
             toolbar: admin.toolbar,
-            fitColumns:false,
+            fitColumns: false,
+            singleSelect: true,
             columns: [[
                 { field: 'sTempletName', title: '模板名称', align: 'center', width: 150 },
                 { field: 'sTempletEnName', title: '模板标识', align: 'center', width: 100 },
                 { field: 'sTempletUrl', title: '生成路径', align: 'center', width: 180 },
-                { field: 'dInsertTime', title: '添加时间', align: 'center', width: 150 },
+                {
+                    field: 'bIsCompile', title: '预编译', align: 'center', width: 80, formatter: function (value) {
+                        if (value) {
+                            return "<span style='color:red'>是</span>";
+                        } else {
+                            return "否";
+                        }
+                    }
+                },
+                { field: 'dInsertTime', title: '添加时间', align: 'center', width: 150 }
             ]],
-            onLoadSuccess: function () {
+            onLoadSuccess: function (data) {
                 admin.grid.datagrid('resize');
+            },
+            onDblClickRow: function (index,row) {
+                UpdateTemplet(row.ID);
             }
         });
-
     });
-
-
-
- 
 </script>
 
 

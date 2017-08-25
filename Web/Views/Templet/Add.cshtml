@@ -19,19 +19,31 @@ textarea {
 <script src="~/Content/auto-line-number.js"></script>
 <form id="dataForm">
     <input type="hidden" name="ID" value="@Model.ID" />
+    <input type="hidden" name="sTempletUrl" value="@Model.sTempletUrl" />
     <input type="hidden" name="dInsertTime" value="@Model.dInsertTime" />
     <div style="padding-left:5px;">
         <p> 
             <label>模板名称：</label><input class="easyui-textbox" name="sTempletName" data-options="required:true" value="@Model.sTempletName">
             <label>模板标识：</label><input class="easyui-textbox" name="sTempletEnName" data-options="required:true" value="@Model.sTempletEnName">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="bIsCompile" value="true" class="bIsCompile" />预编译
         </p>
-        <p> <label>生成路径：</label><input class="easyui-textbox" name="sTempletUrl" style="width:200px" data-options="required:true" readonly="readonly" value="@Model.sTempletUrl"></p>
         <p>
             <textarea id="text" name="sTempletContent">@Html.Raw(Model.sTempletContent)</textarea>
         </p>
     </div>
 </form>
 <script type="text/javascript">
+    $('.bIsCompile').iCheck({
+        labelHover: false,
+        cursor: true,
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%'
+    });
+    var bIsCompile = '@Model.bIsCompile' == "True" ? true : false;
+    if (bIsCompile) $('.bIsCompile').iCheck('check');
+
     $("#text").setTextareaCount({
         width: "30px",
         bgColor: "#000",

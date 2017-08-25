@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RazorBase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +24,10 @@ namespace Web.App_Start
         {
             mangae = new EFHelper();
             result = new Result();
+
+            List<string> list = mangae.db.TG_Templet.Where(m => m.bIsCompile == true).Select(m => m.sTempletEnName).ToList();
+            //初始化公共模板的编译
+            RazorHelper.Instance.InitServices(list);
         }
 
         /// <summary>

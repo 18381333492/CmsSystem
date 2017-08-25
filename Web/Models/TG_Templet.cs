@@ -20,5 +20,6 @@ namespace Web.Models
         public string sTempletContent { get; set; }
         public string sTempletUrl { get; set; }
         public System.DateTime dInsertTime { get; set; }
+        public Nullable<bool> bIsCompile { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using Web.App_Start;
 using Web.Models;
 using Common;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Web.Controllers
 {
@@ -38,13 +40,13 @@ namespace Web.Controllers
                 //读取模板文件内容
                 var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+"\\";
                 string sFileName = templet.sTempletEnName + ".cshtml";
-                try
-                {
+                if (System.IO.File.Exists(sFileName))
+                {//文件存在
                     string Content = System.IO.File.ReadAllText(path + sFileName);
                     templet.sTempletContent = Content;
                 }
-                catch
-                {
+                else
+                {//不存在
                     templet.sTempletContent = templet.sTempletContent;
                 }
             } 
@@ -59,13 +61,23 @@ namespace Web.Controllers
         /// <returns></returns>
         public ActionResult List(PageInfo pageInfo)
         {
-            var query = mangae.db.TG_Templet.OrderByDescending(m => m.ID).AsQueryable();
+            var query = from m in mangae.db.TG_Templet
+                        orderby m.dInsertTime descending
+                        select new
+                        {
+                            m.ID,
+                            m.sTempletName,
+                            m.sTempletUrl,
+                            m.sTempletEnName,
+                            m.dInsertTime,
+                            m.bIsCompile
+                        };
             if (!string.IsNullOrEmpty(pageInfo.sKeyWord))
             {//模糊查询
                 query = query.Where(m => m.sTempletName.Contains(pageInfo.sKeyWord) || m.sTempletEnName.Contains(pageInfo.sKeyWord));
             }
             var total = query.Count();
-             query = query.Skip((pageInfo.page - 1) * pageInfo.rows).Take(pageInfo.rows);
+            query = query.Skip((pageInfo.page - 1) * pageInfo.rows).Take(pageInfo.rows);
 
             result.pageResult.total = total;
             result.pageResult.rows = query;
@@ -185,7 +197,12 @@ namespace Web.Controllers
                            m.ID,
                            m.sTempletName
                        };
-            return Content(C_Json.toJson(query));
+            JArray array = JArray.Parse(C_Json.toJson(query));
+            JObject job = new JObject();
+            job.Add(new JProperty("ID",0));
+            job.Add(new JProperty("sTempletName", "请选择模板"));
+            array.AddFirst(job);
+            return Content(C_Json.toJson(array));
         }
     }
 }

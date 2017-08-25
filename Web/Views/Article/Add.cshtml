@@ -7,7 +7,8 @@
             <label>所属栏目:</label>
             <input class="easyui-combotree" name="iCategoryId" data-options="url:'/Category/CategoryComtreeData?IsGen=0',required:true,panelHeight:'auto'">
             <label>文章属性:</label>
-            <input type="checkbox" name="bIsSlide" value="true" class="bIsSlide" />发布 &nbsp;&nbsp;
+            <input type="checkbox" name="bIsRelease" value="true" class="bIsRelease" />发布&nbsp;&nbsp;
+            <input type="checkbox" name="bIsSlide" value="true" class="bIsSlide" />最新 &nbsp;&nbsp;
             <input type="checkbox" name="bIsTop" value="true" class="bIsTop" />置顶 &nbsp;&nbsp;
             <input type="checkbox" name="bIsHot" value="true" class="bIsHot" />热点
         </p>   
@@ -60,7 +61,7 @@
     </div>
 </form>
 <script type="text/javascript">
-    $('.bIsTop,.bIsSlide,.bIsHot').iCheck({
+    $('.bIsRelease,.bIsTop,.bIsSlide,.bIsHot').iCheck({
         labelHover: false,
         cursor: true,
         checkboxClass: 'icheckbox_square-blue',

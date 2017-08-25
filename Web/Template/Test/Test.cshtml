@@ -117,8 +117,9 @@
                 <div class="templatemo_gradient1 shadow ">
                     <div class="templatemo_gradient2 ">
                         <div class="overflow">
-                            <div class="title">关于博主</div>
-                            <p>个人资料：女，九零后，IT女，金牛座，IT界最不着调的程序员</p>
+                            @{ var gybz=FuncHelper.Instance.GetCategoryByEnName("gybz");}
+                            <div class="title">@gybz.sName</div>
+                            <p>@gybz.sDescription</p>
                             <div class="more"><a href="#">summer</a></div>
                             <div class="clear"></div>
                         </div>

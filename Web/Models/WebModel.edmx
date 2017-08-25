@@ -29,6 +29,8 @@
           <Property Name="sKeyword" Type="varchar(max)" />
           <Property Name="sContent" Type="varchar(max)" />
           <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+          <Property Name="dInsertTime" Type="datetime" />
+          <Property Name="bIsRelease" Type="bit" />
         </EntityType>
         <EntityType Name="TG_Category">
           <Key>
@@ -62,6 +64,7 @@
           <Property Name="sTempletContent" Type="nvarchar(max)" />
           <Property Name="sTempletUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="dInsertTime" Type="datetime" Nullable="false" />
+          <Property Name="bIsCompile" Type="bit" />
         </EntityType>
         <EntityType Name="TG_User">
           <Key>
@@ -73,6 +76,7 @@
           <Property Name="sPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="sRealName" Type="nvarchar" MaxLength="50" />
           <Property Name="iUserType" Type="int" Nullable="false" />
+          <Property Name="bIsSuper" Type="bit" />
         </EntityType>
         <EntityType Name="TG_WebSite">
           <Key>
@@ -110,6 +114,7 @@
           <Property Name="sTempletContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sTempletUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="dInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="bIsCompile" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" />
@@ -143,6 +148,7 @@
           <Property Name="sPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sRealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="iUserType" Type="Int32" Nullable="false" />
+          <Property Name="bIsSuper" Type="Boolean" />
         </EntityType>
         <EntityType Name="TG_Category">
           <Key>
@@ -190,6 +196,8 @@
           <Property Name="sKeyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="dInsertTime" Type="DateTime" Precision="3" />
+          <Property Name="bIsRelease" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -200,6 +208,7 @@
           <EntitySetMapping Name="TG_Templet">
             <EntityTypeMapping TypeName="CmsSystemModel.TG_Templet">
               <MappingFragment StoreEntitySet="TG_Templet">
+                <ScalarProperty Name="bIsCompile" ColumnName="bIsCompile" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sTempletName" ColumnName="sTempletName" />
                 <ScalarProperty Name="sTempletEnName" ColumnName="sTempletEnName" />
@@ -228,6 +237,7 @@
           <EntitySetMapping Name="TG_User">
             <EntityTypeMapping TypeName="CmsSystemModel.TG_User">
               <MappingFragment StoreEntitySet="TG_User">
+                <ScalarProperty Name="bIsSuper" ColumnName="bIsSuper" />
                 <ScalarProperty Name="iUserType" ColumnName="iUserType" />
                 <ScalarProperty Name="sRealName" ColumnName="sRealName" />
                 <ScalarProperty Name="sPhone" ColumnName="sPhone" />
@@ -263,6 +273,8 @@
           <EntitySetMapping Name="TG_Article">
             <EntityTypeMapping TypeName="CmsSystemModel.TG_Article">
               <MappingFragment StoreEntitySet="TG_Article">
+                <ScalarProperty Name="bIsRelease" ColumnName="bIsRelease" />
+                <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
                 <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
                 <ScalarProperty Name="sContent" ColumnName="sContent" />
                 <ScalarProperty Name="sKeyword" ColumnName="sKeyword" />

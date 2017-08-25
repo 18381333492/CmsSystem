@@ -34,5 +34,7 @@ namespace Web.Models
         public string sKeyword { get; set; }
         public string sContent { get; set; }
         public bool bIsDeleted { get; set; }
+        public Nullable<System.DateTime> dInsertTime { get; set; }
+        public Nullable<bool> bIsRelease { get; set; }
     }
 }

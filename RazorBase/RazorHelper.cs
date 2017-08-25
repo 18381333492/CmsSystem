@@ -52,20 +52,28 @@ namespace RazorBase
             //service = RazorEngineService.Create(config);//创建拥有自定义模板的引擎服务
 
             service = RazorEngineService.Create();//创建默认的
+        }
 
+        /// <summary>
+        /// 初始化引擎服务
+        /// </summary>
+        public void InitServices(List<string> sTemplateList)
+        {
             //初始化文件的嵌套，及公共文件的模板的编译
-            var sTemplateList = C_Config.ReadAppSetting("sCommonTemplatePath");
-            if (!string.IsNullOrEmpty(sTemplateList))
+            if (sTemplateList.Count>0)
             {
-                var list = sTemplateList.Split(',').ToList();
-                foreach(var m in list)
+                foreach (var m in sTemplateList)
                 {
-                    string sPath =sTemplateBasePath+"\\"+m+".cshtml";
-                    string fileStr = File.ReadAllText(sPath);
-                    service.Compile(fileStr, m);
+                    string sPath = sTemplateBasePath + "\\" + m + ".cshtml";
+                    if (File.Exists(sPath))
+                    {//文件存在
+                        string fileStr = File.ReadAllText(sPath);
+                        service.Compile(fileStr, m);
+                    }
                 }
             }
         }
+
 
         /// <summary>
         /// 解析文件里面的模板

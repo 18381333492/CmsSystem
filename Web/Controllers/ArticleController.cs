@@ -53,7 +53,10 @@ namespace Web.Controllers
                             m.sAuthor,
                             m.bIsHot,
                             m.bIsTop,
-                            m.bIsSlide
+                            m.bIsSlide,
+                            m.bIsRelease,
+                            m.dInsertTime
+
                         };
             if (iCategoryId > 0)
                 query = query.Where(m => m.iCategoryId == iCategoryId);
@@ -73,6 +76,7 @@ namespace Web.Controllers
         public void Insert(TG_Article article)
         {
             article.bIsDeleted = false;
+            article.dInsertTime = DateTime.Now;
             mangae.Add<TG_Article>(article);
             result.success = mangae.SaveChange();
         }

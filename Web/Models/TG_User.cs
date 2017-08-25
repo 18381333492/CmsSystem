@@ -20,5 +20,6 @@ namespace Web.Models
         public string sPhone { get; set; }
         public string sRealName { get; set; }
         public int iUserType { get; set; }
+        public Nullable<bool> bIsSuper { get; set; }
     }
 }
