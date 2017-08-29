@@ -9,7 +9,7 @@
 	    	"display" : config.display
 	    });
 	    this.$ol.css({
-	    	"color" : config.color,
+	    	"color" : 'green',//config.color,
 	    	"width" : config.width,
 	    	"height" : this.$element.height(),
 	    	"font-size" : this.$element.css("font-size"),
@@ -29,7 +29,7 @@
 	    	"height" : this.$element.height() + 'px'
 	    });
 	    this.$element.css({
-	    //	"white-space" : "pre",
+	    	"white-space" : "pre",
 	    	"resize": "none",
 	    	"margin-left" : (parseInt(config.width) -  parseInt(this.$element.css("border-left-width"))) + 'px',
 	    	"width": (this.$element.width() - parseInt(config.width)) + 'px'

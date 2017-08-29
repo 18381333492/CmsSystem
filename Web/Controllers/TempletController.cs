@@ -39,8 +39,8 @@ namespace Web.Controllers
                 templet = mangae.db.TG_Templet.Find(ID);
                 //读取模板文件内容
                 var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+"\\";
-                string sFileName = templet.sTempletEnName + ".cshtml";
-                if (System.IO.File.Exists(sFileName))
+                string sFileName =templet.sTempletEnName + ".cshtml";
+                if (System.IO.File.Exists(path+sFileName))
                 {//文件存在
                     string Content = System.IO.File.ReadAllText(path + sFileName);
                     templet.sTempletContent = Content;

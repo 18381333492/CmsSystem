@@ -1,4 +1,4 @@
-@using Web.Server;
+﻿@using Web.Server;
 @using Web.Models;
 @{
     var item = Model as TG_Category;
@@ -72,15 +72,12 @@
                     <div class="col-md-7">
                         <div class="swiper-container slide_img">
                             <div class="swiper-wrapper">
+                                @foreach (var m in item.sPictureUrl.Split(','))
+                                {
                                 <div class="swiper-slide">
-                                    <img src="images/portfolio/1.jpg">
+                                    <img src="@m">
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="images/portfolio/2.jpg">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="images/portfolio/3.jpg">
-                                </div>
+                                }
                             </div>
                             <!-- Add Pagination -->
                             <div class="swiper-pagination"></div>
@@ -116,7 +113,7 @@
                 <div class="templatemo_gradient1 shadow ">
                     <div class="templatemo_gradient2 ">
                         <div class="overflow">
-                            @{ var gybz=FuncHelper.Instance.GetCategoryByEnName("gybz");}
+                            @{ var gybz = FuncHelper.Instance.GetCategoryByEnName("gybz");}
                             <div class="title">@gybz.sName</div>
                             <p>@gybz.sDescription</p>
                             <div class="more"><a href="#">summer</a></div>
@@ -357,14 +354,6 @@
             <script src=" http//hm.baidu.com/h.js?ca9c9aeca6d24b987c40c4c8ad091e42" type="text/javascript"></script>
         </div>
     </footer>
-
-<!-- Visual Studio Browser Link -->
-<script type="application/json" id="__browserLink_initializationData">
-    {"appName":"Chrome","requestId":"c83c97ca61784c3b8b506f68499fd66f"}
-</script>
-<script type="text/javascript" src="http://localhost:63043/21e0fb5b5fb34fe591b7aec5d6bf5671/browserLink" async="async"></script>
-<!-- End Browser Link -->
-
 </body>
 <!-- footer end-->
 <!-- Initialize Swiper -->

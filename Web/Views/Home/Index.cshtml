@@ -10,8 +10,24 @@
 </style>
 <div id="layout" class="easyui-layout" data-options="fit:true">
     <!--header-->
-    <div data-options="region:'north',border:false" style="height:70px;"></div>
-
+    <div data-options="region:'north',border:false" style="height:70px;">
+        <div style="text-align:right;margin-right:10px;margin-top:5px;">
+            <span style="vertical-align:middle;font-size:14px">@DateTime.Now.ToString("yyyy年MM月dd日")</span>
+           <a href="javascript:void(0)" id="mb" class="easyui-menubutton"
+           data-options="menu:'#mm',iconCls:'icon-ok',plain:true">注销</a>
+            <div id="mm" style="width:150px;">
+                <div data-options="iconCls:'icon-undo'">Undo</div>
+                <div data-options="iconCls:'icon-redo'">Redo</div>
+                <div class="menu-sep"></div>
+                <div>Cut</div>
+                <div>Copy</div>
+                <div>Paste</div>
+                <div class="menu-sep"></div>
+                <div data-options="iconCls:'icon-remove'">Delete</div>
+                <div>Select All</div>
+            </div>
+        </div>
+    </div>
     <!--Menu-->
     <div data-options="region:'west',title:'菜单栏目',split:true" style="width:200px;">
         <ul id="tree" class="easyui-tree" data-options="animate:true,lines:false" 

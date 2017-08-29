@@ -406,6 +406,7 @@
     <Content Include="ContentHtml\js\swiper.js" />
     <Content Include="ContentHtml\js\templatemo_custom.js" />
     <Content Include="ContentHtml\js\templatemo_tab.js" />
+    <Content Include="Content\background.jpg" />
     <Content Include="Content\easyui\easyloader.js" />
     <Content Include="Content\easyui\jquery.easyui.min.js" />
     <Content Include="Content\easyui\jquery.easyui.mobile.js" />
@@ -1338,7 +1339,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Template\Test\Test.cshtml" />
-    <Content Include="Template\Head.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
