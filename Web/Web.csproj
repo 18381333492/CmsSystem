@@ -406,7 +406,6 @@
     <Content Include="ContentHtml\js\swiper.js" />
     <Content Include="ContentHtml\js\templatemo_custom.js" />
     <Content Include="ContentHtml\js\templatemo_tab.js" />
-    <Content Include="Content\background.jpg" />
     <Content Include="Content\easyui\easyloader.js" />
     <Content Include="Content\easyui\jquery.easyui.min.js" />
     <Content Include="Content\easyui\jquery.easyui.mobile.js" />
@@ -1239,6 +1238,7 @@
     <Content Include="Content\kindeditor\themes\qq\editor.gif" />
     <Content Include="Content\kindeditor\themes\qq\qq.css" />
     <Content Include="Content\kindeditor\themes\simple\simple.css" />
+    <Content Include="Content\background.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\WebModel.Context.tt">
