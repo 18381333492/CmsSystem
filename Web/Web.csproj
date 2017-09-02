@@ -861,6 +861,7 @@
     <Content Include="Content\easyui\themes\metro\validatebox.css" />
     <Content Include="Content\easyui\themes\metro\window.css" />
     <Content Include="Content\easyui\themes\mobile.css" />
+    <Content Include="Content\gridtable.css" />
     <Content Include="Content\icheck\css\banner.jpg" />
     <Content Include="Content\icheck\css\custom.css" />
     <Content Include="Content\icheck\css\icheck.png" />
