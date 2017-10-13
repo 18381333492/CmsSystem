@@ -32,23 +32,16 @@ namespace Web.Controllers
         {
             int iSuccessCount = 0;//成功条数
             int iFalseCount = 0;//失败条数
-            var CategoryList = mangae.db.TG_Category.OrderBy(m=>m.ID).AsQueryable().ToList();//栏目数据
-            var TempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();//模板数据
-            //所有的栏目数据
-            var allCategoryList = CategoryList;
-            if (!string.IsNullOrEmpty(Ids))
-            {
-                var listIds = Ids.Split(',').Select(m=>Convert.ToInt32(m)).ToList();
-                CategoryList = CategoryList.Where(m => listIds.Contains(m.ID)).ToList();
-                //获取栏目下的所有模板ID
-                var listIds_Templet = CategoryList.Select(m => m.iTemplateId.Value).ToList();
-                TempletList = TempletList.Where(m => listIds_Templet.Contains(m.ID)).ToList();
-            }
+
+            var allCategoryList = mangae.db.TG_Category.OrderBy(m=>m.ID).AsQueryable().ToList();//所有栏目数据
+            var allTempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();//所有模板数据
+            var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
+            var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//要生成栏目数据
+
             //循环生成栏目页
             foreach (var category in CategoryList)
             {
-
-                var templet = TempletList.Where(m => m.ID == category.iTemplateId).SingleOrDefault();
+                var templet = allTempletList.Where(m => m.ID == category.iTemplateId).SingleOrDefault();
                 if (templet != null)
                 {//模板存在
                     string templetHtmlString = RazorHelper.Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);

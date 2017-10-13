@@ -9,6 +9,7 @@ using Common;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Web.Server;
 
 namespace Web.Controllers
 {
@@ -91,6 +92,7 @@ namespace Web.Controllers
         [ValidateInput(false)]
         public void Insert(TG_Templet templet)
         {
+            if (templet.bIsCompile == null) templet.bIsCompile = false;
             templet.sTempletEnName = templet.sTempletEnName.Trim();
             if (mangae.db.TG_Templet.Any(m => m.sTempletEnName == templet.sTempletEnName || m.sTempletName == templet.sTempletName))
             {//存在重复模板名称或者模板标识
@@ -113,6 +115,7 @@ namespace Web.Controllers
         [ValidateInput(false)]
         public void Update(TG_Templet templet)
         {
+            if (templet.bIsCompile == null) templet.bIsCompile = false;
             templet.sTempletEnName = templet.sTempletEnName.Trim();
             if (mangae.db.TG_Templet.Where(m => m.ID != templet.ID).Any(m => m.sTempletEnName == templet.sTempletEnName || m.sTempletName == templet.sTempletName))
             {//存在重复模板名称或者模板标识
@@ -159,6 +162,12 @@ namespace Web.Controllers
             {
                 string sFileName = templet.sTempletEnName + ".cshtml";
                 System.IO.File.WriteAllText(path + sFileName, templet.sTempletContent);
+
+                if (templet.bIsCompile.Value)
+                {
+                    //重新编译公共模板
+                    FuncHelper.Instance.initRazorServices();
+                }
             }
         }
 
@@ -180,6 +189,9 @@ namespace Web.Controllers
                     string sFileName = item.sTempletEnName + ".cshtml";
                     System.IO.File.WriteAllText(path + sFileName, item.sTempletContent);
                 }
+
+                //重新编译公共模板
+                FuncHelper.Instance.initRazorServices();
             }
         }
 

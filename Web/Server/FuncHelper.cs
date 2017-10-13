@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RazorBase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +12,22 @@ namespace Web.Server
     /// </summary>
     public partial class FuncHelper
     {
-        private Entities Context;
 
         private static FuncHelper instance = null;
+
+        /// <summary>
+        ///  初始化公共编译模板
+        /// </summary>
+        public void initRazorServices()
+        {
+            using (var db = new Entities())
+            {
+                List<string> list = db.TG_Templet.Where(m => m.bIsCompile == true).Select(m => m.sTempletEnName).ToList();
+                //初始化公共模板的编译
+                RazorHelper.Instance.InitServices(list);
+            }
+        }
+
 
         /// <summary>
         /// 获取站点信息
@@ -22,8 +36,11 @@ namespace Web.Server
         {
             get
             {
-                var web=Context.TG_WebSite.FirstOrDefault();
-                return web;
+                using (var db = new Entities())
+                {
+                    var web = db.TG_WebSite.FirstOrDefault();
+                    return web;
+                }
             }
         }
 
@@ -40,25 +57,20 @@ namespace Web.Server
             }
         }
 
-        /// <summary>
-        /// 初始化构造函数
-        /// </summary>
-        public FuncHelper()
-        {
-            Context = new Entities();
-        }
-
         //********************************************************常用的方法的封装************************************************************//
 
-        
+    
         /// <summary>
         /// 根据主键ID获取实体对象
         /// </summary>
         /// <returns></returns>
         public T GetModel<T>(int ID) where T: class, new()
         {
-            T item = Context.Set<T>().Find(ID); 
-            return item;
+            using (var db = new Entities())
+            {
+                T item = db.Set<T>().Find(ID);
+                return item;
+            }
         }
 
         /// <summary>
@@ -68,8 +80,11 @@ namespace Web.Server
         /// <returns></returns>
         public List<T> GetModelList<T>() where T : class, new()
         {
-            List<T> list = Context.Set<T>().ToList();
-            return list;
+            using (var db = new Entities())
+            {
+                List<T> list = db.Set<T>().ToList();
+                return list;
+            }
         }
 
 
@@ -78,9 +93,12 @@ namespace Web.Server
         /// </summary>
         public List<TG_Category> GetShowCategory()
         {
-            var list = Context.TG_Category.Where(m => m.bIsShowNav == true&&m.CategoryId==0)
+            using (var db = new Entities())
+            {
+                var list = db.TG_Category.Where(m => m.bIsShowNav == true && m.CategoryId == 0)
                                           .OrderBy(m => m.iOrder).ToList();
-            return list;
+                return list;
+            }
         }
 
 
@@ -91,8 +109,11 @@ namespace Web.Server
         /// <returns></returns>
         public TG_Category GetCategoryByEnName(string sEnName)
         {
-            var category = Context.TG_Category.FirstOrDefault(m => m.sEnName == sEnName);
-            return category;
+            using (var db = new Entities())
+            {
+                var category = db.TG_Category.FirstOrDefault(m => m.sEnName == sEnName);
+                return category;
+            }
         }
 
         /// <summary>
@@ -102,8 +123,12 @@ namespace Web.Server
         /// <returns></returns>
         public List<TG_Article> GetArticleListByCategoryId(int iCategoryId)
         {
-            var ArticleList = Context.TG_Article.Where(m => m.iCategoryId == iCategoryId).ToList();
-            return ArticleList;
+            using (var db = new Entities())
+            {
+                var ArticleList = db.TG_Article.Where(m => m.iCategoryId == iCategoryId).ToList();
+                return ArticleList;
+            }
+        
         }
 
 

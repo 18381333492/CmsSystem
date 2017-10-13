@@ -20,6 +20,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
+
         var admin = new adminPackage();
         //注册路由
         admin.routeRegister("Templet");
@@ -53,6 +54,7 @@
                 if ($(admin.form).form('validate')) {
                     admin.button.disable();
                     var data = $(admin.form).serialize();
+                    debugger
                     admin.Ajax(admin.route('Update'), data, function (r) {
                         admin.alert("编辑成功");
                         dialog.dialog('close');
