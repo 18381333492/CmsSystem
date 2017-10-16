@@ -33,7 +33,7 @@ namespace Web.Controllers
             int iSuccessCount = 0;//成功条数
             int iFalseCount = 0;//失败条数
 
-            var allCategoryList = mangae.db.TG_Category.OrderBy(m=>m.ID).AsQueryable().ToList();//所有栏目数据
+            var allCategoryList = mangae.db.TG_Category.OrderBy(m => m.ID).AsQueryable().ToList();//所有栏目数据
             var allTempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();//所有模板数据
             var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
             var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//要生成栏目数据
@@ -57,9 +57,12 @@ namespace Web.Controllers
                 }
             }
             result.success = true;
-            result.data = new { iSuccessCount=iSuccessCount,
-                                iFalseCount = iFalseCount,
-                                iTatolCount=iSuccessCount+ iFalseCount};
+            result.data = new
+            {
+                iSuccessCount = iSuccessCount,
+                iFalseCount = iFalseCount,
+                iTatolCount = iSuccessCount + iFalseCount
+            };
         }
 
 
@@ -71,25 +74,21 @@ namespace Web.Controllers
         {
             int iSuccessCount = 0;//成功条数
             int iFalseCount = 0;//失败条数
-            var CategoryList = mangae.db.TG_Category.OrderBy(m => m.ID).AsQueryable().ToList();//栏目数据
-            var TempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();
-            //所有的栏目数据
-            var allCategoryList = CategoryList;
-            if (!string.IsNullOrEmpty(Ids))
-            {
-                var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
-                //获取栏目数据
-                CategoryList = CategoryList.Where(m => listIds.Contains(m.ID)).ToList();
-            }
+
+            var allCategoryList = mangae.db.TG_Category.OrderBy(m => m.ID).AsQueryable().ToList();//所有栏目数据
+            var allTempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();//所有的模板数据
+            var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
+            var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//获取生成栏目数据
+          
             //获取栏目的ID集合
             var CategoryIds = CategoryList.Select(m => m.ID);
-            //获取栏目下的所有文章
+            //获取生成栏目下的所有文章
             List<TG_Article> ArticleList = mangae.db.TG_Article.Where(m => CategoryIds.Contains(m.iCategoryId)&&m.bIsDeleted==false).ToList();
             //循环生成文章页
             foreach (var category in CategoryList)
             {
                 //获取栏目下的文章模板
-                TG_Templet templetArticle = TempletList.Where(m => m.ID == category.iArticleTemplateId).SingleOrDefault();
+                TG_Templet templetArticle = allTempletList.Where(m => m.ID == category.iArticleTemplateId).SingleOrDefault();
                 //获取当前栏目下的文章数据列表
                 var CurrentArticleList = ArticleList.Where(m => m.iCategoryId == category.ID).ToList();
                 //遍历当前栏目下的文章
@@ -98,7 +97,7 @@ namespace Web.Controllers
                     if (article.iTemplateId != 0)
                     {//获取文章是否有独立模板
                      //有则使用独立模板
-                        templetArticle = TempletList.FirstOrDefault(m => m.ID == article.iTemplateId);
+                        templetArticle = allTempletList.FirstOrDefault(m => m.ID == article.iTemplateId);
                     }
                     if (templetArticle != null)
                     {//模板存在
