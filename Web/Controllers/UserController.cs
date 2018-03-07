@@ -71,7 +71,7 @@ namespace Web.Controllers
             {
                 user.sUserName = user.sUserName.Trim();
                 user.iUserType = 0;
-                user.sPassword = C_Security.MD5(user.sPassword);
+                user.sPassword = SecurityHelper.MD5(user.sPassword);
                 mangae.Add<TG_User>(user);
                 result.success = mangae.SaveChange();
             }
@@ -84,7 +84,7 @@ namespace Web.Controllers
         public void Update(TG_User user)
         {
             var item = mangae.db.TG_User.Find(user.ID);
-            item.sPassword = C_Security.MD5(user.sPassword);
+            item.sPassword = SecurityHelper.MD5(user.sPassword);
             result.success = mangae.SaveChange();
         }
 

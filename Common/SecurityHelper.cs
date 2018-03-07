@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class C_Security
+    public class SecurityHelper
     {
 
         /// <summary>

@@ -46,7 +46,7 @@ namespace Web.Controllers
             JArray comtreeData = new JArray();
             foreach (var m in main)
             {
-                JObject mainData = C_Json.Object(C_Json.toJson(m));
+                JObject mainData = JsonHelper.Object(JsonHelper.toJson(m));
                 var array = recursion(m, child,1);
                 mainData.Add(new JProperty("children", array));
                 comtreeData.Add(mainData);
@@ -100,7 +100,7 @@ namespace Web.Controllers
                 {
                     if (category.ID == n.CategoryId)
                     {
-                        JObject childData = C_Json.Object(C_Json.toJson(n));
+                        JObject childData = JsonHelper.Object(JsonHelper.toJson(n));
                         //函数递归调用
                         var array = recursion(n, list,1);
                         childData.Add(new JProperty("children", array));

@@ -35,7 +35,7 @@ namespace Web.Models
         /// <returns></returns>
         public string toJson()
         {
-            return C_Json.toJson(this);
+            return JsonHelper.toJson(this);
         }
     }
 }

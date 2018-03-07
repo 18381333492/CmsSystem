@@ -30,7 +30,7 @@ namespace Web.Models
 
         public string toJson()
         {
-            return C_Json.toJson(this);
+            return JsonHelper.toJson(this);
         }
 
         //分页返回的结果

@@ -10,7 +10,7 @@ namespace Common
     /// <summary>
     /// 配置文件的相关操作的封装
     /// </summary>
-    public class C_Config
+    public class ConfigHelper
     {
         /// <summary>
         /// 获取连接字符串(从WebConfig配置文件中获取) 

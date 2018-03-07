@@ -49,7 +49,7 @@ namespace Web.Upload
                         /*文件大小超出限制*/
                         if (image.ContentLength > (_iMaxSize * 1024))
                         {
-                            context.Response.Write(C_Json.toJson(new result()
+                            context.Response.Write(JsonHelper.toJson(new result()
                             {
                                 error = 1,
                                 message = "文件超出大小限制2M!"
@@ -59,7 +59,7 @@ namespace Web.Upload
                         /*上传的文件后缀名格式错误*/
                         if (!sExtension.Contains(format))
                         {
-                            context.Response.Write(C_Json.toJson(new result()
+                            context.Response.Write(JsonHelper.toJson(new result()
                             {
                                 error = 1,
                                 message = "上传的图片文件格式错误!"
@@ -74,7 +74,7 @@ namespace Web.Upload
                         ImgArray.Add(srcPicture);
                     }
                 }
-                context.Response.Write(C_Json.toJson(new result()
+                context.Response.Write(JsonHelper.toJson(new result()
                 {
                     error = 0,
                     url = string.Join(",", ImgArray)
@@ -83,7 +83,7 @@ namespace Web.Upload
             catch (Exception e)
             {
               //  Logs.LogHelper.ErrorLog(e);
-                context.Response.Write(C_Json.toJson(new result()
+                context.Response.Write(JsonHelper.toJson(new result()
                 {
                     error = 1,
                     message = "上传失败!"

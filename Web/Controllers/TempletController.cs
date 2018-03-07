@@ -34,12 +34,12 @@ namespace Web.Controllers
         public ActionResult Add(int ? ID)
         {
             var templet = new TG_Templet();
-            templet.sTempletUrl = C_Config.ReadAppSetting("sTemplatePath");
+            templet.sTempletUrl = ConfigHelper.ReadAppSetting("sTemplatePath");
             if (ID != null)
             {
                 templet = mangae.db.TG_Templet.Find(ID);
                 //读取模板文件内容
-                var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+"\\";
+                var path = AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath")+"\\";
                 string sFileName =templet.sTempletEnName + ".cshtml";
                 if (System.IO.File.Exists(path+sFileName))
                 {//文件存在
@@ -153,7 +153,7 @@ namespace Web.Controllers
         /// </summary>
         private void MakeTempletHtml(TG_Templet templet)
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+"\\";
+            var path = AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath")+"\\";
             if (!Directory.Exists(path))
             {//不存在该目录
                 Directory.CreateDirectory(path);
@@ -177,7 +177,7 @@ namespace Web.Controllers
         public void MakeAllTempletHtml()
         {
             var list = mangae.db.TG_Templet.ToList();
-            var path = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sTemplatePath")+ "\\";
+            var path = AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath")+ "\\";
             if (!Directory.Exists(path))
             {//不存在该目录
                 Directory.CreateDirectory(path);
@@ -209,12 +209,12 @@ namespace Web.Controllers
                            m.ID,
                            m.sTempletName
                        };
-            JArray array = JArray.Parse(C_Json.toJson(query));
+            JArray array = JArray.Parse(JsonHelper.toJson(query));
             JObject job = new JObject();
             job.Add(new JProperty("ID",0));
             job.Add(new JProperty("sTempletName", "请选择模板"));
             array.AddFirst(job);
-            return Content(C_Json.toJson(array));
+            return Content(JsonHelper.toJson(array));
         }
     }
 }

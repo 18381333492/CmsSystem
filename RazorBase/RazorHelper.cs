@@ -43,8 +43,8 @@ namespace RazorBase
         public RazorHelper()
         {
             //设置模板和页面目录的位置
-            sTemplateBasePath = AppDomain.CurrentDomain.BaseDirectory +C_Config.ReadAppSetting("sTemplatePath");
-            sHtmlBasePath = AppDomain.CurrentDomain.BaseDirectory + C_Config.ReadAppSetting("sHtmlPath");
+            sTemplateBasePath = AppDomain.CurrentDomain.BaseDirectory +ConfigHelper.ReadAppSetting("sTemplatePath");
+            sHtmlBasePath = AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sHtmlPath");
 
             //我这里用另外一种方法实现自定义的模板，暂时没有用这种方法.
             //var config = new TemplateServiceConfiguration();//获取模板服务配置,需要自定义模板方法需要

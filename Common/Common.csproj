@@ -45,9 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C_Security.cs" />
-    <Compile Include="C_Config.cs" />
-    <Compile Include="C_json.cs" />
+    <Compile Include="SecurityHelper.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
