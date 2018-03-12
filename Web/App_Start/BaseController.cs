@@ -96,5 +96,14 @@ namespace Web.App_Start
                 filterContext.Result = Content(result.toJson()); /**统一处理ajax的返回结果**/
             }
         }
+
+        /// <summary>
+        /// 捕捉全局异常
+        /// </summary>
+        /// <param name="filterContext"></param>
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true; //表示对异常已经处理过,不会对客户端在抛出异常
+        }
     }
 }

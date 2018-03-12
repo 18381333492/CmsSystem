@@ -1240,6 +1240,9 @@
     <Content Include="Content\kindeditor\themes\qq\qq.css" />
     <Content Include="Content\kindeditor\themes\simple\simple.css" />
     <Content Include="Content\background.jpg" />
+    <Content Include="Content\login\images\login-img.png" />
+    <Content Include="Content\login\images\login_logo.png" />
+    <Content Include="Content\login\css\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\WebModel.Context.tt">

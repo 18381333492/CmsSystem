@@ -1,27 +1,28 @@
-﻿
-@{
-    ViewBag.Title = "登录系统";
+﻿@{
+    Layout = null;
 }
-<style>
-    body{
-        background-image:url("/Content/background.jpg");
-    }
-</style>
-<div class="easyui-dialog" title="登录" style="width:600px;height:400px;text-align:center;padding-top:80px;"
-     data-options="modal:true,border:false,noheader:true">
-    <label style="font-size:24px;font-weight:800">
-        LoginSystem
-    </label>
-    <br />
-    <label>
-        ----台哥来了CMS
-    </label>
-    <br /><br />
-    <input class="easyui-textbox" data-options="iconCls:'icon-man',prompt:'Account'" style="width:200px;height:30px">
-    <br /><br />
-    <input class="easyui-textbox" data-options="iconCls:'icon-lock',type:'password',prompt:'Password'" style="width:200px;height:30px"> 
-    <br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-clear'">Reset</a>&nbsp;&nbsp;
-    <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">Login</a>  
-</div>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>CMS管理系统</title>
+    <link href="~/Content/login/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="login_box">
+        <div class="login_l_img"><img src="~/Content/login/images/login-img.png" /></div>
+        <div class="login">
+            <div class="login_logo"><a href="#"><img src="~/Content/login/images/login_logo.png" /></a></div>
+            <div class="login_name">
+                <p>CMS后台管理系统</p>
+            </div>
+            <form>
+                <input name="username" type="text" placeholder="用户名">
+                <input name="password" type="password" placeholder="密码" />
+                <input value="登录" style="width:100%;" type="submit">
+            </form>
+        </div>
+        <div class="copyright">某某有限公司 版权所有©2016-2018 技术支持电话：000-00000000</div>
+    </div>
+</body>
+</html>
