@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MakeHtmlController.cs" />
     <Compile Include="Controllers\TempletController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebSiteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -218,6 +219,9 @@
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TG_Category.cs">
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TG_Client.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TG_Templet.cs">
@@ -1255,6 +1259,91 @@
       <DependentUpon>WebModel.edmx</DependentUpon>
       <LastGenOutput>WebModel.cs</LastGenOutput>
     </Content>
+    <Content Include="page\about.html" />
+    <Content Include="page\about_partner.html" />
+    <Content Include="page\about_team.html" />
+    <Content Include="page\about_team_detail.html" />
+    <Content Include="page\contact.html" />
+    <Content Include="page\index.html" />
+    <Content Include="page\job.html" />
+    <Content Include="page\news.html" />
+    <Content Include="page\news_detail.html" />
+    <Content Include="page\project.html" />
+    <Content Include="page\services.html" />
+    <Content Include="page\statics\css\bwhite.css" />
+    <Content Include="page\statics\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="page\statics\css\fonts\iconfont.svg" />
+    <Content Include="page\statics\css\lib2.css" />
+    <Content Include="page\statics\css\style.2041.css" />
+    <Content Include="page\statics\images\1438424052624.jpg" />
+    <Content Include="page\statics\images\148462137615.jpg" />
+    <Content Include="page\statics\images\1490071914135.jpg" />
+    <Content Include="page\statics\images\1490072433234.jpg" />
+    <Content Include="page\statics\images\1490072989607.jpg" />
+    <Content Include="page\statics\images\1490073118356.jpg" />
+    <Content Include="page\statics\images\1490073308708.jpg" />
+    <Content Include="page\statics\images\1490074286532.jpg" />
+    <Content Include="page\statics\images\1490074376890.jpg" />
+    <Content Include="page\statics\images\1490075211271.jpg" />
+    <Content Include="page\statics\images\1490075444696.jpg" />
+    <Content Include="page\statics\images\1490075922783.png" />
+    <Content Include="page\statics\images\1490076036776.png" />
+    <Content Include="page\statics\images\1490076244647.png" />
+    <Content Include="page\statics\images\1490076286323.png" />
+    <Content Include="page\statics\images\1490076330843.png" />
+    <Content Include="page\statics\images\1490076500816.png" />
+    <Content Include="page\statics\images\149007689617.jpg" />
+    <Content Include="page\statics\images\1490077085525.png" />
+    <Content Include="page\statics\images\1490079371411.png" />
+    <Content Include="page\statics\images\1490089038970.png" />
+    <Content Include="page\statics\images\1490260622270.jpg" />
+    <Content Include="page\statics\images\1490321730457.jpg" />
+    <Content Include="page\statics\images\1490322118269.jpg" />
+    <Content Include="page\statics\images\1490322673374.jpg" />
+    <Content Include="page\statics\images\1490322763387.jpg" />
+    <Content Include="page\statics\images\1490323393338.jpg" />
+    <Content Include="page\statics\images\1490323515250.png" />
+    <Content Include="page\statics\images\1490323516121.jpg" />
+    <Content Include="page\statics\images\1490323755899.jpg" />
+    <Content Include="page\statics\images\1490325755542.png" />
+    <Content Include="page\statics\images\149032638157.png" />
+    <Content Include="page\statics\images\1490326477972.png" />
+    <Content Include="page\statics\images\1490326496297.png" />
+    <Content Include="page\statics\images\1490326932783.png" />
+    <Content Include="page\statics\images\1490327989706.png" />
+    <Content Include="page\statics\images\1490338321679.jpg" />
+    <Content Include="page\statics\images\1490684950277.jpg" />
+    <Content Include="page\statics\images\1490685075590.jpg" />
+    <Content Include="page\statics\images\1490687229663.jpg" />
+    <Content Include="page\statics\images\1491380253463.jpg" />
+    <Content Include="page\statics\images\1491380254145.jpg" />
+    <Content Include="page\statics\images\1491380254768.jpg" />
+    <Content Include="page\statics\images\1491448706133.jpg" />
+    <Content Include="page\statics\images\1491455366761.jpg" />
+    <Content Include="page\statics\images\1491456028677.jpg" />
+    <Content Include="page\statics\images\1491471542571.png" />
+    <Content Include="page\statics\images\1491471598822.png" />
+    <Content Include="page\statics\images\149147167119.png" />
+    <Content Include="page\statics\images\1491471726615.png" />
+    <Content Include="page\statics\images\1491471794980.png" />
+    <Content Include="page\statics\images\1491471808752.png" />
+    <Content Include="page\statics\images\149147182358.png" />
+    <Content Include="page\statics\images\1491471835861.png" />
+    <Content Include="page\statics\images\1491471871985.png" />
+    <Content Include="page\statics\images\1491471881514.png" />
+    <Content Include="page\statics\images\1491471891891.png" />
+    <Content Include="page\statics\images\149147190379.png" />
+    <Content Include="page\statics\images\1491474551405.jpg" />
+    <Content Include="page\statics\images\149147459342.jpg" />
+    <Content Include="page\statics\images\1491475060401.jpg" />
+    <Content Include="page\statics\images\1491537117480.jpg" />
+    <Content Include="page\statics\images\1491801957820.jpg" />
+    <Content Include="page\statics\images\1491802317367.jpg" />
+    <Content Include="page\statics\images\1491811693240.jpg" />
+    <Content Include="page\statics\images\1492400562475.jpg" />
+    <Content Include="page\statics\images\1493794625327.jpg" />
+    <Content Include="page\statics\js\jquery.min.js" />
+    <Content Include="page\statics\js\main.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1292,6 +1381,14 @@
     <Content Include="ContentHtml\fonts\fontawesome-webfont.ttf" />
     <Content Include="ContentHtml\fonts\fontawesome-webfont.woff" />
     <Content Include="ContentHtml\fonts\FontAwesome.otf" />
+    <Content Include="page\statics\css\fonts\fontawesome-webfont.eot" />
+    <Content Include="page\statics\css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="page\statics\css\fonts\fontawesome-webfont.woff" />
+    <Content Include="page\statics\css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="page\statics\css\fonts\HELVETICANEUELTPRO-THEX.OTF" />
+    <Content Include="page\statics\css\fonts\iconfont.eot" />
+    <Content Include="page\statics\css\fonts\iconfont.ttf" />
+    <Content Include="page\statics\css\fonts\iconfont.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1361,6 +1458,7 @@
     <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Views\MakeHtml\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

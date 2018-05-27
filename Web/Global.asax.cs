@@ -18,8 +18,6 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            FuncHelper.Instance.initRazorServices(); //初始化公共编译模板
         }
     }
 }

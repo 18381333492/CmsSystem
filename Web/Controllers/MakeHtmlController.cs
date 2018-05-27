@@ -23,7 +23,7 @@ namespace Web.Controllers
             return View();
         }
 
-
+  
         /// <summary>
         /// 生成栏目页
         /// </summary>
@@ -38,15 +38,18 @@ namespace Web.Controllers
             var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
             var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//要生成栏目数据
 
+            var Instance = new RazorHelper();
+            FuncHelper.Instance.initRazorServices(Instance);
             //循环生成栏目页
             foreach (var category in CategoryList)
             {
                 var templet = allTempletList.Where(m => m.ID == category.iTemplateId).SingleOrDefault();
                 if (templet != null)
                 {//模板存在
-                    string templetHtmlString = RazorHelper.Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
+                   
+                    string templetHtmlString =Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
                     string sHtmlPath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
-                    if (RazorHelper.Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
+                    if (Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
                     {
                         iSuccessCount++;
                     }
@@ -79,7 +82,9 @@ namespace Web.Controllers
             var allTempletList = mangae.db.TG_Templet.OrderBy(m => m.ID).AsQueryable().ToList();//所有的模板数据
             var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
             var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//获取生成栏目数据
-          
+
+            var Instance = new RazorHelper();
+            FuncHelper.Instance.initRazorServices(Instance);
             //获取栏目的ID集合
             var CategoryIds = CategoryList.Select(m => m.ID);
             //获取生成栏目下的所有文章
@@ -101,10 +106,10 @@ namespace Web.Controllers
                     }
                     if (templetArticle != null)
                     {//模板存在
-                        //解析模板
-                        string templetHtmlString = RazorHelper.Instance.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
+                     //解析模板        
+                        string templetHtmlString = Instance.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
                         string ArticlePath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
-                        if (RazorHelper.Instance.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
+                        if (Instance.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
                         {//生成成功
                             iSuccessCount++;
                         }

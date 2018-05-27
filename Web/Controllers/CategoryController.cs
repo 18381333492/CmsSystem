@@ -163,9 +163,11 @@ namespace Web.Controllers
             var templet = mangae.db.TG_Templet.Where(m => m.ID == category.iTemplateId).SingleOrDefault();
             if (templet != null)
             {//模板存在
-                string templetHtmlString = RazorHelper.Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
+                var Instance = new RazorHelper();
+                FuncHelper.Instance.initRazorServices(Instance);
+                string templetHtmlString =Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
                 string sHtmlPath = FuncHelper.Instance.GetHtmlPath(category, mangae.db.TG_Category.ToList());
-                RazorHelper.Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString);
+                Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString);
             }
         }
 

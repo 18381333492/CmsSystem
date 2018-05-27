@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CmsSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TG_Templet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sTempletName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sTempletEnName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sTempletContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sTempletUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="bIsCompile" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" />
+    <EntitySet Name="TG_WebSite" EntityType="CmsSystemModel.TG_WebSite" />
+    <EntitySet Name="TG_User" EntityType="CmsSystemModel.TG_User" />
+    <EntitySet Name="TG_Category" EntityType="CmsSystemModel.TG_Category" />
+    <EntitySet Name="TG_Article" EntityType="CmsSystemModel.TG_Article" />
+    <EntitySet Name="TG_Client" EntityType="CmsSystemModel.TG_Client" />
+  </EntityContainer>
+  <EntityType Name="TG_WebSite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sSiteDNS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="sKeyWord" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sCopyRight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sFiling" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sMobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sFax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sQQNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TG_User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sPassword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sRealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iUserType" Type="Int32" Nullable="false" />
+    <Property Name="bIsSuper" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TG_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="sName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sEnName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sEnNick" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="iOrder" Type="Int32" Nullable="false" />
+    <Property Name="iTemplateId" Type="Int32" />
+    <Property Name="iArticleTemplateId" Type="Int32" />
+    <Property Name="bIsRedirect" Type="Boolean" />
+    <Property Name="sRedirectUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bIsShowNav" Type="Boolean" Nullable="false" />
+    <Property Name="bIsContentCategory" Type="Boolean" />
+    <Property Name="sPictureSize" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sPictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sKeyWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TG_Article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="iTemplateId" Type="Int32" Nullable="false" />
+    <Property Name="sTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sEnTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sAuthor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sSize" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sLang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sVersion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sSummary" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sPictureSize" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sPictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="bIsTop" Type="Boolean" />
+    <Property Name="bIsSlide" Type="Boolean" />
+    <Property Name="bIsHot" Type="Boolean" />
+    <Property Name="dPublishTime" Type="DateTime" Precision="3" />
+    <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sKeyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="dInsertTime" Type="DateTime" Precision="3" />
+    <Property Name="bIsRelease" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TG_Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sQQ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="sAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>

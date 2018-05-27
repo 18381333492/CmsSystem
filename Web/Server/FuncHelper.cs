@@ -12,22 +12,22 @@ namespace Web.Server
     /// </summary>
     public partial class FuncHelper
     {
-
+        
         private static FuncHelper instance = null;
 
         /// <summary>
-        ///  初始化公共编译模板
+        /// 编译公共模版
         /// </summary>
-        public void initRazorServices()
+        /// <param name="Instance"></param>
+        public void initRazorServices(RazorHelper Instance)
         {
             using (var db = new Entities())
             {
                 List<string> list = db.TG_Templet.Where(m => m.bIsCompile == true).Select(m => m.sTempletEnName).ToList();
                 //初始化公共模板的编译
-                RazorHelper.Instance.InitServices(list);
+                Instance.InitServices(list);
             }
         }
-
 
         /// <summary>
         /// 获取站点信息
@@ -60,6 +60,15 @@ namespace Web.Server
         //********************************************************常用的方法的封装************************************************************//
 
     
+        public TG_WebSite GetConfig()
+        {
+            using (var db = new Entities())
+            {
+                var web = db.TG_WebSite.FirstOrDefault();
+                return web;
+            }
+        }
+
         /// <summary>
         /// 根据主键ID获取实体对象
         /// </summary>
@@ -101,6 +110,52 @@ namespace Web.Server
             }
         }
 
+        /// <summary>
+        /// 根据一级栏目ID获取下面的子栏目
+        /// </summary>
+        /// <param name="iParentCategoryId"></param>
+        /// <returns></returns>
+        public List<TG_Category> GetChildCategory(int iParentCategoryId)
+        {
+            using (var db = new Entities())
+            {
+                var list = db.TG_Category.Where(m => m.bIsShowNav == true && m.CategoryId == iParentCategoryId)
+                                          .OrderBy(m => m.iOrder).ToList();
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 根据一级栏目ID获取下面的子栏目
+        /// </summary>
+        /// <param name="iParentCategoryId"></param>
+        /// <returns></returns>
+        public List<TG_Category> GetChildCategory(int iParentCategoryId,bool bIsShowNav)
+        {
+            using (var db = new Entities())
+            {
+                var list = db.TG_Category.Where(m => m.bIsShowNav == bIsShowNav && m.CategoryId == iParentCategoryId)
+                                          .OrderBy(m => m.iOrder).ToList();
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 获取栏目下面的所有文章
+        /// </summary>
+        /// <param name="iParentCategoryId"></param>
+        /// <returns></returns>
+        public List<TG_Article> GetCategoryAllArticleList(int iParentCategoryId)
+        {
+            using (var db = new Entities())
+            {
+                var list = db.TG_Category.Where(m => m.bIsShowNav ==false && m.CategoryId == iParentCategoryId)
+                                          .OrderBy(m => m.iOrder).Select(m=>m.ID).ToList();
+                var AllArticleList = db.TG_Article.Where(m => list.Contains(m.iCategoryId)).ToList();
+                return AllArticleList;
+            }
+        }
+
 
         /// <summary>
         /// 根据栏目的英文标识获取栏目
@@ -125,7 +180,7 @@ namespace Web.Server
         {
             using (var db = new Entities())
             {
-                var ArticleList = db.TG_Article.Where(m => m.iCategoryId == iCategoryId).ToList();
+                var ArticleList = db.TG_Article.Where(m => m.iCategoryId == iCategoryId&&m.bIsDeleted==false).OrderBy(m=>m.sSize).ToList();
                 return ArticleList;
             }
         

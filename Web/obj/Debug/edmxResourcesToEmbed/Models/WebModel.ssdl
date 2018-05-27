@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CmsSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TG_Article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iCategoryId" Type="int" Nullable="false" />
+    <Property Name="iTemplateId" Type="int" Nullable="false" />
+    <Property Name="sTitle" Type="varchar" MaxLength="255" />
+    <Property Name="sEnTitle" Type="varchar" MaxLength="255" />
+    <Property Name="sAuthor" Type="varchar" MaxLength="255" />
+    <Property Name="sSize" Type="varchar" MaxLength="255" />
+    <Property Name="sLang" Type="varchar" MaxLength="255" />
+    <Property Name="sVersion" Type="varchar" MaxLength="255" />
+    <Property Name="sSummary" Type="varchar" MaxLength="255" />
+    <Property Name="sPictureSize" Type="varchar" MaxLength="255" />
+    <Property Name="sPictureUrl" Type="varchar(max)" />
+    <Property Name="bIsTop" Type="bit" />
+    <Property Name="bIsSlide" Type="bit" />
+    <Property Name="bIsHot" Type="bit" />
+    <Property Name="dPublishTime" Type="datetime" />
+    <Property Name="sDescription" Type="varchar(max)" />
+    <Property Name="sKeyword" Type="varchar(max)" />
+    <Property Name="sContent" Type="varchar(max)" />
+    <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+    <Property Name="dInsertTime" Type="datetime" />
+    <Property Name="bIsRelease" Type="bit" />
+  </EntityType>
+  <EntityType Name="TG_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="sName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sEnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sEnNick" Type="nvarchar" MaxLength="255" />
+    <Property Name="iOrder" Type="int" Nullable="false" />
+    <Property Name="iTemplateId" Type="int" />
+    <Property Name="iArticleTemplateId" Type="int" />
+    <Property Name="bIsRedirect" Type="bit" />
+    <Property Name="sRedirectUrl" Type="nvarchar" MaxLength="255" />
+    <Property Name="bIsShowNav" Type="bit" Nullable="false" />
+    <Property Name="bIsContentCategory" Type="bit" />
+    <Property Name="sPictureSize" Type="nvarchar" MaxLength="255" />
+    <Property Name="sPictureUrl" Type="nvarchar(max)" />
+    <Property Name="sDescription" Type="nvarchar(max)" />
+    <Property Name="sKeyWord" Type="nvarchar(max)" />
+    <Property Name="sContent" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TG_Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sName" Type="nvarchar" MaxLength="100" />
+    <Property Name="sPhone" Type="nvarchar" MaxLength="100" />
+    <Property Name="sContent" Type="nvarchar(max)" />
+    <Property Name="sEmail" Type="nvarchar" MaxLength="255" />
+    <Property Name="sQQ" Type="nvarchar" MaxLength="255" />
+    <Property Name="sAddress" Type="nvarchar(max)" />
+    <Property Name="dInsertTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TG_Templet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sTempletName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sTempletEnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sTempletContent" Type="nvarchar(max)" />
+    <Property Name="sTempletUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="dInsertTime" Type="datetime" Nullable="false" />
+    <Property Name="bIsCompile" Type="bit" />
+  </EntityType>
+  <EntityType Name="TG_User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sUserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sPassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="sRealName" Type="nvarchar" MaxLength="50" />
+    <Property Name="iUserType" Type="int" Nullable="false" />
+    <Property Name="bIsSuper" Type="bit" />
+  </EntityType>
+  <EntityType Name="TG_WebSite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sSiteDNS" Type="nvarchar" MaxLength="255" />
+    <Property Name="sEmail" Type="nvarchar" MaxLength="255" />
+    <Property Name="sMobile" Type="nvarchar" MaxLength="255" />
+    <Property Name="sFax" Type="nvarchar" MaxLength="255" />
+    <Property Name="sPhone" Type="nvarchar" MaxLength="255" />
+    <Property Name="sQQNum" Type="nvarchar" MaxLength="255" />
+    <Property Name="sAddress" Type="nvarchar" MaxLength="300" />
+    <Property Name="sKeyWord" Type="nvarchar" MaxLength="255" />
+    <Property Name="sDescription" Type="nvarchar(max)" />
+    <Property Name="sCopyRight" Type="nvarchar(max)" />
+    <Property Name="sFiling" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="CmsSystemModelStoreContainer">
+    <EntitySet Name="TG_Article" EntityType="Self.TG_Article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TG_Category" EntityType="Self.TG_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TG_Client" EntityType="Self.TG_Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TG_User" EntityType="Self.TG_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TG_WebSite" EntityType="Self.TG_WebSite" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

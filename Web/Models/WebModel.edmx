@@ -54,6 +54,19 @@
           <Property Name="sKeyWord" Type="nvarchar(max)" />
           <Property Name="sContent" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="TG_Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sName" Type="nvarchar" MaxLength="100" />
+          <Property Name="sPhone" Type="nvarchar" MaxLength="100" />
+          <Property Name="sContent" Type="nvarchar(max)" />
+          <Property Name="sEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="sQQ" Type="nvarchar" MaxLength="255" />
+          <Property Name="sAddress" Type="nvarchar(max)" />
+          <Property Name="dInsertTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="TG_Templet">
           <Key>
             <PropertyRef Name="ID" />
@@ -85,8 +98,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="sSiteDNS" Type="nvarchar" MaxLength="255" />
-          <Property Name="sEmail" Type="nvarchar" MaxLength="100" />
-          <Property Name="sPhone" Type="nvarchar" MaxLength="100" />
+          <Property Name="sEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="sMobile" Type="nvarchar" MaxLength="255" />
+          <Property Name="sFax" Type="nvarchar" MaxLength="255" />
+          <Property Name="sPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="sQQNum" Type="nvarchar" MaxLength="255" />
           <Property Name="sAddress" Type="nvarchar" MaxLength="300" />
           <Property Name="sKeyWord" Type="nvarchar" MaxLength="255" />
           <Property Name="sDescription" Type="nvarchar(max)" />
@@ -96,6 +112,7 @@
         <EntityContainer Name="CmsSystemModelStoreContainer">
           <EntitySet Name="TG_Article" EntityType="Self.TG_Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_Category" EntityType="Self.TG_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TG_Client" EntityType="Self.TG_Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_User" EntityType="Self.TG_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TG_WebSite" EntityType="Self.TG_WebSite" Schema="dbo" store:Type="Tables" />
@@ -122,6 +139,7 @@
           <EntitySet Name="TG_User" EntityType="CmsSystemModel.TG_User" />
           <EntitySet Name="TG_Category" EntityType="CmsSystemModel.TG_Category" />
           <EntitySet Name="TG_Article" EntityType="CmsSystemModel.TG_Article" />
+          <EntitySet Name="TG_Client" EntityType="CmsSystemModel.TG_Client" />
         </EntityContainer>
         <EntityType Name="TG_WebSite">
           <Key>
@@ -130,13 +148,16 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="sSiteDNS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="sEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="sPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="sKeyWord" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sCopyRight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sFiling" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sMobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sFax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sQQNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TG_User">
           <Key>
@@ -199,6 +220,19 @@
           <Property Name="dInsertTime" Type="DateTime" Precision="3" />
           <Property Name="bIsRelease" Type="Boolean" />
         </EntityType>
+        <EntityType Name="TG_Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sQQ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dInsertTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -221,6 +255,9 @@
           <EntitySetMapping Name="TG_WebSite">
             <EntityTypeMapping TypeName="CmsSystemModel.TG_WebSite">
               <MappingFragment StoreEntitySet="TG_WebSite">
+                <ScalarProperty Name="sQQNum" ColumnName="sQQNum" />
+                <ScalarProperty Name="sFax" ColumnName="sFax" />
+                <ScalarProperty Name="sMobile" ColumnName="sMobile" />
                 <ScalarProperty Name="sFiling" ColumnName="sFiling" />
                 <ScalarProperty Name="sCopyRight" ColumnName="sCopyRight" />
                 <ScalarProperty Name="sDescription" ColumnName="sDescription" />
@@ -294,6 +331,20 @@
                 <ScalarProperty Name="sTitle" ColumnName="sTitle" />
                 <ScalarProperty Name="iTemplateId" ColumnName="iTemplateId" />
                 <ScalarProperty Name="iCategoryId" ColumnName="iCategoryId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TG_Client">
+            <EntityTypeMapping TypeName="CmsSystemModel.TG_Client">
+              <MappingFragment StoreEntitySet="TG_Client">
+                <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
+                <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+                <ScalarProperty Name="sQQ" ColumnName="sQQ" />
+                <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+                <ScalarProperty Name="sContent" ColumnName="sContent" />
+                <ScalarProperty Name="sPhone" ColumnName="sPhone" />
+                <ScalarProperty Name="sName" ColumnName="sName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

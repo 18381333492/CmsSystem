@@ -27,7 +27,7 @@ namespace Web.Controllers
             list.Add(t);
             list.Add(t);
            
-            string content = RazorHelper.Instance.ParseFile("Test.cshtml", new { list= list, sTitle="我的RazorEngine成功了!" });
+           // string content = RazorHelper.Instance.ParseFile("Test.cshtml", new { list= list, sTitle="我的RazorEngine成功了!" });
          //   RazorHelper.Instance.MakeHtml("Test.html", content);
         }
 

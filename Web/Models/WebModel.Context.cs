@@ -30,5 +30,6 @@ namespace Web.Models
         public virtual DbSet<TG_User> TG_User { get; set; }
         public virtual DbSet<TG_Category> TG_Category { get; set; }
         public virtual DbSet<TG_Article> TG_Article { get; set; }
+        public virtual DbSet<TG_Client> TG_Client { get; set; }
     }
 }

@@ -24,5 +24,8 @@ namespace Web.Models
         public string sDescription { get; set; }
         public string sCopyRight { get; set; }
         public string sFiling { get; set; }
+        public string sMobile { get; set; }
+        public string sFax { get; set; }
+        public string sQQNum { get; set; }
     }
 }

@@ -27,6 +27,7 @@
                     admin.button.disable();
                     var data = $(admin.form).serializeArray().toObject();
                     data.sContent = editor.gethtml();
+              
                     admin.Ajax(admin.route('Insert'), data, function (r) {
                         admin.alert("添加成功");
                         dialog.dialog('close');
@@ -56,6 +57,7 @@
                     admin.button.disable();
                     var data = $(admin.form).serializeArray().toObject();
                     data.sContent = editor.gethtml();
+                    debugger
                     admin.Ajax(admin.route('Update'), data, function (r) {
                         admin.alert("编辑成功");
                         dialog.dialog('close');

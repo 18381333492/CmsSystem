@@ -1,418 +1,345 @@
 ﻿@using Web.Server;
 @using Web.Models;
 @{
-    var item = Model as TG_Category;
+    var Category = Model as TG_Category;
 }
-
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="agent-pc theme-b theme-bwhite">
 <head>
-    <title>@item.sName</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1">
-    @Include("quote", item)
-    <style>
-        .snow {
-            position: absolute;
-            top: 0;
-            color: #fff;
-            z-index: 999999999999999999999;
-        }
-    </style>
+    @Include("quote");
+    <script src="~/page/statics/js/main.js" data-main="indexMain"></script>
+    <title>@Category.sName</title>
 </head>
-<body class="snowbg">
-
-    <!-- menu start -->
-    <div class="menu">
-        <div class="templatemo_menubg shadow">
-            <div class="col-sm-4 right">
-                <div class="templatemo_logo">Xiang</div>
-            </div>
-            <div class="col-sm-8">
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">Xiang</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div id="top-menu">
-                            <div class="collapse navbar-collapse main_menu" id="bs-example-navbar-collapse-1">
-                                <ul class="nav navbar-nav">
-                                    @foreach (var m in FuncHelper.Instance.GetShowCategory())
-                                    {
-                                        if (m.ID == item.ID)
-                                        {
-                                            <li class="current"><a href="index.html">@m.sName</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li><a href="ITabout.html">@m.sName</a></li>
-                                        }
-                                    }
-                                </ul>
+<body id="longPage" class="gh0  longPage">
+    <!--头部-->
+    @Include("top");
+    <div id="sitecontent" class="ff_sitecontent">
+        <!--栏目列表手机端-->
+        @Include("list");
+        <div id="indexPage" class="ff_indexPage" data-scroll-ease="Expo.easeInOut" data-scroll-speed="1" data-control="0" data-control-wheel="0" data-singlescreen="0">
+            <div id="topSlider" class="ff_topSlider mslider module">
+                <div class="content_wrapper">
+                    <div class="content_list owl-carousel owl-theme" data-slider-height="500" data-slider-auto="1" data-slider-mode="3" data-slider-pause="5" data-slider-ease="ease-out" data-slider-speed="1" style="height:500px">
+                        @foreach (var url in Category.sPictureUrl.Split(',').ToList())
+                        {
+                            <div class="item_block">
+                                <div class="item_bg image" style="background-image:url(@url)"></div>
                             </div>
+                        }
+                    </div>
+                    <div class="sliderArrow">
+                        <div></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!--服务-->
+           
+            <div class="mlist service_tabs module ff_noSlider">
+                <div class="bgmask"></div>
+                <div class="module_container wide">
+                    <div class="container_header wow">
+                        <p class="title">服务</p>
+                        <p class="subtitle">/ SERVICE</p>
+                    </div>
+                    <div class="container_category wow movedx one" data-movedx-mid="2" data-movedx-distance="15">
+                        <a href="#" class="active"><span>全部</span></a>
+                    </div>
+                    <div class="container_content">
+                        <div class="content_wrapper">
+                            <div class="tab_content_wrapper">
+                                <div class="tab_content">
+                                    <div class="tab_indexs">
+                                        <div class="fnums nums_item" data-current="0">
+                                            <div><span>0</span><span>1</span><span>2</span></div>
+                                        </div>
+                                        <div class="tnums nums_item">
+                                            <div><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+                                        </div>
+                                        <div class="nums_item">
+                                            <div><span> /</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="sliderWrapper" data-slider-num="1">
+                                        <div class="content_list">
+                                            @{ var server_acticlelist = FuncHelper.Instance.GetArticleListByCategoryId(FuncHelper.Instance.GetCategoryByEnName("server").ID); }
+                                            @for (var i = 0; i < server_acticlelist.Count; i++)
+                                            {
+                                                <div id="service_postitem_@i" class="item_block">
+                                                    <div class="item_wrapper">
+                                                        <div class="item_info">
+                                                            <p class="title ellipsis">@server_acticlelist[i].sTitle</p>
+                                                            <p class="subtitle ellipsis">@server_acticlelist[i].sEnTitle</p>
+                                                            <div class="description">
+                                                                <p>@server_acticlelist[i].sContent</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab_button">
+                                <div class="content_list">
+                                    @for (var i = 0; i < server_acticlelist.Count; i++)
+                                    {
+                                        <div id="service_item_@i" class="item_block wow" style="animation-delay:.0s">
+                                            <a href="javascript:;" class="item_link">
+                                                <div class="item_wrapper">
+                                                    <div class="item_img"><img src="@server_acticlelist[i].sPictureUrl.Split(',')[0]" /></div>
+                                                    <div class="item_info">
+                                                        <p class="nums">@i/</p>
+                                                        <p class="title ellipsis">@server_acticlelist[i].sTitle</p>
+                                                        <p class="subtitle ellipsis">@server_acticlelist[i].sEnTitle</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="clear"></div>
                         </div>
                     </div>
-                </nav>
+                    <div class="clear"></div>
+                </div>
             </div>
-        </div>
-    </div>
-    <!-- menu end -->
-    <!-- home start -->
-    <div class="templatemo_topbg topmargin">
-        <div class="templatemo_grey">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="swiper-container slide_img">
-                            <div class="swiper-wrapper">
-                                @foreach (var m in item.sPictureUrl.Split(','))
+            <!--项目-->
+            <div class="mlist project module ff_noSlider">
+                <div class="bgmask"></div>
+                <div class="module_container wide">
+                    <div class="container_header wow">
+                        <p class="title">项目</p>
+                        <p class="subtitle"> / PROJECT</p>
+                    </div>
+                    <div class="container_category wow movedx" data-movedx-mid="2" data-movedx-distance="15">
+                        <a href="#" class="active">
+                            <span>全部</span>
+                        </a>
+                        @{  var project_list = FuncHelper.Instance.GetChildCategory(Category.ID, false); }
+                        @for (var i = 0; i < project_list.Count; i++)
+                        {
+                            <a href="#" data-type="@project_list[i].ID">
+                                <span>@project_list[i].sName</span>
+                            </a>
+                        }
+                    </div>
+                    <div class="container_content">
+                        <div class="content_wrapper">
+                            <div class="content_list movedx" data-movedx-mid="2" data-movedx-distance="15">
+                            @{  var project_acticlelist = FuncHelper.Instance.GetCategoryAllArticleList(FuncHelper.Instance.GetCategoryByEnName("project").ID); }
+                            @for (var i = 0; i < project_acticlelist.Count; i++)
+                            {
+                                <div id="project_item_@i" class="item_block wow" data-type="@project_acticlelist[i].iCategoryId" style="animation-delay:.0s">
+                                    <a href="#" class="item_link" target="_blank">
+                                        <img src="@project_acticlelist[i].sPictureUrl.Split(',')[0]" />
+                                        <div class="item_wrapper">
+                                            <div class="item_info move">
+                                                <p class="title ellipsis">@project_acticlelist[i].sTitle</p>
+                                                <p class="subtitle ellipsis">@project_acticlelist[i].sDescription</p>
+                                            </div><i class="icon iconfont icon-add"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            
+            <!--关于-->
+            <div class="mcustomize module horizontal tril" style="">
+                <div class="bgmask"></div>
+                <div class="module_container">
+                    <div class="container_content">
+                        <div class="contentbody">
+                            <div class="wrapper">
+                                <div class="header wow">
+                                    <p class="title">关于我们</p>
+                                    <p class="subtitle">ABOUT US</p>
+                                </div>
+                                <div class="description wow">
+                                    <p style="text-align: center;"><span style="font-size: 14px;">我们是JSMO集团建筑设计院，一家全面服务的设计和咨询公司，业务范围包括规划与景观设计所、市政与设备设计所，有些建筑设计院还设立分院，专业范围包括城市规划、建筑工程设计、景观设计、室内设计、市政设计、消防设计、智能设计等，业务涉及中外合作设计，施工图设计审查，工程承包，环境艺术，建筑智能化工程等。</span></p>
+                                    <p><span style="font-size: 14px;"><br /></span></p>
+                                    <p style="text-align: center;">
+                                        <a class="more" href="#" target="_blank">MORE</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mediabody wow">
+                            <a target="_popup" href="http://resources.jsmo.xin/templates/upload/demo/yanshi.mp4">
+                                <div class="image" style="background-image:url(./statics/images/149007689617.jpg)"></div>
+                                <div class="mask"></div>
+                                <div class="link_icon"><i class="fa fa-link" aria-hidden="true"></i></div>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--公司信息-->
+            <div class="mcounter module " style=" =">
+                <div class="bgmask"></div>
+                <div id="counterBgdx" style="position:absolute; width:100%; height:100%"></div>
+                <div class="module_container">
+                    <div class="container_content">
+                        <ul class="content_list">
+                            <li>
+                                <div>
+                                    <p class="number"><span class="counterDX" data-counter-value="1912">1912</span><span class="unit">年</span></p>
+                                    <p class="title">成立</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <p class="number"><span class="counterDX" data-counter-value="299">299</span><span class="unit">+</span></p>
+                                    <p class="title">服务</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <p class="number"><span class="counterDX" data-counter-value="999">999</span><span class="unit">+</span></p>
+                                    <p class="title">项目</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <p class="number"><span class="counterDX" data-counter-value="2016">2016</span><span class="unit">+</span></p>
+                                    <p class="title">客户</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <!--团队-->
+            <div class="mlist team module ff_slider">
+                <div class="bgmask"></div>
+                <div class="module_container">
+                    <div class="container_header wow">
+                        <p class="title">团队精英</p>
+                        <p class="subtitle"> / TEAM</p>
+                    </div>
+                    <div class="container_category wow movedx one" data-movedx-mid="2" data-movedx-distance="15">
+                        <a href="#" class="active"><span>全部</span></a>
+                    </div>
+                    <div class="container_content">
+                        <div class="content_wrapper slider" data-slider-num='{"0":{"nav":0,"items":2},"1180":{"items":4}}' data-slider-loop="1">
+                            <div class="content_list">
+                                @{    
+                                    var acticlelist = FuncHelper.Instance.GetArticleListByCategoryId(FuncHelper.Instance.GetCategoryByEnName("team").ID); 
+                                 }
+                                @for (var i = 0; i < acticlelist.Count; i++)
                                 {
-                                    <div class="swiper-slide">
-                                        <img src="@m">
+                                    <div id="project_item_@i" class="item_block wow" style="animation-delay:.0s">
+                                        <a class="item_link" target="_blank">
+                                            <div class="item_img">
+                                                <img src="@acticlelist[i].sPictureUrl.Split(',')[0]" />
+                                                <div class="rectborder"></div><i class="icon iconfont icon-add"></i>
+                                            </div>
+                                            <div class="item_wrapper">
+                                                <div class="item_info">
+                                                    <p class="title ellipsis">@acticlelist[i].sTitle</p>
+                                                    <p class="subtitle">@acticlelist[i].sEnTitle</p>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 }
                             </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 margin40 title_right_box">
-                        <div class="title_box"><span style="color: #ef252f;font-weight: bold;font-size: 17px">推荐文章 </span>  NEW Blog</div>
-                        <ul class="topblog">
-                            <li>
-                                <img src="images/1.png">
-                                <a title="腾讯云和阿里云对比哪个好？云计算优势测评" target="_blank">
-                                    腾讯云和阿里云对比哪个好？云计<span>在对比每一款产品时，本文先通过一系列的文先标准化测...</span>
-                                </a>
-                            </li>
-                            <li>
-                                <img src="images/2.png">
-                                <a title="dux主题1.8下载-大前端主题" target="_blank">dux主题1.8下载-大前端主题<span>最近看到很多找大前端主题dux主题1.8下载的，我也...</span></a>
-                            </li>
-                            <li>
-                                <img src="images/3.png">
-                                <a title="网络刷单骗子伎俩揭晓" target="_blank">网络刷单骗子伎俩揭晓<span>很多大学生总想赚钱，看到网上各类刷单广告心痒的...</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="container">
-        <div class="row templatemo_homemid">
-            <div class="col-md-3 margin30">
-                <div class="templatemo_gradient1 shadow ">
-                    <div class="templatemo_gradient2 ">
-                        <div class="overflow">
-                            @{ var gybz = FuncHelper.Instance.GetCategoryByEnName("gybz");}
-                            <div class="title">@gybz.sName</div>
-                            <p>@gybz.sDescription</p>
-                            <div class="more"><a href="#">summer</a></div>
-                            <div class="clear"></div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="templatemo_gradient1 shadow margin30">
-                    <div class="templatemo_gradient2">
-                        <div class="overflow">
-                            <div class="title">关于友情链接</div>
-                            <p>申请友情链接童鞋们：</p>
-                            <p>首先在贵站做好叶</p>
-                            <div class="more"><a href="#">summer</a></div>
                             <div class="clear"></div>
                         </div>
                     </div>
+                    <div class="clear"></div>
                 </div>
             </div>
-            <div class="col-md-9 margin30">
-                <div class="new_act">
-                    <span>旅途分享</span>最新文章
-                    <div class="back_box"></div>
-                </div>
-
-                <div class="templatemo_homemid_right shadow">
-                    <div class="box">
-                        <div class="icon"><img src="images/portfolio/1.jpg" alt="templatemo home icon 1"></div>
-                        <div class="text">
-                            <div class="title">vagrant环境问题的记录</div>
-                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
-                            <p class="autor">
-                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
-                                <span class="dtime f_l">2017-07-21</span>
-                                <input class="zan_cookie" type="hidden" value="2">
-                                <input class="zan_newsid" type="hidden" value="432">
-                                <span class="label_bottom f_r" style="padding-left: 0;">
-                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
-                                </span>
-                                <span class="viewnum f_r">浏览（204）</span>
-                                <span class="pingl f_r">
-                                    <a href="/index/titleinfo/id/432#SOHUCS">
-                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
-                                    </a>
-                                </span>
-                            </p>
-
-                        </div>
-                        <div class="clear"></div>
+            
+            <!--联系-->
+            <div id="mcontact" class="mcontact module">
+                <div class="module_container">
+                    <div class="container_header wow">
+                        <p class="title">联系</p>
+                        <p class="subtitle">/ CONTACT</p>
                     </div>
-
-                </div>
-                <div class="templatemo_homemid_right shadow">
-                    <div class="box">
-                        <div class="icon"><img src="images/portfolio/4.jpg" alt="templatemo home icon 1"></div>
-                        <div class="text">
-                            <div class="title">vagrant环境问题的记录</div>
-                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
-                            <p class="autor">
-                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
-                                <span class="dtime f_l">2017-07-21</span>
-                                <input class="zan_cookie" type="hidden" value="2">
-                                <input class="zan_newsid" type="hidden" value="432">
-                                <span class="label_bottom f_r" style="padding-left: 0;">
-                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
-                                </span>
-                                <span class="viewnum f_r">浏览（204）</span>
-                                <span class="pingl f_r">
-                                    <a href="/index/titleinfo/id/432#SOHUCS">
-                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
-                                    </a>
-                                </span>
-                            </p>
-
+                    <div class="container_content">
+                        <div class="content_wrapper">
+                            <div id="contactlist" class="contactlist">
+                                <div id="contactinfo" class="contactinfo wow">
+                                    @{ var config = FuncHelper.Instance.GetConfig(); }
+                                    <h3 class="ellipsis contact_name">@config.sSiteName</h3>
+                                    <p class="ellipsis contact_add">地址：@config.sAddress</p>
+                                    <p class="ellipsis contact_tel">电话：@config.sMobile</p>
+                                    <p class="ellipsis contact_mob">手机：@config.sPhone</p>
+                                    <p class="ellipsis contact_fax">传真：@config.sFax</p>
+                                    <p class="ellipsis contact_eml">邮箱：@config.sEmail</p>
+                                    <div class="ff_social">
+                                        <a class="fl" target="_blank" href="http://weibo.com/web"><i class="fa fa-weibo"></i></a>
+                                        <a class="fl" target="_blank" href="tencent://message/?uin=@config.sQQNum&Site=uemo&Menu=yes"><i class="fa fa-qq"></i></a>
+                                        <a id="mpbtn" class="fl" target="_blank" href="~/page/statics/images/1438424052624.jpg"><i class="fa fa-weixin"></i></a>
+                                    </div>
+                                </div>
+                                <div id="contactform" class="contactform wow">
+                                    <form id="client_form">
+                                        <p class="contactform_name">
+                                            <input type="text" class="inputtxt" name="sName" placeholder="姓名" autocomplete="off" />
+                                        </p>
+                                        <p class="contactform_eml">
+                                            <input type="text" class="inputtxt" name="sEmail" placeholder="邮箱" autocomplete="off" />
+                                        </p>
+                                        <p class="contactform_tel">
+                                            <input type="text" class="inputtxt" name="sPhone" placeholder="电话" autocomplete="off" />
+                                        </p>
+                                        <p class="contactform_content">
+                                            <textarea class="inputtxt" name="sContent" placeholder="内容" autocomplete="off"></textarea>
+                                        </p>
+                                        <p class="contactform_submit">
+                                            <input class="inputtxt" id="commit" value="提交" />
+                                        </p>
+                                    </form>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
                         </div>
-                        <div class="clear"></div>
                     </div>
-
-                </div>
-                <div class="templatemo_homemid_right shadow">
-                    <div class="box">
-                        <div class="icon"><img src="images/portfolio/3.jpg"></div>
-                        <div class="text">
-                            <div class="title">vagrant环境问题的记录</div>
-                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
-                            <p class="autor">
-                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
-                                <span class="dtime f_l">2017-07-21</span>
-                                <input class="zan_cookie" type="hidden" value="2">
-                                <input class="zan_newsid" type="hidden" value="432">
-                                <span class="label_bottom f_r" style="padding-left: 0;">
-                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
-                                </span>
-                                <span class="viewnum f_r">浏览（204）</span>
-                                <span class="pingl f_r">
-                                    <a href="/index/titleinfo/id/432#SOHUCS">
-                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
-                                    </a>
-                                </span>
-                            </p>
-
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                </div>
-                <div class="templatemo_homemid_right shadow">
-                    <div class="box">
-                        <div class="icon"><img src="images/portfolio/1.jpg" alt="templatemo home icon 1"></div>
-                        <div class="text">
-                            <div class="title">vagrant环境问题的记录</div>
-                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
-                            <p class="autor">
-                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
-                                <span class="dtime f_l">2017-07-21</span>
-                                <input class="zan_cookie" type="hidden" value="2">
-                                <input class="zan_newsid" type="hidden" value="432">
-                                <span class="label_bottom f_r" style="padding-left: 0;">
-                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
-                                </span>
-                                <span class="viewnum f_r">浏览（204）</span>
-                                <span class="pingl f_r">
-                                    <a href="/index/titleinfo/id/432#SOHUCS">
-                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
-                                    </a>
-                                </span>
-                            </p>
-
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                </div>
-                <div class="templatemo_homemid_right shadow">
-                    <div class="box">
-                        <div class="icon"><img src="images/portfolio/4.jpg" alt="templatemo home icon 1"></div>
-                        <div class="text">
-                            <div class="title">vagrant环境问题的记录</div>
-                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
-                            <p class="autor">
-                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
-                                <span class="dtime f_l">2017-07-21</span>
-                                <input class="zan_cookie" type="hidden" value="2">
-                                <input class="zan_newsid" type="hidden" value="432">
-                                <span class="label_bottom f_r" style="padding-left: 0;">
-                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
-                                </span>
-                                <span class="viewnum f_r">浏览（204）</span>
-                                <span class="pingl f_r">
-                                    <a href="/index/titleinfo/id/432#SOHUCS">
-                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
-                                    </a>
-                                </span>
-                            </p>
-
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                </div>
-                <div class="templatemo_homemid_right shadow">
-                    <div class="box">
-                        <div class="icon"><img src="images/portfolio/3.jpg"></div>
-                        <div class="text">
-                            <div class="title">vagrant环境问题的记录</div>
-                            <p>2 但是即使报错，除了无法映射本地文件，还是可以在xshell 连上服务器，所以问题应解决冲突方法就是删除对应的文件。</p>
-                            <p class="autor">
-                                <span class="lm f_l"><a href="/">韶华追忆</a></span>
-                                <span class="dtime f_l">2017-07-21</span>
-                                <input class="zan_cookie" type="hidden" value="2">
-                                <input class="zan_newsid" type="hidden" value="432">
-                                <span class="label_bottom f_r" style="padding-left: 0;">
-                                    <a href="javascript:void(0)" onclick="return false;" class="yz_zan" style="">9</a>
-                                </span>
-                                <span class="viewnum f_r">浏览（204）</span>
-                                <span class="pingl f_r">
-                                    <a href="/index/titleinfo/id/432#SOHUCS">
-                                        <span id="sourceId::432" class="cy_cmt_count">评论（9 )</span>
-                                    </a>
-                                </span>
-                            </p>
-
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="fat">
-            <section class="partner">
-                <ul>
-                    <li>
-                        <h2>关于佳丽</h2>
-                        <p><a href="http://520.itbyc.com">佳丽的告白</a></p>
-                        <p><a href="#">个人档案</a></p>
-                        <p><a href="#" rel="nofollow">给我留言</a></p><a href="#" rel="nofollow">
-                            <h2>网站赞助</h2>
-                        </a><p><a href="#" rel="nofollow"></a><a rel="nofollow" href="http://itbyc.com/tags/" target="_blank">热点标签</a></p>
-                        <p><a href="http://itbyc.com/sitemap.xml" title="sitemap" target="_blank">sitemap</a></p>
-                    </li>
-
-                </ul>
-            </section>
-            <section class="links">
-                <h2>友情链接</h2>
-                <ul>
-                    <li><a href="http://itbyc.com/sitemap.xml" title="sitemap" target="_blank">sitemap</a></li>
-                    <li><a href="http://www.monkeyblog.cn/" target="_blank">Monkey前端博客</a> </li>
-                    <li><a href="http://www.aiihu.cn/" target="_blank">爱虎网</a> </li>
-                    <li><a href="http://v5dyw.com" target="_blank">v5订阅网</a> </li>
-                    <li><a href="http://www.phpernote.com" target="_blank">php程序员的笔记</a> </li>
-                    <li><a href="https://www.phpsong.com" target="_blank">小松博客</a> </li>
-                    <li><a href="http://www.sucaihuo.com/" target="_blank">html5网站模板</a> </li>
-                    <li><a href="http://www.weixianmanbu.com" target="_blank">黑客技术博客</a> </li>
-                    <li><a href="http://www.5imb.com" target="_blank">网站模板</a> </li>
-                    <li><a href="http://www.liudehua.video/" target="_blank">刘德华视频</a> </li>
-                    <li><a href="http://itbyc.com/cms/" target="_blank">cms使用教程</a> </li>
-                    <li><a href="http://www.runmeiti.com/" target="_blank">ASO优化</a> </li>
-                    <li><a href="http://bbs.zzjidi.com" target="_blank">站长论坛</a> </li>
-                    <li><a href="http://itbyc.com" target="_blank">个人博客</a> </li>
-                    <li><a href="http://www.php230.com/" target="_blank">IT程序员</a> </li>
-                    <li><a href="http://www.itjie.com/" target="_blank">IT业界</a> </li>
-
-                    <!---<li class="more"><a href="" target="_blank" rel="nofollow">更多链接>></a></li>--->
-                </ul>
-            </section>
-        </div>
-        <div id="copright">
-            <span>本站采用创作共用版权 CC BY-NC-ND/2.5/CN 许可协议 </span><span>滇ICP备14002061号-1</span>
-            <script type="text/javascript">
-                var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-                document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fca9c9aeca6d24b987c40c4c8ad091e42' type='text/javascript'%3E%3C/script%3E"));
-            </script>
-            <script src=" http//hm.baidu.com/h.js?ca9c9aeca6d24b987c40c4c8ad091e42" type="text/javascript"></script>
-        </div>
-    </footer>
-
+    <!--底部-->
+    @Include("bottom");
 </body>
-<!-- footer end-->
-<!-- Initialize Swiper -->
-<script>
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        grabCursor: true,
-        effect : 'cube',
-        autoplay : 2000,
-        speed:1000,
-        loop : true,
-        cube: {
-            slideShadows: true,
-            shadow: true,
-            shadowOffset: 100,
-            shadowScale: 0.6
-        }
-
-    });
-    $(function(){
-
-        var d="<div class='snow'>❅<div>"
-
-        setInterval(function(){
-
-            var f=$(document).width();
-
-            var e=Math.random()*f-100;
-
-            var o=0.3+Math.random();
-
-            var fon=10+Math.random()*30;
-
-            var l = e - 100 + 200 * Math.random();
-
-            var k=2000 + 5000 * Math.random();
-
-            $(d).clone().appendTo(".snowbg").css({
-
-                left:e+"px",
-
-                opacity:o,
-
-                "font-size":fon,
-
-            }).animate({
-
-                top:"1900px",
-
-                left:l+"px",
-
-                opacity:0.1
-
-            },k,"linear",function(){$(this).remove()})
-
-        },500)
-
-    })
-</script>
 </html>
+<script type="text/javascript">
+    $(function () {
+        $('#commit').on("click", function () {
+            var sName = $.trim($('input[name=sName]').val());
+            var sEmail = $.trim($('input[name=sEmail]').val());
+            var sPhone = $.trim($('input[name=sPhone]').val());
+            var sContent = $.trim($('input[name=sContent]').val());
+            if (sName.length == 0) return alert("姓名不能为空");
+            if (sPhone.length == 0) return alert("电话不能为空");
+            $.ajax({
+                url: '/Client/Add',
+                type: 'POST',
+                data: { sName: sName, sEmail: sEmail, sPhone: sPhone, sContent: sContent },
+                dataType: 'json',
+                success: function (r) {
+                    if (r.success) {
+                        alert("提交成功,客服人员将尽快联系您");
+                    }
+                    else {
+                        alert("提交失败");
+                    }
+                }
+            });
+        });
+    });
+</script>

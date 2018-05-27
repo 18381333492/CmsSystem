@@ -8,31 +8,18 @@ using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using Common;
+using RazorEngine.Text;
 
 namespace RazorBase
 {
     public class RazorHelper
     {
-         /*
-         tip:注意使用RazorEngine.Razor引擎的时候
-         */
-
-        private readonly string sTemplateBasePath;
-        private readonly string sHtmlBasePath;
-
-        private static RazorHelper instance = null;
-
-        public static RazorHelper Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new RazorHelper();
-                }        
-                return instance;
-            }
-        }
+        /*
+        tip:注意使用RazorEngine.Razor引擎的时候
+        */
+        //设置模板和页面目录的位置
+        private static readonly string sTemplateBasePath=AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath");
+        private static readonly string sHtmlBasePath= AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sHtmlPath");
 
         //引擎服务接口
         private IRazorEngineService service;
@@ -42,10 +29,7 @@ namespace RazorBase
         /// </summary>
         public RazorHelper()
         {
-            //设置模板和页面目录的位置
-            sTemplateBasePath = AppDomain.CurrentDomain.BaseDirectory +ConfigHelper.ReadAppSetting("sTemplatePath");
-            sHtmlBasePath = AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sHtmlPath");
-
+            
             //我这里用另外一种方法实现自定义的模板，暂时没有用这种方法.
             //var config = new TemplateServiceConfiguration();//获取模板服务配置,需要自定义模板方法需要
             //config.BaseTemplateType = typeof(RazorFunc<>);//设置你自定义的模板
@@ -60,7 +44,7 @@ namespace RazorBase
         public void InitServices(List<string> sTemplateList)
         {
             //初始化文件的嵌套，及公共文件的模板的编译
-            if (sTemplateList.Count>0)
+            if (sTemplateList.Count > 0)
             {
                 foreach (var m in sTemplateList)
                 {
@@ -72,6 +56,16 @@ namespace RazorBase
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 输出html
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static IEncodedString Raw(string content)
+        {
+            return new RawString(content);
         }
 
 

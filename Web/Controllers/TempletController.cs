@@ -162,12 +162,6 @@ namespace Web.Controllers
             {
                 string sFileName = templet.sTempletEnName + ".cshtml";
                 System.IO.File.WriteAllText(path + sFileName, templet.sTempletContent);
-
-                if (templet.bIsCompile.Value)
-                {
-                    //重新编译公共模板
-                    FuncHelper.Instance.initRazorServices();
-                }
             }
         }
 
@@ -189,9 +183,6 @@ namespace Web.Controllers
                     string sFileName = item.sTempletEnName + ".cshtml";
                     System.IO.File.WriteAllText(path + sFileName, item.sTempletContent);
                 }
-
-                //重新编译公共模板
-                FuncHelper.Instance.initRazorServices();
             }
         }
 
