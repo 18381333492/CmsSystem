@@ -38,8 +38,6 @@ namespace Web.Controllers
             var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
             var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//要生成栏目数据
 
-            var Instance = new RazorHelper();
-            FuncHelper.Instance.initRazorServices(Instance);
             //循环生成栏目页
             foreach (var category in CategoryList)
             {
@@ -47,9 +45,9 @@ namespace Web.Controllers
                 if (templet != null)
                 {//模板存在
                    
-                    string templetHtmlString =Instance.ParseFile(templet.sTempletEnName + ".cshtml", category);
+                    string templetHtmlString = RazorHelper.ParseFile(templet.sTempletEnName + ".cshtml", category);
                     string sHtmlPath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
-                    if (Instance.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
+                    if (RazorHelper.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
                     {
                         iSuccessCount++;
                     }
@@ -83,8 +81,6 @@ namespace Web.Controllers
             var listIds = Ids.Split(',').Select(m => Convert.ToInt32(m)).ToList();
             var CategoryList = allCategoryList.Where(m => listIds.Contains(m.ID)).ToList();//获取生成栏目数据
 
-            var Instance = new RazorHelper();
-            FuncHelper.Instance.initRazorServices(Instance);
             //获取栏目的ID集合
             var CategoryIds = CategoryList.Select(m => m.ID);
             //获取生成栏目下的所有文章
@@ -107,9 +103,9 @@ namespace Web.Controllers
                     if (templetArticle != null)
                     {//模板存在
                      //解析模板        
-                        string templetHtmlString = Instance.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
+                        string templetHtmlString = RazorHelper.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
                         string ArticlePath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
-                        if (Instance.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
+                        if (RazorHelper.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
                         {//生成成功
                             iSuccessCount++;
                         }

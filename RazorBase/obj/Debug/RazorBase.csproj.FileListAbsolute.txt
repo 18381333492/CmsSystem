@@ -11,3 +11,16 @@ E:\VS源代码\CmsSystem\RazorBase\bin\Debug\Newtonsoft.Json.xml
 E:\VS源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.csprojResolveAssemblyReference.cache
 E:\VS源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.dll
 E:\VS源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.pdb
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\RazorBase.dll
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\RazorBase.pdb
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\Common.dll
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\RazorEngine.dll
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\System.Web.Razor.dll
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\Newtonsoft.Json.dll
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\Common.pdb
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\RazorEngine.xml
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\System.Web.Razor.xml
+E:\Github源代码\CmsSystem\RazorBase\bin\Debug\Newtonsoft.Json.xml
+E:\Github源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.csprojResolveAssemblyReference.cache
+E:\Github源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.dll
+E:\Github源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.pdb

@@ -13,22 +13,20 @@ namespace Web.Server
     public partial class FuncHelper
     {
         
-        private static FuncHelper instance = null;
+        private static FuncHelper instance=null;
 
         /// <summary>
-        /// 编译公共模版
+        /// 对象实例
         /// </summary>
-        /// <param name="Instance"></param>
-        public void initRazorServices(RazorHelper Instance)
+        public static FuncHelper Instance
         {
-            using (var db = new Entities())
+            get
             {
-                List<string> list = db.TG_Templet.Where(m => m.bIsCompile == true).Select(m => m.sTempletEnName).ToList();
-                //初始化公共模板的编译
-                Instance.InitServices(list);
+                if (instance == null)
+                    instance = new FuncHelper();
+                return instance;
             }
         }
-
         /// <summary>
         /// 获取站点信息
         /// </summary>
@@ -43,20 +41,6 @@ namespace Web.Server
                 }
             }
         }
-
-        /// <summary>
-        /// 实例
-        /// </summary>
-        public static FuncHelper Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new FuncHelper();
-                return instance;
-            }
-        }
-
         //********************************************************常用的方法的封装************************************************************//
 
     

@@ -21,15 +21,14 @@ namespace RazorBase
         private static readonly string sTemplateBasePath=AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath");
         private static readonly string sHtmlBasePath= AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sHtmlPath");
 
-        //引擎服务接口
-        private IRazorEngineService service;
+        //引擎服务
+        private static IRazorEngineService service;
 
         /// <summary>
-        /// 初始化构造函数处理相关配置
+        /// 静态构造函数
         /// </summary>
-        public RazorHelper()
+        static RazorHelper()
         {
-            
             //我这里用另外一种方法实现自定义的模板，暂时没有用这种方法.
             //var config = new TemplateServiceConfiguration();//获取模板服务配置,需要自定义模板方法需要
             //config.BaseTemplateType = typeof(RazorFunc<>);//设置你自定义的模板
@@ -38,24 +37,24 @@ namespace RazorBase
             service = RazorEngineService.Create();//创建默认的
         }
 
+        
         /// <summary>
-        /// 初始化引擎服务
+        /// 预编译模板
         /// </summary>
-        public void InitServices(List<string> sTemplateList)
+        /// <param name="sFileStr"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
+        public static bool PrevCompileTemplate(string sFileStr,string sKey)
         {
-            //初始化文件的嵌套，及公共文件的模板的编译
-            if (sTemplateList.Count > 0)
+            try
             {
-                foreach (var m in sTemplateList)
-                {
-                    string sPath = sTemplateBasePath + "\\" + m + ".cshtml";
-                    if (File.Exists(sPath))
-                    {//文件存在
-                        string fileStr = File.ReadAllText(sPath);
-                        service.Compile(fileStr, m);
-                    }
-                }
+                service.Compile(sFileStr, sKey);
+                return true;
             }
+            catch (Exception ex)
+            {
+                return false;
+            }     
         }
 
         /// <summary>
@@ -75,7 +74,7 @@ namespace RazorBase
         /// <param name="filePath"></param>
         /// <param name="Model"></param>
         /// <returns></returns>
-        public string ParseFile(string filePath, object Model = null)
+        public static string ParseFile(string filePath, object Model = null)
         {
             filePath =sTemplateBasePath+"\\"+filePath;
             string fileStr = File.ReadAllText(filePath);
@@ -89,7 +88,7 @@ namespace RazorBase
         /// <param name="sTemplateString">模板字符串</param>
         /// <param name="Model">传入的对象</param>
         /// <returns></returns>
-        public string ParseString(string sTemplateString, object Model = null)
+        public static string ParseString(string sTemplateString, object Model = null)
         {
             string str = service.RunCompile(sTemplateString, DateTime.Now.ToString("yyyyMMddHHmmssfff"), null, Model);
             return str;
@@ -101,7 +100,7 @@ namespace RazorBase
         /// <param name="sfilePath"></param>
         /// <param name="sContent"></param>
         /// <returns></returns>
-        public bool MakeHtml(string sfilePath,string sFileName,string sContent)
+        public static bool MakeHtml(string sfilePath,string sFileName,string sContent)
         {
             string DirectoryPath = sHtmlBasePath + "\\" + sfilePath;
             try
@@ -114,7 +113,7 @@ namespace RazorBase
                 System.IO.File.WriteAllText(sPath, sContent);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return false;
             }
