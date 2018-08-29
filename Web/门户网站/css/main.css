@@ -1,7 +1,7 @@
 ﻿@charset "utf-8";
 
 body{min-width:1200px; background:#d6e8f4;}
-.header{width:100%; height:200px; background:url(../images/topbj.png) top center no-repeat;}
+.header{width:100%; height:200px; background:url(../images/topbj.jpg) top center no-repeat;}
 .container{width:1200px; margin:0 auto; position:relative;}
 .container_col{ background:#fff; padding:10px;}
 #weather{position:absolute; left:0; top:10px; font-size:12px; color:#fff; line-height:24px;}
@@ -162,7 +162,7 @@ overflow:hidden;}
 .linkslist li a{display:inline-block; line-height:25px;}
 
 .ft-menu{height:230px; width:100%; background:url(../images/footbj.jpg) top center repeat-y; overflow:hidden;}
-.menu{width:1000px; float:left; margin-top:40px;}
+.menu{width:1000px; float:left; margin-top:20px;}
 .menu dl{float:left; margin-right:20px; color:#fff;}
 .menu dl dt{font-size:15px;}
 .menu dl dd{margin-top:20px;}
