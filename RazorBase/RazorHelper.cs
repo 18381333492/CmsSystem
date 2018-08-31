@@ -21,34 +21,18 @@ namespace RazorBase
         private static readonly string sTemplateBasePath=AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath");
         private static readonly string sHtmlBasePath= AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sHtmlPath");
 
-        //引擎服务
-        private static IRazorEngineService service;
-
-        /// <summary>
-        /// 静态构造函数
-        /// </summary>
-        static RazorHelper()
-        {
-            //我这里用另外一种方法实现自定义的模板，暂时没有用这种方法.
-            //var config = new TemplateServiceConfiguration();//获取模板服务配置,需要自定义模板方法需要
-            //config.BaseTemplateType = typeof(RazorFunc<>);//设置你自定义的模板
-            //service = RazorEngineService.Create(config);//创建拥有自定义模板的引擎服务
-
-            service = RazorEngineService.Create();//创建默认的
-        }
-
-        
         /// <summary>
         /// 预编译模板
         /// </summary>
         /// <param name="sFileStr"></param>
         /// <param name="sKey"></param>
         /// <returns></returns>
-        public static bool PrevCompileTemplate(string sFileStr,string sKey)
+        public static bool PrevCompileTemplate(string sKey,string sTemplateStr)
         {
             try
             {
-                service.Compile(sFileStr, sKey);
+                Engine.Razor.AddTemplate(sKey, sTemplateStr);
+                Engine.Razor.Compile(sKey);
                 return true;
             }
             catch (Exception ex)
@@ -69,28 +53,14 @@ namespace RazorBase
 
 
         /// <summary>
-        /// 解析文件里面的模板
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="Model"></param>
-        /// <returns></returns>
-        public static string ParseFile(string filePath, object Model = null)
-        {
-            filePath =sTemplateBasePath+"\\"+filePath;
-            string fileStr = File.ReadAllText(filePath);
-            string str = ParseString(fileStr, Model);
-            return str;
-        }
-
-        /// <summary>
         /// 解析模板
         /// </summary>
-        /// <param name="sTemplateString">模板字符串</param>
+        /// <param name="sTemplateName">模板标识</param>
         /// <param name="Model">传入的对象</param>
         /// <returns></returns>
-        public static string ParseString(string sTemplateString, object Model = null)
+        public static string ParseString(string sTemplateName, object Model = null)
         {
-            string str = service.RunCompile(sTemplateString, DateTime.Now.ToString("yyyyMMddHHmmssfff"), null, Model);
+            string str = Engine.Razor.Run(sTemplateName, null, Model);
             return str;
         }
 

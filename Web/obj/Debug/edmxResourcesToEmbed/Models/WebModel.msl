@@ -17,6 +17,7 @@
     <EntitySetMapping Name="TG_WebSite">
       <EntityTypeMapping TypeName="CmsSystemModel.TG_WebSite">
         <MappingFragment StoreEntitySet="TG_WebSite">
+          <ScalarProperty Name="IsNeedVerify" ColumnName="IsNeedVerify" />
           <ScalarProperty Name="sQQNum" ColumnName="sQQNum" />
           <ScalarProperty Name="sFax" ColumnName="sFax" />
           <ScalarProperty Name="sMobile" ColumnName="sMobile" />

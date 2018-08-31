@@ -65,12 +65,13 @@ namespace Web.Controllers
         {
             if (mangae.db.TG_User.Any(m => m.sUserName == user.sUserName))
             {
-                result.info = "已存在相同账户管理员";
+                result.info = "该账户已存在";
             }
             else
             {
                 user.sUserName = user.sUserName.Trim();
                 user.iUserType = 0;
+                user.bIsSuper = false;//默认非超级管理员
                 user.sPassword = SecurityHelper.MD5(user.sPassword);
                 mangae.Add<TG_User>(user);
                 result.success = mangae.SaveChange();

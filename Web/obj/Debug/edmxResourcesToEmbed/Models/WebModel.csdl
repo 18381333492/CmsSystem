@@ -37,6 +37,7 @@
     <Property Name="sMobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="sFax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="sQQNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IsNeedVerify" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="TG_User">
     <Key>
@@ -97,7 +98,7 @@
     <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="dInsertTime" Type="DateTime" Precision="3" />
-    <Property Name="bIsRelease" Type="Boolean" />
+    <Property Name="bIsRelease" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="TG_Client">
     <Key>

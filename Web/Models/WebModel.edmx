@@ -30,7 +30,7 @@
           <Property Name="sContent" Type="varchar(max)" />
           <Property Name="bIsDeleted" Type="bit" Nullable="false" />
           <Property Name="dInsertTime" Type="datetime" />
-          <Property Name="bIsRelease" Type="bit" />
+          <Property Name="bIsRelease" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TG_Category">
           <Key>
@@ -108,6 +108,7 @@
           <Property Name="sDescription" Type="nvarchar(max)" />
           <Property Name="sCopyRight" Type="nvarchar(max)" />
           <Property Name="sFiling" Type="nvarchar(max)" />
+          <Property Name="IsNeedVerify" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CmsSystemModelStoreContainer">
           <EntitySet Name="TG_Article" EntityType="Self.TG_Article" Schema="dbo" store:Type="Tables" />
@@ -158,6 +159,7 @@
           <Property Name="sMobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sFax" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sQQNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsNeedVerify" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TG_User">
           <Key>
@@ -218,7 +220,7 @@
           <Property Name="sContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="dInsertTime" Type="DateTime" Precision="3" />
-          <Property Name="bIsRelease" Type="Boolean" />
+          <Property Name="bIsRelease" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TG_Client">
           <Key>
@@ -255,6 +257,7 @@
           <EntitySetMapping Name="TG_WebSite">
             <EntityTypeMapping TypeName="CmsSystemModel.TG_WebSite">
               <MappingFragment StoreEntitySet="TG_WebSite">
+                <ScalarProperty Name="IsNeedVerify" ColumnName="IsNeedVerify" />
                 <ScalarProperty Name="sQQNum" ColumnName="sQQNum" />
                 <ScalarProperty Name="sFax" ColumnName="sFax" />
                 <ScalarProperty Name="sMobile" ColumnName="sMobile" />

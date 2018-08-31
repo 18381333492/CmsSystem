@@ -45,7 +45,7 @@ namespace Web.Controllers
                 if (templet != null)
                 {//模板存在
                    
-                    string templetHtmlString = RazorHelper.ParseFile(templet.sTempletEnName + ".cshtml", category);
+                    string templetHtmlString = RazorHelper.ParseString(templet.sTempletEnName, category);
                     string sHtmlPath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
                     if (RazorHelper.MakeHtml(sHtmlPath, category.sEnName, templetHtmlString))
                     {
@@ -103,7 +103,7 @@ namespace Web.Controllers
                     if (templetArticle != null)
                     {//模板存在
                      //解析模板        
-                        string templetHtmlString = RazorHelper.ParseFile(templetArticle.sTempletEnName + ".cshtml", article);
+                        string templetHtmlString = RazorHelper.ParseString(templetArticle.sTempletEnName, article);
                         string ArticlePath = FuncHelper.Instance.GetHtmlPath(category, allCategoryList);
                         if (RazorHelper.MakeHtml(ArticlePath, article.ID.ToString(), templetHtmlString))
                         {//生成成功

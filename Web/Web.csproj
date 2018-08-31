@@ -136,6 +136,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TraceLogs">
+      <HintPath>..\Common\Dll\TraceLogs.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -164,41 +167,13 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BaseController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NoLogin.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -210,10 +185,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginCacheInfo.cs" />
     <Compile Include="Models\PagingRet.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\Result.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\student.cs" />
     <Compile Include="Models\TG_Article.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
@@ -252,164 +227,11 @@
     <Compile Include="Server\EFHelper.cs" />
     <Compile Include="Server\FuncHelper.cs" />
     <Compile Include="Server\FuncOthers.cs" />
-    <Compile Include="Startup.cs" />
     <Compile Include="Upload\Upload.ashx.cs">
       <DependentUpon>Upload.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Blog\css\all-examples.css" />
-    <Content Include="Blog\css\bootstrap.min.css" />
-    <Content Include="Blog\css\font-awesome.min.css" />
-    <Content Include="Blog\css\jquery-ui.css" />
-    <Content Include="Blog\css\styel.css" />
-    <Content Include="Blog\css\swiper.css" />
-    <Content Include="Blog\css\templatemo_misc.css" />
-    <Content Include="Blog\css\templatemo_style.css" />
-    <Content Include="Blog\fonts\flexslider-icon.svg" />
-    <Content Include="Blog\fonts\fontawesome-webfont.svg" />
-    <Content Include="Blog\images\1.png" />
-    <Content Include="Blog\images\2.png" />
-    <Content Include="Blog\images\3.png" />
-    <Content Include="Blog\images\banner 32.jpg" />
-    <Content Include="Blog\images\banner1.jpg" />
-    <Content Include="Blog\images\banner12.jpg" />
-    <Content Include="Blog\images\banner123.jpg" />
-    <Content Include="Blog\images\banner2.jpg" />
-    <Content Include="Blog\images\banner3.jpg" />
-    <Content Include="Blog\images\banner31.jpg" />
-    <Content Include="Blog\images\close.png" />
-    <Content Include="Blog\images\email-sm.png" />
-    <Content Include="Blog\images\email.png" />
-    <Content Include="Blog\images\history-sm.png" />
-    <Content Include="Blog\images\history.png" />
-    <Content Include="Blog\images\home-sm.png" />
-    <Content Include="Blog\images\home.png" />
-    <Content Include="Blog\images\libg.png" />
-    <Content Include="Blog\images\list_icon.png" />
-    <Content Include="Blog\images\mynewsbg.png" />
-    <Content Include="Blog\images\next.png" />
-    <Content Include="Blog\images\pay_success.png" />
-    <Content Include="Blog\images\portfolio\1.jpg" />
-    <Content Include="Blog\images\portfolio\10.jpg" />
-    <Content Include="Blog\images\portfolio\11.jpg" />
-    <Content Include="Blog\images\portfolio\12.jpg" />
-    <Content Include="Blog\images\portfolio\2.jpg" />
-    <Content Include="Blog\images\portfolio\3.jpg" />
-    <Content Include="Blog\images\portfolio\4.jpg" />
-    <Content Include="Blog\images\portfolio\5.jpg" />
-    <Content Include="Blog\images\portfolio\6.jpg" />
-    <Content Include="Blog\images\portfolio\7.jpg" />
-    <Content Include="Blog\images\portfolio\8.jpg" />
-    <Content Include="Blog\images\portfolio\9.jpg" />
-    <Content Include="Blog\images\previous.png" />
-    <Content Include="Blog\images\templatemo_about1.png" />
-    <Content Include="Blog\images\templatemo_about2.png" />
-    <Content Include="Blog\images\templatemo_about3.png" />
-    <Content Include="Blog\images\templatemo_about4.png" />
-    <Content Include="Blog\images\templatemo_about5.jpg" />
-    <Content Include="Blog\images\templatemo_abouticon.png" />
-    <Content Include="Blog\images\templatemo_award.jpg" />
-    <Content Include="Blog\images\templatemo_company.jpg" />
-    <Content Include="Blog\images\templatemo_contacticon.png" />
-    <Content Include="Blog\images\templatemo_gallerybg.png" />
-    <Content Include="Blog\images\templatemo_heart.png" />
-    <Content Include="Blog\images\templatemo_homeicon.png" />
-    <Content Include="Blog\images\templatemo_homeicon1.png" />
-    <Content Include="Blog\images\templatemo_homeicon2.png" />
-    <Content Include="Blog\images\templatemo_homeicon3.png" />
-    <Content Include="Blog\images\templatemo_menubg.png" />
-    <Content Include="Blog\images\templatemo_menuhover.png" />
-    <Content Include="Blog\images\templatemo_mission.jpg" />
-    <Content Include="Blog\images\templatemo_pagebg.png" />
-    <Content Include="Blog\images\templatemo_portfolioicon.png" />
-    <Content Include="Blog\images\templatemo_tabcurrent.png" />
-    <Content Include="Blog\images\templatemo_topbg.jpg" />
-    <Content Include="Blog\js\bootstrap-collapse.js" />
-    <Content Include="Blog\js\jquery-1.11.1.min.js" />
-    <Content Include="Blog\js\jquery-ui.min.js" />
-    <Content Include="Blog\js\jquery.jqDock.min.js" />
-    <Content Include="Blog\js\jquery.lightbox.js" />
-    <Content Include="Blog\js\jquery.min.js" />
-    <Content Include="Blog\js\swiper.js" />
-    <Content Include="Blog\js\templatemo_custom.js" />
-    <Content Include="Blog\js\templatemo_tab.js" />
-    <Content Include="ContentHtml\css\all-examples.css" />
-    <Content Include="ContentHtml\css\bootstrap.min.css" />
-    <Content Include="ContentHtml\css\font-awesome.min.css" />
-    <Content Include="ContentHtml\css\jquery-ui.css" />
-    <Content Include="ContentHtml\css\styel.css" />
-    <Content Include="ContentHtml\css\swiper.css" />
-    <Content Include="ContentHtml\css\templatemo_misc.css" />
-    <Content Include="ContentHtml\css\templatemo_style.css" />
-    <Content Include="ContentHtml\fonts\flexslider-icon.svg" />
-    <Content Include="ContentHtml\fonts\fontawesome-webfont.svg" />
-    <Content Include="ContentHtml\images\1.png" />
-    <Content Include="ContentHtml\images\2.png" />
-    <Content Include="ContentHtml\images\3.png" />
-    <Content Include="ContentHtml\images\banner 32.jpg" />
-    <Content Include="ContentHtml\images\banner1.jpg" />
-    <Content Include="ContentHtml\images\banner12.jpg" />
-    <Content Include="ContentHtml\images\banner123.jpg" />
-    <Content Include="ContentHtml\images\banner2.jpg" />
-    <Content Include="ContentHtml\images\banner3.jpg" />
-    <Content Include="ContentHtml\images\banner31.jpg" />
-    <Content Include="ContentHtml\images\close.png" />
-    <Content Include="ContentHtml\images\email-sm.png" />
-    <Content Include="ContentHtml\images\email.png" />
-    <Content Include="ContentHtml\images\history-sm.png" />
-    <Content Include="ContentHtml\images\history.png" />
-    <Content Include="ContentHtml\images\home-sm.png" />
-    <Content Include="ContentHtml\images\home.png" />
-    <Content Include="ContentHtml\images\libg.png" />
-    <Content Include="ContentHtml\images\list_icon.png" />
-    <Content Include="ContentHtml\images\mynewsbg.png" />
-    <Content Include="ContentHtml\images\next.png" />
-    <Content Include="ContentHtml\images\pay_success.png" />
-    <Content Include="ContentHtml\images\portfolio\1.jpg" />
-    <Content Include="ContentHtml\images\portfolio\10.jpg" />
-    <Content Include="ContentHtml\images\portfolio\11.jpg" />
-    <Content Include="ContentHtml\images\portfolio\12.jpg" />
-    <Content Include="ContentHtml\images\portfolio\2.jpg" />
-    <Content Include="ContentHtml\images\portfolio\3.jpg" />
-    <Content Include="ContentHtml\images\portfolio\4.jpg" />
-    <Content Include="ContentHtml\images\portfolio\5.jpg" />
-    <Content Include="ContentHtml\images\portfolio\6.jpg" />
-    <Content Include="ContentHtml\images\portfolio\7.jpg" />
-    <Content Include="ContentHtml\images\portfolio\8.jpg" />
-    <Content Include="ContentHtml\images\portfolio\9.jpg" />
-    <Content Include="ContentHtml\images\previous.png" />
-    <Content Include="ContentHtml\images\templatemo_about1.png" />
-    <Content Include="ContentHtml\images\templatemo_about2.png" />
-    <Content Include="ContentHtml\images\templatemo_about3.png" />
-    <Content Include="ContentHtml\images\templatemo_about4.png" />
-    <Content Include="ContentHtml\images\templatemo_about5.jpg" />
-    <Content Include="ContentHtml\images\templatemo_abouticon.png" />
-    <Content Include="ContentHtml\images\templatemo_award.jpg" />
-    <Content Include="ContentHtml\images\templatemo_company.jpg" />
-    <Content Include="ContentHtml\images\templatemo_contacticon.png" />
-    <Content Include="ContentHtml\images\templatemo_gallerybg.png" />
-    <Content Include="ContentHtml\images\templatemo_heart.png" />
-    <Content Include="ContentHtml\images\templatemo_homeicon.png" />
-    <Content Include="ContentHtml\images\templatemo_homeicon1.png" />
-    <Content Include="ContentHtml\images\templatemo_homeicon2.png" />
-    <Content Include="ContentHtml\images\templatemo_homeicon3.png" />
-    <Content Include="ContentHtml\images\templatemo_menubg.png" />
-    <Content Include="ContentHtml\images\templatemo_menuhover.png" />
-    <Content Include="ContentHtml\images\templatemo_mission.jpg" />
-    <Content Include="ContentHtml\images\templatemo_pagebg.png" />
-    <Content Include="ContentHtml\images\templatemo_portfolioicon.png" />
-    <Content Include="ContentHtml\images\templatemo_tabcurrent.png" />
-    <Content Include="ContentHtml\images\templatemo_topbg.jpg" />
-    <Content Include="ContentHtml\js\bootstrap-collapse.js" />
-    <Content Include="ContentHtml\js\jquery-1.11.1.min.js" />
-    <Content Include="ContentHtml\js\jquery-ui.min.js" />
-    <Content Include="ContentHtml\js\jquery.jqDock.min.js" />
-    <Content Include="ContentHtml\js\jquery.lightbox.js" />
-    <Content Include="ContentHtml\js\jquery.min.js" />
-    <Content Include="ContentHtml\js\swiper.js" />
-    <Content Include="ContentHtml\js\templatemo_custom.js" />
-    <Content Include="ContentHtml\js\templatemo_tab.js" />
     <Content Include="Content\easyui\easyloader.js" />
     <Content Include="Content\easyui\jquery.easyui.min.js" />
     <Content Include="Content\easyui\jquery.easyui.mobile.js" />
@@ -865,6 +687,13 @@
     <Content Include="Content\easyui\themes\metro\validatebox.css" />
     <Content Include="Content\easyui\themes\metro\window.css" />
     <Content Include="Content\easyui\themes\mobile.css" />
+    <Content Include="Content\fonts\demo.css" />
+    <Content Include="Content\fonts\demo_fontclass.html" />
+    <Content Include="Content\fonts\demo_symbol.html" />
+    <Content Include="Content\fonts\demo_unicode.html" />
+    <Content Include="Content\fonts\iconfont.css" />
+    <Content Include="Content\fonts\iconfont.js" />
+    <Content Include="Content\fonts\iconfont.svg" />
     <Content Include="Content\gridtable.css" />
     <Content Include="Content\icheck\css\banner.jpg" />
     <Content Include="Content\icheck\css\custom.css" />
@@ -998,6 +827,7 @@
     <Content Include="Content\icheck\skins\square\yellow.css" />
     <Content Include="Content\icheck\skins\square\yellow.png" />
     <Content Include="Content\icheck\skins\square\_all.css" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\kindeditor\examples\auto-height.html" />
     <Content Include="Content\kindeditor\examples\colorpicker.html" />
     <Content Include="Content\kindeditor\examples\custom-plugin.html" />
@@ -1259,100 +1089,12 @@
       <DependentUpon>WebModel.edmx</DependentUpon>
       <LastGenOutput>WebModel.cs</LastGenOutput>
     </Content>
-    <Content Include="page\about.html" />
-    <Content Include="page\about_partner.html" />
-    <Content Include="page\about_team.html" />
-    <Content Include="page\about_team_detail.html" />
-    <Content Include="page\contact.html" />
-    <Content Include="page\index.html" />
-    <Content Include="page\job.html" />
-    <Content Include="page\news.html" />
-    <Content Include="page\news_detail.html" />
-    <Content Include="page\project.html" />
-    <Content Include="page\services.html" />
-    <Content Include="page\statics\css\bwhite.css" />
-    <Content Include="page\statics\css\fonts\fontawesome-webfont.svg" />
-    <Content Include="page\statics\css\fonts\iconfont.svg" />
-    <Content Include="page\statics\css\lib2.css" />
-    <Content Include="page\statics\css\style.2041.css" />
-    <Content Include="page\statics\images\1438424052624.jpg" />
-    <Content Include="page\statics\images\148462137615.jpg" />
-    <Content Include="page\statics\images\1490071914135.jpg" />
-    <Content Include="page\statics\images\1490072433234.jpg" />
-    <Content Include="page\statics\images\1490072989607.jpg" />
-    <Content Include="page\statics\images\1490073118356.jpg" />
-    <Content Include="page\statics\images\1490073308708.jpg" />
-    <Content Include="page\statics\images\1490074286532.jpg" />
-    <Content Include="page\statics\images\1490074376890.jpg" />
-    <Content Include="page\statics\images\1490075211271.jpg" />
-    <Content Include="page\statics\images\1490075444696.jpg" />
-    <Content Include="page\statics\images\1490075922783.png" />
-    <Content Include="page\statics\images\1490076036776.png" />
-    <Content Include="page\statics\images\1490076244647.png" />
-    <Content Include="page\statics\images\1490076286323.png" />
-    <Content Include="page\statics\images\1490076330843.png" />
-    <Content Include="page\statics\images\1490076500816.png" />
-    <Content Include="page\statics\images\149007689617.jpg" />
-    <Content Include="page\statics\images\1490077085525.png" />
-    <Content Include="page\statics\images\1490079371411.png" />
-    <Content Include="page\statics\images\1490089038970.png" />
-    <Content Include="page\statics\images\1490260622270.jpg" />
-    <Content Include="page\statics\images\1490321730457.jpg" />
-    <Content Include="page\statics\images\1490322118269.jpg" />
-    <Content Include="page\statics\images\1490322673374.jpg" />
-    <Content Include="page\statics\images\1490322763387.jpg" />
-    <Content Include="page\statics\images\1490323393338.jpg" />
-    <Content Include="page\statics\images\1490323515250.png" />
-    <Content Include="page\statics\images\1490323516121.jpg" />
-    <Content Include="page\statics\images\1490323755899.jpg" />
-    <Content Include="page\statics\images\1490325755542.png" />
-    <Content Include="page\statics\images\149032638157.png" />
-    <Content Include="page\statics\images\1490326477972.png" />
-    <Content Include="page\statics\images\1490326496297.png" />
-    <Content Include="page\statics\images\1490326932783.png" />
-    <Content Include="page\statics\images\1490327989706.png" />
-    <Content Include="page\statics\images\1490338321679.jpg" />
-    <Content Include="page\statics\images\1490684950277.jpg" />
-    <Content Include="page\statics\images\1490685075590.jpg" />
-    <Content Include="page\statics\images\1490687229663.jpg" />
-    <Content Include="page\statics\images\1491380253463.jpg" />
-    <Content Include="page\statics\images\1491380254145.jpg" />
-    <Content Include="page\statics\images\1491380254768.jpg" />
-    <Content Include="page\statics\images\1491448706133.jpg" />
-    <Content Include="page\statics\images\1491455366761.jpg" />
-    <Content Include="page\statics\images\1491456028677.jpg" />
-    <Content Include="page\statics\images\1491471542571.png" />
-    <Content Include="page\statics\images\1491471598822.png" />
-    <Content Include="page\statics\images\149147167119.png" />
-    <Content Include="page\statics\images\1491471726615.png" />
-    <Content Include="page\statics\images\1491471794980.png" />
-    <Content Include="page\statics\images\1491471808752.png" />
-    <Content Include="page\statics\images\149147182358.png" />
-    <Content Include="page\statics\images\1491471835861.png" />
-    <Content Include="page\statics\images\1491471871985.png" />
-    <Content Include="page\statics\images\1491471881514.png" />
-    <Content Include="page\statics\images\1491471891891.png" />
-    <Content Include="page\statics\images\149147190379.png" />
-    <Content Include="page\statics\images\1491474551405.jpg" />
-    <Content Include="page\statics\images\149147459342.jpg" />
-    <Content Include="page\statics\images\1491475060401.jpg" />
-    <Content Include="page\statics\images\1491537117480.jpg" />
-    <Content Include="page\statics\images\1491801957820.jpg" />
-    <Content Include="page\statics\images\1491802317367.jpg" />
-    <Content Include="page\statics\images\1491811693240.jpg" />
-    <Content Include="page\statics\images\1492400562475.jpg" />
-    <Content Include="page\statics\images\1493794625327.jpg" />
-    <Content Include="page\statics\js\jquery.min.js" />
-    <Content Include="page\statics\js\main.js" />
-    <Content Include="Scripts\ai.0.22.9-build00167.js" />
-    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\easyui\themes\material\images\Thumbs.db" />
     <Content Include="Content\auto-line-number.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="门户网站\css\base.css" />
     <Content Include="门户网站\css\jquery.slideBox.css" />
     <Content Include="门户网站\css\main.css" />
@@ -1427,37 +1169,6 @@
     <Content Include="Content\icheck\css\montserrat-regular.eot" />
     <Content Include="Content\icheck\css\montserrat-regular.ttf" />
     <Content Include="Content\icheck\css\montserrat-regular.woff" />
-    <Content Include="Blog\fonts\flexslider-icon.eot" />
-    <Content Include="Blog\fonts\flexslider-icon.ttf" />
-    <Content Include="Blog\fonts\flexslider-icon.woff" />
-    <Content Include="Blog\fonts\fontawesome-webfont.eot" />
-    <Content Include="Blog\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Blog\fonts\fontawesome-webfont.woff" />
-    <Content Include="Blog\fonts\FontAwesome.otf" />
-    <Content Include="ContentHtml\fonts\flexslider-icon.eot" />
-    <Content Include="ContentHtml\fonts\flexslider-icon.ttf" />
-    <Content Include="ContentHtml\fonts\flexslider-icon.woff" />
-    <Content Include="ContentHtml\fonts\fontawesome-webfont.eot" />
-    <Content Include="ContentHtml\fonts\fontawesome-webfont.ttf" />
-    <Content Include="ContentHtml\fonts\fontawesome-webfont.woff" />
-    <Content Include="ContentHtml\fonts\FontAwesome.otf" />
-    <Content Include="page\statics\css\fonts\fontawesome-webfont.eot" />
-    <Content Include="page\statics\css\fonts\fontawesome-webfont.ttf" />
-    <Content Include="page\statics\css\fonts\fontawesome-webfont.woff" />
-    <Content Include="page\statics\css\fonts\fontawesome-webfont.woff2" />
-    <Content Include="page\statics\css\fonts\HELVETICANEUELTPRO-THEX.OTF" />
-    <Content Include="page\statics\css\fonts\iconfont.eot" />
-    <Content Include="page\statics\css\fonts\iconfont.ttf" />
-    <Content Include="page\statics\css\fonts\iconfont.woff" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mylib\admin.js" />
     <Content Include="Scripts\mylib\extend.js" />
     <Content Include="Scripts\plug-in\cityselect\city.min.js" />
@@ -1485,8 +1196,6 @@
     <Content Include="Scripts\plug-in\starsScore\index.html" />
     <Content Include="Scripts\plug-in\starsScore\jquery.raty.min.js" />
     <Content Include="Scripts\plug-in\starsScore\starComment.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1535,12 +1244,7 @@
     <Folder Include="Html\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -1554,6 +1258,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\iconfont.eot" />
+    <Content Include="Content\fonts\iconfont.ttf" />
+    <Content Include="Content\fonts\iconfont.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

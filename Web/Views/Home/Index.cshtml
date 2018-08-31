@@ -7,11 +7,26 @@
         padding-top:8px;
         padding-bottom:8px;
     }
+    .operate span{
+       cursor:pointer;
+    }
 </style>
+<link href="~/Content/fonts/iconfont.css" rel="stylesheet" />
 <div id="layout" class="easyui-layout" data-options="fit:true">
     <!--header-->
-    <div data-options="region:'north',border:false" style="height:70px;background-color:#438eb9">
-
+    <div data-options="region:'north',border:false" style="height:75px;background-color:#438eb9">
+        <div>
+            <div style="float:left;height:70px;">
+                <img src="~/Content/images/logo.png" style="width:60px;height:60px;margin:7px 10px 0px 30px;" />
+            </div>
+            <div style="float:left;height:70px;line-height:70px;color:white;font-size:32px">泸州市公安信息网管理系统</div>
+            <div class="operate" style="float:right;height:70px;line-height:70px;margin-right:50px;font-size:16px;">
+               <span id="weather"></span>
+               <span style="color:white">欢迎您：<i class="iconfont icon-guanliyuan"></i>admin</span>
+               <span style="color:white"><i class="iconfont icon-xiugaimima"></i>密码修改</span>
+               <span style="color:red"><i class="iconfont icon-084tuichu"></i>退出系统</span>
+            </div>
+        </div> 
     </div>
     <!--Menu-->
     <div data-options="region:'west',title:'菜单栏目',split:true" style="width:200px;">
@@ -71,32 +86,63 @@
         </div>
     </div>
 </div>  
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
 <script type="text/javascript">
-    $('#tree').tree({
-        onClick: function (node) {
-            var menu = $(node.target).find('a');
-            if (menu.length == 1) {
-                var title = menu.text();
-                var url = menu.attr("data-url");
-                if ($('#tabs').tabs("getTab", title)) {
-                    $('#tabs').tabs("select", title);
-                }
-                else {
-                    $('#tabs').tabs('add', {
-                        title: title,
-                        content: '<iframe scrolling="auto" frameborder="0"  src="' + url + '" width="100%" height="100%" style="display:-webkit-box"></iframe>',
-                        closable: true,
-                        tools: [{
-                            iconCls: 'icon-mini-refresh',
-                            handler: function () {
-                                //刷新
-                               $('#tabs').tabs('getSelected').panel();
-                            }
-                        }]
+    $(function () {
+        //findWeather();
 
-                    });
+        $('#tree').tree({
+            onClick: function (node) {
+                var menu = $(node.target).find('a');
+                if (menu.length == 1) {
+                    var title = menu.text();
+                    var url = menu.attr("data-url");
+                    if ($('#tabs').tabs("getTab", title)) {
+                        $('#tabs').tabs("select", title);
+                    }
+                    else {
+                        $('#tabs').tabs('add', {
+                            title: title,
+                            content: '<iframe scrolling="auto" frameborder="0"  src="' + url + '" width="100%" height="100%" style="display:-webkit-box"></iframe>',
+                            closable: true,
+                            tools: [{
+                                iconCls: 'icon-mini-refresh',
+                                handler: function () {
+                                    //刷新
+                                    $('#tabs').tabs('getSelected').panel();
+                                }
+                            }]
+
+                        });
+                    }
                 }
             }
-        }
+        });
     });
+
+    ////天气预报
+    //function findWeather() {
+    //    var cityUrl = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js';
+    //    $.getScript(cityUrl, function (script, textStatus, jqXHR) {
+    //        var citytq = remote_ip_info.city;// 获取城市
+    //        var url = "http://php.weather.sina.com.cn/iframe/index/w_cl.php?code=js&city=" + citytq + "&day=0&dfc=3&charset=utf-8";
+    //        $.ajax({
+    //            url: url,
+    //            dataType: "script",
+    //            success: function (data) {
+    //                debugger
+    //                var _w = window.SWther.w[citytq][0];
+    //                var _f = _w.f1 + "_0.png";
+    //                if (new Date().getHours() > 17) {
+    //                    _f = _w.f2 + "_1.png";
+    //                }
+    //                var img = "<img width='70px' height='60px' src='http://i2.sinaimg.cn/dy/main/weather/weatherplugin/wthIco/20_20/" + _f
+    //                + "' />";
+    //                var tq = citytq + " " + img + " " + _w.s1 + " " + _w.t1 + "℃～" + _w.t2 + "℃  " + _w.d1 + _w.p1 + "级";
+    //                //#weather自己修改,天气样式自己打断点调试
+    //                $('#weather').html(tq);
+    //            }
+    //        });
+    //    });
+    //}
 </script>

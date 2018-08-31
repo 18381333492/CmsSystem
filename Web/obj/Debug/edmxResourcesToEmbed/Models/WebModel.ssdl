@@ -25,7 +25,7 @@
     <Property Name="sContent" Type="varchar(max)" />
     <Property Name="bIsDeleted" Type="bit" Nullable="false" />
     <Property Name="dInsertTime" Type="datetime" />
-    <Property Name="bIsRelease" Type="bit" />
+    <Property Name="bIsRelease" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TG_Category">
     <Key>
@@ -103,6 +103,7 @@
     <Property Name="sDescription" Type="nvarchar(max)" />
     <Property Name="sCopyRight" Type="nvarchar(max)" />
     <Property Name="sFiling" Type="nvarchar(max)" />
+    <Property Name="IsNeedVerify" Type="bit" Nullable="false" />
   </EntityType>
   <EntityContainer Name="CmsSystemModelStoreContainer">
     <EntitySet Name="TG_Article" EntityType="Self.TG_Article" Schema="dbo" store:Type="Tables" />

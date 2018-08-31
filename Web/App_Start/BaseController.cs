@@ -1,9 +1,11 @@
-﻿using RazorBase;
+﻿using Common;
+using RazorBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TraceLogs;
 using Web.Models;
 using Web.Server;
 
@@ -14,8 +16,28 @@ namespace Web.App_Start
     /// </summary>
     public class BaseController: Controller
     {
+
+        /// <summary>
+        /// 日志组件
+        /// </summary>
+        private static ILogger logger = LoggerManager.Instance.GetSLogger("Web");
+        private static readonly string sSessionKey = "@UserInfo";
+
+        /// <summary>
+        /// EF的封装
+        /// </summary>
         protected EFHelper mangae;
+
+        /// <summary>
+        /// 返回结果
+        /// </summary>
         protected Result result;
+
+        /// <summary>
+        /// 管理员的登录信息
+        /// </summary>
+        public LoginCacheInfo LoginStatus;
+
 
         /// <summary>
         /// 初始化构造函数
@@ -33,50 +55,21 @@ namespace Web.App_Start
         /// <param name="filterContext"></param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-        //    if (bool.Parse(filterContext.HttpContext.Application["bIsStartUp"].ToString()) == true)
-        //    {//网站能继续运行
-        //        if (!(filterContext.ActionDescriptor.GetCustomAttributes(typeof(NoLogin), true).Length == 1))
-        //        {//有NoLogin属性;不判断登录
-        //            if (Session[SESSION.AdminUser] == null)
-        //            {
-        //                /*登录过时,session过期*/
-        //                if (filterContext.HttpContext.Request.HttpMethod.ToUpper() == "GET")
-        //                {
-        //                    /*跳转到登录过期提示页面*/
-        //                    var LoginPath = C_Config.ReadAppSetting("virtualPath");
-        //                    filterContext.Result = new RedirectResult(LoginPath + "/Admin/AdminUser/Login");
-        //                }
-        //                else
-        //                {
-        //                    result.over = true;//登录过时
-        //                    ContentResult res = new ContentResult();
-        //                    res.Content = result.toJson();
-        //                    filterContext.Result = res;
-        //                }
-        //            }
-        //            else
-        //            {//session存在
-
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {//网站过期
-        //        if (filterContext.HttpContext.Request.HttpMethod.ToUpper() == "GET")
-        //        {
-        //            /*跳转到网站到期提示页面*/
-        //            var LoginPath = C_Config.ReadAppSetting("virtualPath");
-        //            filterContext.Result = new RedirectResult("http://www.baidu.com");
-        //        }
-        //        else
-        //        {
-        //            result.success = false;
-        //            result.info = "网站运行时间已到期,不能执行任何操作.请及时充值!";
-        //            ContentResult res = new ContentResult();
-        //            res.Content = result.toJson();
-        //            filterContext.Result = res;
-        //        }
-        //    }
+            ////是否需要验证登录
+            //bool needLogin = filterContext.ActionDescriptor.GetCustomAttributes(typeof(NoLogin), true).Length == 1 ? false : true;
+            //if (needLogin)
+            //{ //验证登录
+            //    //bool IsAjax = filterContext.HttpContext.Request.IsAjaxRequest();
+            //    if (Session[sSessionKey] != null)
+            //    {
+            //        LoginStatus = (LoginCacheInfo)Session[sSessionKey];
+            //    }
+            //    else
+            //    {
+            //        //登录失效跳转登录
+            //        filterContext.Result = Redirect("/User/Login");
+            //    }
+            //}
         }
 
 
@@ -91,7 +84,7 @@ namespace Web.App_Start
             var actionMethod = filterContext.Controller
               .GetType()
               .GetMethod(filterContext.ActionDescriptor.ActionName);//获取访问方法   
-            if (actionMethod.ReturnType.Name.ToString() == "Void" && request.IsAjaxRequest() && request.HttpMethod.ToUpper() == "POST")
+            if (actionMethod.ReturnType.Name.ToString() == "Void")
             {//POST的返回结果处理
                 filterContext.Result = Content(result.toJson()); /**统一处理ajax的返回结果**/
             }
@@ -103,7 +96,13 @@ namespace Web.App_Start
         /// <param name="filterContext"></param>
         protected override void OnException(ExceptionContext filterContext)
         {
-            filterContext.ExceptionHandled = true; //表示对异常已经处理过,不会对客户端在抛出异常
+            filterContext.ExceptionHandled = true;
+            logger.Info("请求链接:" + filterContext.HttpContext.Request.Url.AbsolutePath);
+            logger.Info("WebController异常:" + filterContext.Exception.Message);
+            logger.Fatal("WebController异常:" + filterContext.Exception);
+            result.success = false;
+            result.info = "系统错误!";
+            filterContext.Result = Content(JsonHelper.toJson(result));
         }
     }
 }

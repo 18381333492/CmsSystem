@@ -9,14 +9,10 @@ namespace Web.Server
 {
     public class EFHelper
     {
-        public Entities db; 
-
-        /// <summary>
-        /// 初始化构造函数
-        /// </summary>
-        public EFHelper()
+        
+        public Entities db
         {
-            db = new Entities();
+            get { return new Entities(); }
         }
 
         /// <summary>
