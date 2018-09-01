@@ -8,6 +8,7 @@ namespace Web.Models
     /// <summary>
     /// 用户登录的缓存信息
     /// </summary>
+    [Serializable]
     public class LoginCacheInfo
     {
         /// <summary>
@@ -32,6 +33,27 @@ namespace Web.Models
         public bool bIsSuper
         {
             get; set;
+        }
+
+        /// <summary>
+        /// 上次登录时间
+        /// </summary>
+        public DateTime dLoginTime
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// 上次登录IP地址
+        /// </summary>
+        public string Ip
+        {
+            get;set;
+        }
+
+        public bool isFirst
+        {
+            get;set;
         }
     }
 }

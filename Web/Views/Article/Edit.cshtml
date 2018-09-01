@@ -7,6 +7,14 @@
 <!--编辑文章视图-->
 <form id="dataForm">
     <input type="hidden" name="ID" value="@Model.ID" />
+    @if (Model.bIsRelease)
+    {
+        <input type="hidden" name="bIsRelease" value="true" />
+    }
+    else
+    {
+        <input type="hidden" name="bIsRelease" value="false" />
+    }
     <table class="gridtable">
         <tr>
             <td>所属栏目:</td>
@@ -15,7 +23,7 @@
             </td>
             <td>文章属性:</td>
             <td>
-                <input type="checkbox" name="bIsRelease" value="true" class="bIsRelease" />发布&nbsp;&nbsp;
+                @*<input type="checkbox" name="bIsRelease" value="true" class="bIsRelease" />发布&nbsp;&nbsp;*@
                 <input type="checkbox" name="bIsSlide" value="true" class="bIsSlide" />最新 &nbsp;&nbsp;
                 <input type="checkbox" name="bIsTop" value="true" class="bIsTop" />置顶 &nbsp;&nbsp;
                 <input type="checkbox" name="bIsHot" value="true" class="bIsHot" />热点
@@ -110,12 +118,12 @@
         increaseArea: '20%'
     });
 
-    var bIsRelease = '@Model.bIsRelease' == "True" ? true : false;
+    @*var bIsRelease = '@Model.bIsRelease' == "True" ? true : false;*@
     var bIsSlide = '@Model.bIsSlide' == "True" ? true : false;
     var bIsTop = '@Model.bIsTop' == "True" ? true : false;
     var bIsHot = '@Model.bIsHot' == "True" ? true : false;
 
-    if (bIsRelease) $('.bIsRelease').iCheck('check');
+    //if (bIsRelease) $('.bIsRelease').iCheck('check');
     if (bIsSlide) $('.bIsSlide').iCheck('check');
     if (bIsTop) $('.bIsTop').iCheck('check');
     if (bIsHot) $('.bIsHot').iCheck('check');

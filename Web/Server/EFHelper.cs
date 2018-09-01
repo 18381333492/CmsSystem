@@ -9,10 +9,17 @@ namespace Web.Server
 {
     public class EFHelper
     {
-        
+
+        private Entities instance;
+
         public Entities db
         {
-            get { return new Entities(); }
+            get
+            {
+                if (instance == null)
+                    instance = new Entities();
+                return instance;
+            }
         }
 
         /// <summary>
@@ -99,7 +106,7 @@ namespace Web.Server
         /// <returns></returns>
         public bool SaveChange()
         {
-            return db.SaveChanges()>0?true:false;
+            return this.db.SaveChanges()>0?true:false;
         }
     }
 }

@@ -24,3 +24,17 @@ E:\Github源代码\CmsSystem\RazorBase\bin\Debug\Newtonsoft.Json.xml
 E:\Github源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.csprojResolveAssemblyReference.cache
 E:\Github源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.dll
 E:\Github源代码\CmsSystem\RazorBase\obj\Debug\RazorBase.pdb
+F:\CmsSystem\RazorBase\bin\Debug\RazorBase.dll
+F:\CmsSystem\RazorBase\bin\Debug\RazorBase.pdb
+F:\CmsSystem\RazorBase\bin\Debug\Common.dll
+F:\CmsSystem\RazorBase\bin\Debug\RazorEngine.dll
+F:\CmsSystem\RazorBase\bin\Debug\System.Web.Razor.dll
+F:\CmsSystem\RazorBase\bin\Debug\Newtonsoft.Json.dll
+F:\CmsSystem\RazorBase\bin\Debug\Common.pdb
+F:\CmsSystem\RazorBase\bin\Debug\RazorEngine.xml
+F:\CmsSystem\RazorBase\bin\Debug\System.Web.Razor.xml
+F:\CmsSystem\RazorBase\bin\Debug\Newtonsoft.Json.xml
+F:\CmsSystem\RazorBase\obj\Debug\RazorBase.csprojResolveAssemblyReference.cache
+F:\CmsSystem\RazorBase\obj\Debug\RazorBase.dll
+F:\CmsSystem\RazorBase\obj\Debug\RazorBase.pdb
+F:\CmsSystem\RazorBase\bin\Debug\TraceLogs.dll

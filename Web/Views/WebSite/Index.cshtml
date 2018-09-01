@@ -9,8 +9,21 @@
         font-size:14px;
     }
 </style>
+<link href="~/Content/icheck/skins/square/blue.css" rel="stylesheet" />
+<script src="~/Content/icheck/icheck.min.js"></script>
 <div class="container">
     <form id="dataForm">
+        @if (ViewBag.bIsSuper==false)
+        {
+            if (Model.IsNeedVerify)
+            {
+                <input type="hidden" name="IsNeedVerify" value="true" />
+            }
+            else
+            {
+                <input type="hidden" name="IsNeedVerify" value="false" />
+            }
+        }
         <input type="hidden" name="ID"  value="@Model.ID" />
         <table class="gridtable">
             <tr>
@@ -25,6 +38,15 @@
                     <input name="sSiteDNS" class="easyui-textbox easyui-validatebox"  style="width:300px" value="@Model.sSiteDNS">
                 </td>
             </tr>
+            @if (ViewBag.bIsSuper)
+            {
+                <tr>
+                    <td>需要审核文章</td>
+                    <td>
+                        <input type="checkbox" class="IsNeedVerify" name="IsNeedVerify" value="true" />
+                    </td>
+                </tr>
+            }
             <tr>
                 <td>联系QQ:</td>
                 <td>
@@ -99,6 +121,18 @@
 </div>
 <script type="text/javascript">
     $(function () {
+
+        $('.IsNeedVerify').iCheck({
+            labelHover: false,
+            cursor: true,
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%'
+        });
+        var IsNeedVerify = '@Model.IsNeedVerify' == "True" ? true : false;
+        if (IsNeedVerify) $('.IsNeedVerify').iCheck('check');
+
+
         var admin = new adminPackage();
         //注册路由
         admin.routeRegister("WebSite");

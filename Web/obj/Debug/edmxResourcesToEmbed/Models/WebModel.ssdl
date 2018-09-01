@@ -62,6 +62,15 @@
     <Property Name="sAddress" Type="nvarchar(max)" />
     <Property Name="dInsertTime" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="TG_LoginLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sUserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="dInsertTime" Type="datetime" Nullable="false" />
+    <Property Name="Ip" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="TG_Templet">
     <Key>
       <PropertyRef Name="ID" />
@@ -84,7 +93,7 @@
     <Property Name="sPhone" Type="nvarchar" MaxLength="50" />
     <Property Name="sRealName" Type="nvarchar" MaxLength="50" />
     <Property Name="iUserType" Type="int" Nullable="false" />
-    <Property Name="bIsSuper" Type="bit" />
+    <Property Name="bIsSuper" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TG_WebSite">
     <Key>
@@ -109,6 +118,7 @@
     <EntitySet Name="TG_Article" EntityType="Self.TG_Article" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TG_Category" EntityType="Self.TG_Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TG_Client" EntityType="Self.TG_Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TG_LoginLog" EntityType="Self.TG_LoginLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TG_Templet" EntityType="Self.TG_Templet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TG_User" EntityType="Self.TG_User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TG_WebSite" EntityType="Self.TG_WebSite" Schema="dbo" store:Type="Tables" />

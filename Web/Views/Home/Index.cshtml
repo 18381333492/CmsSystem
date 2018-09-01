@@ -1,14 +1,22 @@
 ﻿
 @{
-    ViewBag.Title = "台哥CMS系统";
+    ViewBag.Title = "泸州市公安信息网管理系统";
 }
+@model Web.Models.LoginCacheInfo
 <style>
     .panel-header{
         padding-top:8px;
         padding-bottom:8px;
     }
-    .operate span{
+    .operate{
        cursor:pointer;
+       color:white;
+       font-size:14px;
+       display:inline-block;
+       margin-right:30px;
+    }
+    .hover:hover{
+        color:blue;
     }
 </style>
 <link href="~/Content/fonts/iconfont.css" rel="stylesheet" />
@@ -20,11 +28,11 @@
                 <img src="~/Content/images/logo.png" style="width:60px;height:60px;margin:7px 10px 0px 30px;" />
             </div>
             <div style="float:left;height:70px;line-height:70px;color:white;font-size:32px">泸州市公安信息网管理系统</div>
-            <div class="operate" style="float:right;height:70px;line-height:70px;margin-right:50px;font-size:16px;">
+            <div style="float:right;height:70px;line-height:70px;margin-right:50px;font-size:16px;">
                <span id="weather"></span>
-               <span style="color:white">欢迎您：<i class="iconfont icon-guanliyuan"></i>admin</span>
-               <span style="color:white"><i class="iconfont icon-xiugaimima"></i>密码修改</span>
-               <span style="color:red"><i class="iconfont icon-084tuichu"></i>退出系统</span>
+               <span class="operate">欢迎您:@Model.sUserName</span>
+               <span class="operate hover AlterPwd"><i class="iconfont icon-xiugaimima"></i>密码修改</span>
+               <span class="operate hover Quit"><i class="iconfont icon-084tuichu"></i>退出系统</span>
             </div>
         </div> 
     </div>
@@ -58,6 +66,12 @@
                     <li>
                         <span><a data-url="/WebSite/Index">站点设置</a></span>
                     </li>
+                    @if (Model.bIsSuper)
+                    {
+                        <li>
+                            <span><a data-url="/User/LogList">登录日志</a></span>
+                        </li>
+                    }
                 </ul>
             </li>
             <li>
@@ -75,7 +89,19 @@
     <div data-options="region:'center',border:false"> 
         <div id="tabs" class="easyui-tabs" data-options="fit:true,tabHeight:31">
             <div title="首页" style="padding:10px;">
-                欢迎来到台哥CMS系统
+                <div style="padding:0px;font-size:13px;">
+                    <div style="margin-bottom:5px;color:rgb(67, 142, 185)">欢迎登录泸州市公安信息网管理系统</div>
+                    @if (Model.isFirst == false)
+                    {
+                        <div style="margin-bottom:5px">上次登录时间:@Model.dLoginTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                        <div style="margin-bottom:5px">上次登录Ip地址:@Model.Ip</div>
+                    }
+                    else
+                    {
+                        <div style="margin-bottom:5px">本次登录时间:@Model.dLoginTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                        <div style="margin-bottom:5px">本次登录Ip地址:@Model.Ip</div>
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -86,11 +112,9 @@
         </div>
     </div>
 </div>  
-@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+<script src="~/Scripts/common.client.js"></script>
 <script type="text/javascript">
     $(function () {
-        //findWeather();
-
         $('#tree').tree({
             onClick: function (node) {
                 var menu = $(node.target).find('a');
@@ -118,31 +142,30 @@
                 }
             }
         });
-    });
 
-    ////天气预报
-    //function findWeather() {
-    //    var cityUrl = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js';
-    //    $.getScript(cityUrl, function (script, textStatus, jqXHR) {
-    //        var citytq = remote_ip_info.city;// 获取城市
-    //        var url = "http://php.weather.sina.com.cn/iframe/index/w_cl.php?code=js&city=" + citytq + "&day=0&dfc=3&charset=utf-8";
-    //        $.ajax({
-    //            url: url,
-    //            dataType: "script",
-    //            success: function (data) {
-    //                debugger
-    //                var _w = window.SWther.w[citytq][0];
-    //                var _f = _w.f1 + "_0.png";
-    //                if (new Date().getHours() > 17) {
-    //                    _f = _w.f2 + "_1.png";
-    //                }
-    //                var img = "<img width='70px' height='60px' src='http://i2.sinaimg.cn/dy/main/weather/weatherplugin/wthIco/20_20/" + _f
-    //                + "' />";
-    //                var tq = citytq + " " + img + " " + _w.s1 + " " + _w.t1 + "℃～" + _w.t2 + "℃  " + _w.d1 + _w.p1 + "级";
-    //                //#weather自己修改,天气样式自己打断点调试
-    //                $('#weather').html(tq);
-    //            }
-    //        });
-    //    });
-    //}
+        var admin = new adminPackage();
+        //注册路由
+        admin.routeRegister("User");
+        //修改密码
+        $('.AlterPwd').on("click", function () {
+            var dialog = admin.dialog(admin.route('AlterPwd'), "修改密码", function (r) {
+                if ($(admin.form).form('validate')) {
+                    admin.button.disable();
+                    var data = $(admin.form).serialize();
+                    admin.Ajax(admin.route('AlterPwd'), data, function (r) {
+                        admin.alert("修改成功");
+                        dialog.dialog('close');
+                    });
+                }
+            }, 300,200);
+        });
+        //退出系统
+        $('.Quit').on("click", function () {
+            if (confirm("确定要退出系统")) {
+                client.ajax.postRequest("/User/Quit", null, function (r) {
+                    location.href = "/User/Login";
+                });
+            }
+        });
+    });
 </script>

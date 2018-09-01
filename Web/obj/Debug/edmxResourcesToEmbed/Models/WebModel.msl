@@ -1,114 +1,124 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CmsSystemModelStoreContainer" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="TG_Templet">
-      <EntityTypeMapping TypeName="CmsSystemModel.TG_Templet">
-        <MappingFragment StoreEntitySet="TG_Templet">
-          <ScalarProperty Name="bIsCompile" ColumnName="bIsCompile" />
+    <EntitySetMapping Name="TG_Article">
+      <EntityTypeMapping TypeName="CmsSystemModel.TG_Article">
+        <MappingFragment StoreEntitySet="TG_Article">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="sTempletName" ColumnName="sTempletName" />
-          <ScalarProperty Name="sTempletEnName" ColumnName="sTempletEnName" />
-          <ScalarProperty Name="sTempletContent" ColumnName="sTempletContent" />
-          <ScalarProperty Name="sTempletUrl" ColumnName="sTempletUrl" />
-          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TG_WebSite">
-      <EntityTypeMapping TypeName="CmsSystemModel.TG_WebSite">
-        <MappingFragment StoreEntitySet="TG_WebSite">
-          <ScalarProperty Name="IsNeedVerify" ColumnName="IsNeedVerify" />
-          <ScalarProperty Name="sQQNum" ColumnName="sQQNum" />
-          <ScalarProperty Name="sFax" ColumnName="sFax" />
-          <ScalarProperty Name="sMobile" ColumnName="sMobile" />
-          <ScalarProperty Name="sFiling" ColumnName="sFiling" />
-          <ScalarProperty Name="sCopyRight" ColumnName="sCopyRight" />
+          <ScalarProperty Name="iCategoryId" ColumnName="iCategoryId" />
+          <ScalarProperty Name="iTemplateId" ColumnName="iTemplateId" />
+          <ScalarProperty Name="sTitle" ColumnName="sTitle" />
+          <ScalarProperty Name="sEnTitle" ColumnName="sEnTitle" />
+          <ScalarProperty Name="sAuthor" ColumnName="sAuthor" />
+          <ScalarProperty Name="sSize" ColumnName="sSize" />
+          <ScalarProperty Name="sLang" ColumnName="sLang" />
+          <ScalarProperty Name="sVersion" ColumnName="sVersion" />
+          <ScalarProperty Name="sSummary" ColumnName="sSummary" />
+          <ScalarProperty Name="sPictureSize" ColumnName="sPictureSize" />
+          <ScalarProperty Name="sPictureUrl" ColumnName="sPictureUrl" />
+          <ScalarProperty Name="bIsTop" ColumnName="bIsTop" />
+          <ScalarProperty Name="bIsSlide" ColumnName="bIsSlide" />
+          <ScalarProperty Name="bIsHot" ColumnName="bIsHot" />
+          <ScalarProperty Name="dPublishTime" ColumnName="dPublishTime" />
           <ScalarProperty Name="sDescription" ColumnName="sDescription" />
-          <ScalarProperty Name="sKeyWord" ColumnName="sKeyWord" />
-          <ScalarProperty Name="sAddress" ColumnName="sAddress" />
-          <ScalarProperty Name="sPhone" ColumnName="sPhone" />
-          <ScalarProperty Name="sEmail" ColumnName="sEmail" />
-          <ScalarProperty Name="sSiteDNS" ColumnName="sSiteDNS" />
-          <ScalarProperty Name="sSiteName" ColumnName="sSiteName" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TG_User">
-      <EntityTypeMapping TypeName="CmsSystemModel.TG_User">
-        <MappingFragment StoreEntitySet="TG_User">
-          <ScalarProperty Name="bIsSuper" ColumnName="bIsSuper" />
-          <ScalarProperty Name="iUserType" ColumnName="iUserType" />
-          <ScalarProperty Name="sRealName" ColumnName="sRealName" />
-          <ScalarProperty Name="sPhone" ColumnName="sPhone" />
-          <ScalarProperty Name="sPassword" ColumnName="sPassword" />
-          <ScalarProperty Name="sUserName" ColumnName="sUserName" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sKeyword" ColumnName="sKeyword" />
+          <ScalarProperty Name="sContent" ColumnName="sContent" />
+          <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
+          <ScalarProperty Name="bIsRelease" ColumnName="bIsRelease" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TG_Category">
       <EntityTypeMapping TypeName="CmsSystemModel.TG_Category">
         <MappingFragment StoreEntitySet="TG_Category">
-          <ScalarProperty Name="sContent" ColumnName="sContent" />
-          <ScalarProperty Name="sKeyWord" ColumnName="sKeyWord" />
-          <ScalarProperty Name="sDescription" ColumnName="sDescription" />
-          <ScalarProperty Name="sPictureUrl" ColumnName="sPictureUrl" />
-          <ScalarProperty Name="sPictureSize" ColumnName="sPictureSize" />
-          <ScalarProperty Name="bIsContentCategory" ColumnName="bIsContentCategory" />
-          <ScalarProperty Name="bIsShowNav" ColumnName="bIsShowNav" />
-          <ScalarProperty Name="sRedirectUrl" ColumnName="sRedirectUrl" />
-          <ScalarProperty Name="bIsRedirect" ColumnName="bIsRedirect" />
-          <ScalarProperty Name="iArticleTemplateId" ColumnName="iArticleTemplateId" />
-          <ScalarProperty Name="iTemplateId" ColumnName="iTemplateId" />
-          <ScalarProperty Name="iOrder" ColumnName="iOrder" />
-          <ScalarProperty Name="sEnNick" ColumnName="sEnNick" />
-          <ScalarProperty Name="sEnName" ColumnName="sEnName" />
-          <ScalarProperty Name="sName" ColumnName="sName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TG_Article">
-      <EntityTypeMapping TypeName="CmsSystemModel.TG_Article">
-        <MappingFragment StoreEntitySet="TG_Article">
-          <ScalarProperty Name="bIsRelease" ColumnName="bIsRelease" />
-          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
-          <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
-          <ScalarProperty Name="sContent" ColumnName="sContent" />
-          <ScalarProperty Name="sKeyword" ColumnName="sKeyword" />
-          <ScalarProperty Name="sDescription" ColumnName="sDescription" />
-          <ScalarProperty Name="dPublishTime" ColumnName="dPublishTime" />
-          <ScalarProperty Name="bIsHot" ColumnName="bIsHot" />
-          <ScalarProperty Name="bIsSlide" ColumnName="bIsSlide" />
-          <ScalarProperty Name="bIsTop" ColumnName="bIsTop" />
-          <ScalarProperty Name="sPictureUrl" ColumnName="sPictureUrl" />
-          <ScalarProperty Name="sPictureSize" ColumnName="sPictureSize" />
-          <ScalarProperty Name="sSummary" ColumnName="sSummary" />
-          <ScalarProperty Name="sVersion" ColumnName="sVersion" />
-          <ScalarProperty Name="sLang" ColumnName="sLang" />
-          <ScalarProperty Name="sSize" ColumnName="sSize" />
-          <ScalarProperty Name="sAuthor" ColumnName="sAuthor" />
-          <ScalarProperty Name="sEnTitle" ColumnName="sEnTitle" />
-          <ScalarProperty Name="sTitle" ColumnName="sTitle" />
+          <ScalarProperty Name="sName" ColumnName="sName" />
+          <ScalarProperty Name="sEnName" ColumnName="sEnName" />
+          <ScalarProperty Name="sEnNick" ColumnName="sEnNick" />
+          <ScalarProperty Name="iOrder" ColumnName="iOrder" />
           <ScalarProperty Name="iTemplateId" ColumnName="iTemplateId" />
-          <ScalarProperty Name="iCategoryId" ColumnName="iCategoryId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="iArticleTemplateId" ColumnName="iArticleTemplateId" />
+          <ScalarProperty Name="bIsRedirect" ColumnName="bIsRedirect" />
+          <ScalarProperty Name="sRedirectUrl" ColumnName="sRedirectUrl" />
+          <ScalarProperty Name="bIsShowNav" ColumnName="bIsShowNav" />
+          <ScalarProperty Name="bIsContentCategory" ColumnName="bIsContentCategory" />
+          <ScalarProperty Name="sPictureSize" ColumnName="sPictureSize" />
+          <ScalarProperty Name="sPictureUrl" ColumnName="sPictureUrl" />
+          <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+          <ScalarProperty Name="sKeyWord" ColumnName="sKeyWord" />
+          <ScalarProperty Name="sContent" ColumnName="sContent" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TG_Client">
       <EntityTypeMapping TypeName="CmsSystemModel.TG_Client">
         <MappingFragment StoreEntitySet="TG_Client">
-          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
-          <ScalarProperty Name="sAddress" ColumnName="sAddress" />
-          <ScalarProperty Name="sQQ" ColumnName="sQQ" />
-          <ScalarProperty Name="sEmail" ColumnName="sEmail" />
-          <ScalarProperty Name="sContent" ColumnName="sContent" />
-          <ScalarProperty Name="sPhone" ColumnName="sPhone" />
-          <ScalarProperty Name="sName" ColumnName="sName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sName" ColumnName="sName" />
+          <ScalarProperty Name="sPhone" ColumnName="sPhone" />
+          <ScalarProperty Name="sContent" ColumnName="sContent" />
+          <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+          <ScalarProperty Name="sQQ" ColumnName="sQQ" />
+          <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TG_LoginLog">
+      <EntityTypeMapping TypeName="CmsSystemModel.TG_LoginLog">
+        <MappingFragment StoreEntitySet="TG_LoginLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sUserName" ColumnName="sUserName" />
+          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
+          <ScalarProperty Name="Ip" ColumnName="Ip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TG_Templet">
+      <EntityTypeMapping TypeName="CmsSystemModel.TG_Templet">
+        <MappingFragment StoreEntitySet="TG_Templet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sTempletName" ColumnName="sTempletName" />
+          <ScalarProperty Name="sTempletEnName" ColumnName="sTempletEnName" />
+          <ScalarProperty Name="sTempletContent" ColumnName="sTempletContent" />
+          <ScalarProperty Name="sTempletUrl" ColumnName="sTempletUrl" />
+          <ScalarProperty Name="dInsertTime" ColumnName="dInsertTime" />
+          <ScalarProperty Name="bIsCompile" ColumnName="bIsCompile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TG_User">
+      <EntityTypeMapping TypeName="CmsSystemModel.TG_User">
+        <MappingFragment StoreEntitySet="TG_User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sUserName" ColumnName="sUserName" />
+          <ScalarProperty Name="sPassword" ColumnName="sPassword" />
+          <ScalarProperty Name="sPhone" ColumnName="sPhone" />
+          <ScalarProperty Name="sRealName" ColumnName="sRealName" />
+          <ScalarProperty Name="iUserType" ColumnName="iUserType" />
+          <ScalarProperty Name="bIsSuper" ColumnName="bIsSuper" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TG_WebSite">
+      <EntityTypeMapping TypeName="CmsSystemModel.TG_WebSite">
+        <MappingFragment StoreEntitySet="TG_WebSite">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sSiteName" ColumnName="sSiteName" />
+          <ScalarProperty Name="sSiteDNS" ColumnName="sSiteDNS" />
+          <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+          <ScalarProperty Name="sMobile" ColumnName="sMobile" />
+          <ScalarProperty Name="sFax" ColumnName="sFax" />
+          <ScalarProperty Name="sPhone" ColumnName="sPhone" />
+          <ScalarProperty Name="sQQNum" ColumnName="sQQNum" />
+          <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+          <ScalarProperty Name="sKeyWord" ColumnName="sKeyWord" />
+          <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+          <ScalarProperty Name="sCopyRight" ColumnName="sCopyRight" />
+          <ScalarProperty Name="sFiling" ColumnName="sFiling" />
+          <ScalarProperty Name="IsNeedVerify" ColumnName="IsNeedVerify" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

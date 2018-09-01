@@ -22,6 +22,10 @@
     <a class="easyui-linkbutton add" data-options="iconCls:'icon-add',plain:true">新增</a>
     <a class="easyui-linkbutton edit" data-options="iconCls:'icon-edit',plain:true">编辑</a>
     <a class="easyui-linkbutton cancel" data-options="iconCls:'icon-cancel',plain:true">删除</a>
+    @if (ViewBag.bIsSuper)
+    {
+        <a class="easyui-linkbutton verify" data-options="iconCls:'icon-tip',plain:true">审核</a>
+    }
 </div>
 <script type="text/javascript">
     $(function () {
@@ -108,6 +112,27 @@
             }
         });
 
+        //审核操作
+        $('.verify').on("click", function () {
+            var selected = admin.grid.datagrid('getSelections');
+            if (selected.length > 0) {
+                admin.confirm("确定要审核通过文章", function () {
+                    var Ids = [];
+                    $(selected).each(function () {
+                        Ids.push(this.ID);
+                    });
+                    admin.Ajax(admin.route("Verify"), { Ids: Ids.join() }, function (r) {
+                        admin.alert("操作成功");
+                        admin.grid.datagrid("reload");
+                        admin.grid.datagrid("clearSelections");
+                    });
+                });
+            }
+            else {
+                admin.alert("请选择数据进行操作!");
+            }
+        });
+
         /*!
         * method:数据列表(datagrid)的绑定
         */
@@ -115,15 +140,16 @@
             url: admin.route('List'),
             toolbar: admin.toolbar,
             columns: [[
-                { field: 'sTitle', title: '标题', align: 'center', width: 350, rowspan: 2 },
+                { field: 'ID', title: ' ', align: 'center',  rowspan: 2, checkbox: true },
+                { field: 'sTitle', title: '标题', align: 'center', width: 350, rowspan: 2},
                 { field: 'sName', title: '所属栏目', align: 'center', width: 150, rowspan: 2 },
                 { field: 'sAuthor', title: '作者', align: 'center', width: 100, rowspan: 2 },
                 {
-                    field: 'bIsRelease', title: '发布', align: 'center', width: 100, rowspan: 2, formatter: function (value) {
+                    field: 'bIsRelease', title: '审核状态', align: 'center', width: 100, rowspan: 2, formatter: function (value) {
                         if (value) {
-                            return "<span style='color:red'>是</span>";
+                            return "<span style='color:green'>已审核</span>";
                         } else {
-                            return "否";
+                            return "<span style='color:red'>待审核</span>";
                         }
                     }
                 },

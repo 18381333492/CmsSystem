@@ -16,6 +16,7 @@ namespace Web.Controllers
         // GET: Article
         public ActionResult Index()
         {
+            ViewBag.bIsSuper = LoginStatus.bIsSuper;
             return View();
         }
 
@@ -75,6 +76,8 @@ namespace Web.Controllers
         [ValidateInput(false)]
         public void Insert(TG_Article article)
         {
+            var config=mangae.db.TG_WebSite.SingleOrDefault();
+            article.bIsRelease = config.IsNeedVerify;
             article.bIsDeleted = false;
             article.dInsertTime = DateTime.Now;
             mangae.Add<TG_Article>(article);
@@ -101,6 +104,17 @@ namespace Web.Controllers
         public void Cancel(string Ids)
         {
            var res=mangae.Cancel<TG_Article>(Ids);
+            if (res > 0)
+                result.success = true;
+        }
+
+        /// <summary>
+        /// 审核文章
+        /// </summary>
+        /// <param name="Ids"></param>
+        public void Verify(string Ids)
+        {
+            var res=mangae.ExcuteBySql(string.Format("update TG_Article set bIsRelease=1 where ID IN ({0})", Ids));
             if (res > 0)
                 result.success = true;
         }

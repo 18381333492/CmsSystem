@@ -1,0 +1,67 @@
+[2018-09-01 11:42:19] [Web] 请求链接:/Category/List
+[2018-09-01 11:42:19] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 11:42:50] [Web] 请求链接:/Templet/List
+[2018-09-01 11:42:50] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 11:44:06] [Web] 请求链接:/Templet/List
+[2018-09-01 11:44:06] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 11:46:50] [Web] 请求链接:/MakeHtml/MakeCategoryPage
+[2018-09-01 11:46:50] [Web] WebController异常:No template exists with key 'index'
+[2018-09-01 11:46:56] [Web] 请求链接:/MakeHtml/MakeCategoryPage
+[2018-09-01 11:46:56] [Web] WebController异常:No template exists with key 'index'
+[2018-09-01 11:53:52] [Web] 请求链接:/MakeHtml/MakeCategoryPage
+[2018-09-01 11:53:52] [Web] WebController异常:No template exists with key 'index'
+[2018-09-01 11:55:48] [Web] 请求链接:/Article/List
+[2018-09-01 11:55:48] [Web] WebController异常:指定的 LINQ 表达式包含对与不同上下文关联的查询的引用。
+[2018-09-01 12:10:32] [Web] 请求链接:/User/login
+[2018-09-01 12:10:32] [Web] WebController异常:未将对象引用设置到对象的实例。
+[2018-09-01 12:11:15] [Web] 请求链接:/User/login
+[2018-09-01 12:11:15] [Web] WebController异常:未将对象引用设置到对象的实例。
+[2018-09-01 12:17:21] [Web] 请求链接:/User/login
+[2018-09-01 12:17:21] [Web] WebController异常:未将对象引用设置到对象的实例。
+[2018-09-01 12:30:39] [Web] 请求链接:/User/MakePictureCode
+[2018-09-01 12:30:39] [Web] WebController异常:未将对象引用设置到对象的实例。
+[2018-09-01 12:31:58] [Web] 请求链接:/User/MakePictureCode
+[2018-09-01 12:31:58] [Web] WebController异常:未将对象引用设置到对象的实例。
+[2018-09-01 13:02:08] [Web] 请求链接:/User/Login
+[2018-09-01 13:02:08] [Web] WebController异常:String 引用没有设置为 String 的实例。
+参数名: s
+[2018-09-01 14:33:16] [Web] 请求链接:/User/Login
+[2018-09-01 14:33:16] [Web] WebController异常:序列包含一个以上的元素
+[2018-09-01 14:42:10] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:10] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:10] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:10] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:10] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:10] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:10] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:10] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:10] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:10] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:11] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:11] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:42:34] [Web] 请求链接:/User/Login
+[2018-09-01 14:42:34] [Web] WebController异常:基础提供程序在 Open 上失败。
+[2018-09-01 14:47:30] [Web] 请求链接:/User/Login
+[2018-09-01 14:47:30] [Web] WebController异常:此请求已被阻止，因为当用在 GET 请求中时，会将敏感信息透漏给第三方网站。若要允许 GET 请求，请将 JsonRequestBehavior 设置为 AllowGet。
+[2018-09-01 14:57:12] [Web] 请求链接:/User/Insert
+[2018-09-01 14:57:12] [Web] WebController异常:未将对象引用设置到对象的实例。
+[2018-09-01 14:59:40] [Web] 请求链接:/User/AlterPwd
+[2018-09-01 14:59:40] [Web] WebController异常:不存在从对象类型 <>f__AnonymousType6`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] 到已知的托管提供程序本机类型的映射。
+[2018-09-01 15:04:05] [Web] 请求链接:/User/AlterPwd
+[2018-09-01 15:04:05] [Web] WebController异常:不存在从对象类型 System.Collections.Generic.List`1[[System.Data.SqlClient.SqlParameter, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] 到已知的托管提供程序本机类型的映射。
+[2018-09-01 15:46:47] [Web] 请求链接:/Article/Index
+[2018-09-01 15:46:47] [Web] WebController异常:无法将 null 转换为“bool”，因为后者是不可以为 null 的值类型

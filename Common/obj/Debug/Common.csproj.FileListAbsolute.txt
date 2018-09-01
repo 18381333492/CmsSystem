@@ -11,3 +11,10 @@ E:\Github源代码\CmsSystem\Common\bin\Debug\Newtonsoft.Json.dll
 E:\Github源代码\CmsSystem\Common\bin\Debug\Newtonsoft.Json.xml
 E:\Github源代码\CmsSystem\Common\obj\Debug\Common.dll
 E:\Github源代码\CmsSystem\Common\obj\Debug\Common.pdb
+F:\CmsSystem\Common\bin\Debug\Common.dll
+F:\CmsSystem\Common\bin\Debug\Common.pdb
+F:\CmsSystem\Common\bin\Debug\Newtonsoft.Json.dll
+F:\CmsSystem\Common\bin\Debug\Newtonsoft.Json.xml
+F:\CmsSystem\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+F:\CmsSystem\Common\obj\Debug\Common.dll
+F:\CmsSystem\Common\obj\Debug\Common.pdb

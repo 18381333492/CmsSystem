@@ -16,7 +16,7 @@ namespace Web.Models
         /// <summary>
         /// 信息描述
         /// </summary>
-        public string info = "操作成功";
+        public string info = "操作失败";
 
         /// <summary>
         /// 成功标识

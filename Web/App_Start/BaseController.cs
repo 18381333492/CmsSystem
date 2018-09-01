@@ -21,7 +21,9 @@ namespace Web.App_Start
         /// 日志组件
         /// </summary>
         private static ILogger logger = LoggerManager.Instance.GetSLogger("Web");
-        private static readonly string sSessionKey = "@UserInfo";
+        protected static readonly string sUserSessionKey = "@UserInfo";
+        protected static readonly string sCodeSessionKey = "@CodeInfo";
+
 
         /// <summary>
         /// EF的封装
@@ -55,21 +57,29 @@ namespace Web.App_Start
         /// <param name="filterContext"></param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ////是否需要验证登录
-            //bool needLogin = filterContext.ActionDescriptor.GetCustomAttributes(typeof(NoLogin), true).Length == 1 ? false : true;
-            //if (needLogin)
-            //{ //验证登录
-            //    //bool IsAjax = filterContext.HttpContext.Request.IsAjaxRequest();
-            //    if (Session[sSessionKey] != null)
-            //    {
-            //        LoginStatus = (LoginCacheInfo)Session[sSessionKey];
-            //    }
-            //    else
-            //    {
-            //        //登录失效跳转登录
-            //        filterContext.Result = Redirect("/User/Login");
-            //    }
-            //}
+            //是否需要验证登录
+            bool needLogin = filterContext.ActionDescriptor.GetCustomAttributes(typeof(NoLogin), true).Length == 1 ? false : true;
+            if (needLogin)
+            { //验证登录
+                bool IsAjax = filterContext.HttpContext.Request.IsAjaxRequest();
+                if (Session[sUserSessionKey] != null)
+                {
+                    LoginStatus = (LoginCacheInfo)Session[sUserSessionKey];
+                }
+                else
+                {
+                    if(IsAjax&& filterContext.HttpContext.Request.HttpMethod.ToUpper() == "POST")
+                    {
+                        result.over = true;
+                        filterContext.Result = Json(result);
+                    }
+                    else
+                    {
+                        //登录失效跳转登录
+                        filterContext.Result = Redirect("/User/Login");
+                    }   
+                }
+            }
         }
 
 
@@ -80,10 +90,15 @@ namespace Web.App_Start
         /// <param name="filterContext"></param>
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
+            string sActionName = filterContext.ActionDescriptor.ActionName;//获取action的名字
+            if (sActionName.ToLower() == "login")
+            {
+                sActionName = sActionName.Substring(0, 1).ToUpper() + sActionName.Substring(1, sActionName.Length - 1).ToLower();
+            }
             var request = filterContext.HttpContext.Request;
             var actionMethod = filterContext.Controller
               .GetType()
-              .GetMethod(filterContext.ActionDescriptor.ActionName);//获取访问方法   
+              .GetMethod(sActionName);//获取访问方法   
             if (actionMethod.ReturnType.Name.ToString() == "Void")
             {//POST的返回结果处理
                 filterContext.Result = Content(result.toJson()); /**统一处理ajax的返回结果**/

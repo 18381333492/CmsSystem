@@ -26,7 +26,6 @@ textarea {
             <td>模板名称</td>
             <td>
                 <input class="easyui-textbox" name="sTempletName" data-options="required:true" value="@Model.sTempletName">
-                <input type="checkbox" class="bIsCompile" name="bIsCompile" value="true"/>
             </td>
         </tr>
         <tr>
@@ -43,17 +42,6 @@ textarea {
     </table>
 </form>
 <script type="text/javascript">
-    $('.bIsCompile').iCheck({
-        labelHover: false,
-        cursor: true,
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%'
-    });
-    var bIsCompile = '@Model.bIsCompile' == "True" ? true : false;
-    if (bIsCompile) $('.bIsCompile').iCheck('check');
-
-
     $("#text").setTextareaCount({
         width: "30px",
         bgColor: "#000",

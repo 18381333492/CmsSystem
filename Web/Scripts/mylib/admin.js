@@ -148,7 +148,6 @@ function adminPackage() {
                 }
                 else {
                      alert("登录过期,请重新登录");
-                    // location.href = "/Admin/Home/Tip";
                 }
             },
             // jqXHR 是经过jQuery封装的XMLHttpRequest对象

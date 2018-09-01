@@ -2,8 +2,6 @@
 @{
     ViewBag.Title = "模板列表";
 }
-<link href="~/Content/icheck/skins/square/blue.css" rel="stylesheet" />
-<script src="~/Content/icheck/icheck.min.js"></script>
 <table id="Templet"></table>
 <div id="Templet_toolbar" style="padding:5px;">
     <form id="searchForm">
@@ -54,7 +52,6 @@
                 if ($(admin.form).form('validate')) {
                     admin.button.disable();
                     var data = $(admin.form).serialize();
-                    debugger
                     admin.Ajax(admin.route('Update'), data, function (r) {
                         admin.alert("编辑成功");
                         dialog.dialog('close');
@@ -116,16 +113,7 @@
             columns: [[
                 { field: 'sTempletName', title: '模板名称', align: 'center', width: 150 },
                 { field: 'sTempletEnName', title: '模板标识', align: 'center', width: 100 },
-                { field: 'sTempletUrl', title: '生成路径', align: 'center', width: 180 },
-                {
-                    field: 'bIsCompile', title: '预编译', align: 'center', width: 80, formatter: function (value) {
-                        if (value) {
-                            return "<span style='color:red'>是</span>";
-                        } else {
-                            return "否";
-                        }
-                    }
-                },
+                //{ field: 'sTempletUrl', title: '生成路径', align: 'center', width: 180 },
                 { field: 'dInsertTime', title: '添加时间', align: 'center', width: 150 }
             ]],
             onLoadSuccess: function (data) {

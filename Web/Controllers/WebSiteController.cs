@@ -25,6 +25,7 @@ namespace Web.Controllers
             var web = mangae.db.TG_WebSite.FirstOrDefault();
             if (web == null)
                 web = new TG_WebSite();
+            ViewBag.bIsSuper =LoginStatus.bIsSuper;
             return View(web);
         }
 

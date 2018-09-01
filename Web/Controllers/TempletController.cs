@@ -164,7 +164,7 @@ namespace Web.Controllers
                 string sFileName = templet.sTempletEnName + ".cshtml";
                 System.IO.File.WriteAllText(path + sFileName, templet.sTempletContent);
                 //预编译模板
-                RazorHelper.PrevCompileTemplate(templet.sTempletContent, templet.sTempletEnName);
+                RazorHelper.PrevCompileTemplate(templet.sTempletEnName,templet.sTempletContent);
             }
         }
 
@@ -186,7 +186,7 @@ namespace Web.Controllers
                     string sFileName = item.sTempletEnName + ".cshtml";
                     System.IO.File.WriteAllText(path + sFileName, item.sTempletContent);
                     //预编译模板
-                    RazorHelper.PrevCompileTemplate(item.sTempletContent, item.sTempletEnName);
+                    RazorHelper.PrevCompileTemplate(item.sTempletEnName,item.sTempletContent);
                 }
             }
         }

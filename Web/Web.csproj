@@ -199,6 +199,9 @@
     <Compile Include="Models\TG_Client.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TG_LoginLog.cs">
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TG_Templet.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
@@ -1079,6 +1082,11 @@
     <Content Include="Content\login\css\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\easyui\themes\material\images\Thumbs.db" />
+    <Content Include="Content\auto-line-number.js" />
     <Content Include="Models\WebModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WebModel.edmx</DependentUpon>
@@ -1089,11 +1097,7 @@
       <DependentUpon>WebModel.edmx</DependentUpon>
       <LastGenOutput>WebModel.cs</LastGenOutput>
     </Content>
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\easyui\themes\material\images\Thumbs.db" />
-    <Content Include="Content\auto-line-number.js" />
+    <Content Include="Scripts\common.client.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="门户网站\css\base.css" />
     <Content Include="门户网站\css\jquery.slideBox.css" />
@@ -1155,13 +1159,6 @@
     <Content Include="门户网站\liuyan.html" />
     <Content Include="门户网站\upload\newsimg.jpg" />
     <Content Include="门户网站\upload\tup.jpg" />
-    <EntityDeploy Include="Models\WebModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\WebModel.edmx.diagram">
-      <DependentUpon>WebModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\icheck\css\custom.styl" />
     <Content Include="Content\icheck\css\montserrat-bold.eot" />
     <Content Include="Content\icheck\css\montserrat-bold.ttf" />
@@ -1263,6 +1260,23 @@
     <Content Include="Content\fonts\iconfont.eot" />
     <Content Include="Content\fonts\iconfont.ttf" />
     <Content Include="Content\fonts\iconfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\WebModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\WebModel.edmx.diagram">
+      <DependentUpon>WebModel.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\AlterPwd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\LogList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

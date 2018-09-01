@@ -9,6 +9,7 @@ using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using Common;
 using RazorEngine.Text;
+using TraceLogs;
 
 namespace RazorBase
 {
@@ -20,6 +21,8 @@ namespace RazorBase
         //设置模板和页面目录的位置
         private static readonly string sTemplateBasePath=AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sTemplatePath");
         private static readonly string sHtmlBasePath= AppDomain.CurrentDomain.BaseDirectory + ConfigHelper.ReadAppSetting("sHtmlPath");
+
+        private static ILogger logger = LoggerManager.Instance.GetSLogger("RazorHelper");
 
         /// <summary>
         /// 预编译模板
@@ -37,6 +40,8 @@ namespace RazorBase
             }
             catch (Exception ex)
             {
+                logger.Info(ex.Message);
+                logger.Fatal(ex);
                 return false;
             }     
         }
@@ -60,8 +65,18 @@ namespace RazorBase
         /// <returns></returns>
         public static string ParseString(string sTemplateName, object Model = null)
         {
-            string str = Engine.Razor.Run(sTemplateName, null, Model);
-            return str;
+            try
+            {
+                string str = Engine.Razor.Run(sTemplateName, null, Model);
+                return str;
+            }
+            catch (Exception ex)
+            {
+                logger.Info(ex.Message);
+                logger.Fatal(ex);
+                return string.Empty;
+            }
+           
         }
 
         /// <summary>
@@ -85,6 +100,8 @@ namespace RazorBase
             }
             catch (Exception ex)
             {
+                logger.Info(ex.Message);
+                logger.Fatal(ex);
                 return false;
             }
         }
